@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Being a Twin — Warm-Up</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mint: #3dd6ac;
+    --coral: #ff6b6b;
+    --sky: #4fc3f7;
+    --yellow: #ffd54f;
+    --purple: #b39ddb;
+    --bg: #f0faf7;
+    --card: #ffffff;
+    --text: #1a2e2a;
+    --muted: #6b8f85;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 60px;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1a6b52 0%, #0d4a3a 100%);
+    color: white;
+    padding: 36px 24px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(61,214,172,0.18);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,107,107,0.13);
+  }
+  .header-tag {
+    display: inline-block;
+    background: var(--mint);
+    color: #0d4a3a;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  header p {
+    font-size: 15px;
+    opacity: 0.8;
+    font-weight: 600;
+  }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: #e0f2ec;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .progress-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--muted);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 10px;
+    background: #c4e8df;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--mint), var(--sky));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .progress-score {
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: #1a6b52;
+    min-width: 48px;
+    text-align: right;
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 760px;
+    margin: 32px auto 0;
+    padding: 0 16px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: #0d4a3a;
+  }
+  .section-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { transform: translateY(-2px); }
+
+  /* SPEAKING QUESTIONS */
+  .question-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    animation: slideIn 0.4s ease both;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .q-number {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: white;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .q-check {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 2.5px solid #c4e8df;
+    background: white;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-check.done {
+    background: var(--mint);
+    border-color: var(--mint);
+    color: white;
+  }
+  .q-check:hover { transform: scale(1.1); }
+
+  /* VOCABULARY MATCH */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 500px) { .vocab-grid { grid-template-columns: 1fr; } }
+
+  .vocab-col-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  .word-pill, .def-pill {
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    text-align: center;
+    border: 2.5px solid transparent;
+  }
+  .word-pill {
+    background: #e8f8f3;
+    color: #0d4a3a;
+    border-color: #c4e8df;
+  }
+  .def-pill {
+    background: #fff3e0;
+    color: #6d4c28;
+    border-color: #ffe0b2;
+  }
+  .word-pill.selected, .def-pill.selected {
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .word-pill.selected { background: var(--sky); color: white; border-color: var(--sky); }
+  .def-pill.selected  { background: var(--coral); color: white; border-color: var(--coral); }
+  .word-pill.matched, .def-pill.matched {
+    background: var(--mint) !important;
+    color: white !important;
+    border-color: var(--mint) !important;
+    cursor: default;
+  }
+  .word-pill.wrong, .def-pill.wrong {
+    animation: shake 0.3s ease;
+    background: #ffebee !important;
+    border-color: var(--coral) !important;
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  /* QUIZ */
+  .quiz-question {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 480px) { .quiz-options { grid-template-columns: 1fr; } }
+
+  .quiz-opt {
+    padding: 13px 16px;
+    border-radius: 14px;
+    border: 2.5px solid #e0f2ec;
+    background: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: left;
+    color: var(--text);
+  }
+  .quiz-opt:hover:not(:disabled) {
+    border-color: var(--sky);
+    background: #e1f5fe;
+    transform: translateY(-1px);
+  }
+  .quiz-opt.correct {
+    background: #e8f8f3;
+    border-color: var(--mint);
+    color: #0d4a3a;
+  }
+  .quiz-opt.wrong {
+    background: #ffebee;
+    border-color: var(--coral);
+    color: #c0392b;
+  }
+  .quiz-opt:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: #e8f8f3; color: #0d4a3a; }
+  .quiz-feedback.no { background: #ffebee; color: #c0392b; }
+
+  .quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+  }
+  .quiz-counter {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--mint), #2abf96);
+    color: white;
+    box-shadow: 0 4px 14px rgba(61,214,172,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(61,214,172,0.4); }
+  .btn-secondary {
+    background: #e0f2ec;
+    color: #1a6b52;
+  }
+  .btn-secondary:hover { background: #c4e8df; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+
+  /* RESULT BANNER */
+  .result-banner {
+    background: linear-gradient(135deg, #1a6b52, #0d4a3a);
+    color: white;
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    display: none;
+    margin-top: 20px;
+  }
+  .result-banner.show { display: block; animation: popIn 0.4s ease; }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .result-emoji { font-size: 52px; margin-bottom: 10px; }
+  .result-title { font-family: 'Fredoka One', cursive; font-size: 1.8rem; margin-bottom: 8px; }
+  .result-sub { font-size: 15px; opacity: 0.85; }
+
+  /* TIMER */
+  .timer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff3e0;
+    color: #e65100;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 800;
+    border: 2px solid #ffe0b2;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c4e8df, transparent);
+    margin: 8px 0 24px;
+    border-radius: 2px;
+  }
+
+  /* HINT */
+  .hint-box {
+    background: #fffde7;
+    border: 2px solid var(--yellow);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #6d5800;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  /* STAR RATING */
+  .stars { font-size: 26px; letter-spacing: 4px; }
+
+  /* CONFETTI */
+  .confetti-piece {
+    position: fixed;
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    animation: confettiFall linear both;
+    z-index: 9999;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">Pre-Intermediate · Warm-Up</div>
+  <h1>🌟 Being a Twin</h1>
+  <p>Grammar: Present Tenses &amp; <em>have / have got</em></p>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <span class="progress-label">Progress</span>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-score" id="scoreDisplay">0 pts</span>
+</div>
+
+<!-- ======== SECTION 1: SPEAKING ======== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:#e0f7fa;">🗣️</div>
+    <div>
+      <div class="section-title">Part 1 — Speaking Warm-Up</div>
+      <div class="section-subtitle">Discuss with your partner · 3–4 minutes · Mark questions you've discussed</div>
+    </div>
+  </div>
+
+  <div class="hint-box">💡 <span>Take turns! Try to use full sentences and add details to your answers.</span></div>
+
+  <div id="speakingCards"></div>
+
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+    <span id="speakCount" style="font-size:13px;font-weight:800;color:var(--muted);">0 / 5 discussed</span>
+    <div class="timer-badge" id="timerBadge">⏱ 04:00</div>
+  </div>
+</div>
+
+<div class="section"><div class="divider"></div></div>
+
+<!-- ======== SECTION 2: VOCAB MATCH ======== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:#fce4ec;">📖</div>
+    <div>
+      <div class="section-title">Part 2 — Vocabulary Match</div>
+      <div class="section-subtitle">Click a word, then click its definition</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="vocab-grid">
+      <div>
+        <div class="vocab-col-label">Words</div>
+        <div id="wordList" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+      <div>
+        <div class="vocab-col-label">Definitions</div>
+        <div id="defList" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+    </div>
+    <div id="vocabFeedback" style="margin-top:16px;font-size:14px;font-weight:700;color:#1a6b52;min-height:20px;"></div>
+  </div>
+</div>
+
+<div class="section"><div class="divider"></div></div>
+
+<!-- ======== SECTION 3: QUIZ ======== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:#f3e5f5;">❓</div>
+    <div>
+      <div class="section-title">Part 3 — Quick Quiz</div>
+      <div class="section-subtitle">Choose the correct answer · 5 questions</div>
+    </div>
+  </div>
+
+  <div class="card" id="quizCard">
+    <div class="quiz-question" id="quizQuestion"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <div class="quiz-nav">
+      <span class="quiz-counter" id="quizCounter"></span>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next →</button>
+    </div>
+  </div>
+
+  <div class="result-banner" id="resultBanner">
+    <div class="result-emoji" id="resultEmoji"></div>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="stars" id="resultStars"></div>
+    <div class="result-sub" id="resultSub"></div>
+    <button class="btn btn-primary" style="margin-top:20px;" onclick="restartQuiz()">🔄 Try Again</button>
+  </div>
+</div>
+
+<div style="height:40px;"></div>
+
+<script>
+// ---- STATE ----
+let totalPoints = 0;
+let maxPoints = 0;
+
+function addPoints(p) {
+  totalPoints += p;
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = maxPoints > 0 ? Math.min(100, (totalPoints / maxPoints) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('scoreDisplay').textContent = totalPoints + ' pts';
+}
+
+// ---- SPEAKING ----
+const questions = [
+  { text: "How many brothers and sisters have you got?", color: "#3dd6ac" },
+  { text: "Who do you get on with best in your family? Why?", color: "#4fc3f7" },
+  { text: "Do you spend a lot of free time with your family members?", color: "#ff6b6b" },
+  { text: "Are there any twins in your family?", color: "#ffd54f" },
+  { text: "Would you like to have a twin? Why / Why not?", color: "#b39ddb" }
+];
+
+maxPoints += questions.length * 2; // 2pts each
+
+let speakDone = 0;
+
+function buildSpeaking() {
+  const c = document.getElementById('speakingCards');
+  questions.forEach((q, i) => {
+    const d = document.createElement('div');
+    d.className = 'card question-card';
+    d.style.animationDelay = (i * 0.08) + 's';
+    d.innerHTML = `
+      <div class="q-number" style="background:${q.color}">${i+1}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-check" id="qc${i}" onclick="toggleSpeak(${i})">✓</div>
+    `;
+    c.appendChild(d);
+  });
+}
+
+function toggleSpeak(i) {
+  const el = document.getElementById('qc' + i);
+  if (el.classList.contains('done')) {
+    el.classList.remove('done');
+    speakDone--;
+    totalPoints -= 2;
+  } else {
+    el.classList.add('done');
+    speakDone++;
+    addPoints(2);
+  }
+  document.getElementById('speakCount').textContent = speakDone + ' / 5 discussed';
+}
+
+// ---- TIMER ----
+let timerSec = 240;
+let timerInt;
+function startTimer() {
+  timerInt = setInterval(() => {
+    timerSec--;
+    const m = String(Math.floor(timerSec / 60)).padStart(2,'0');
+    const s = String(timerSec % 60).padStart(2,'0');
+    const badge = document.getElementById('timerBadge');
+    badge.textContent = '⏱ ' + m + ':' + s;
+    if (timerSec <= 30) badge.style.background = '#ffebee', badge.style.color = '#c0392b', badge.style.borderColor = '#ffcdd2';
+    if (timerSec <= 0) { clearInterval(timerInt); badge.textContent = '⏱ Time!'; }
+  }, 1000);
+}
+
+// ---- VOCAB MATCH ----
+const vocab = [
+  { word: "identical",   def: "exactly the same" },
+  { word: "shy",         def: "nervous with strangers" },
+  { word: "personality", def: "the way a person thinks & behaves" },
+  { word: "similar",     def: "almost the same, but not exactly" },
+];
+
+maxPoints += vocab.length * 3; // 3pts each
+
+let selectedWord = null;
+let selectedDef  = null;
+let matchedPairs = 0;
+
+const shuffledDefs = [...vocab].sort(() => Math.random() - 0.5);
+
+function buildVocab() {
+  const wl = document.getElementById('wordList');
+  const dl = document.getElementById('defList');
+  vocab.forEach(v => {
+    const w = document.createElement('div');
+    w.className = 'word-pill';
+    w.textContent = v.word;
+    w.dataset.key = v.word;
+    w.onclick = () => selectWord(w);
+    wl.appendChild(w);
+  });
+  shuffledDefs.forEach(v => {
+    const d = document.createElement('div');
+    d.className = 'def-pill';
+    d.textContent = v.def;
+    d.dataset.key = v.word;
+    d.onclick = () => selectDef(d);
+    dl.appendChild(d);
+  });
+}
+
+function selectWord(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.word-pill.selected').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedWord = el;
+  tryMatch();
+}
+
+function selectDef(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.def-pill.selected').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedDef = el;
+  tryMatch();
+}
+
+function tryMatch() {
+  if (!selectedWord || !selectedDef) return;
+  const fb = document.getElementById('vocabFeedback');
+  if (selectedWord.dataset.key === selectedDef.dataset.key) {
+    selectedWord.classList.remove('selected'); selectedWord.classList.add('matched');
+    selectedDef.classList.remove('selected');  selectedDef.classList.add('matched');
+    matchedPairs++;
+    addPoints(3);
+    fb.textContent = '✅ Correct! +3 points';
+    fb.style.color = '#1a6b52';
+    if (matchedPairs === vocab.length) {
+      setTimeout(() => { fb.textContent = '🎉 All matched! Great job!'; }, 300);
+    }
+  } else {
+    selectedWord.classList.add('wrong'); selectedDef.classList.add('wrong');
+    fb.textContent = '❌ Try again!';
+    fb.style.color = '#c0392b';
+    setTimeout(() => {
+      selectedWord.classList.remove('wrong','selected');
+      selectedDef.classList.remove('wrong','selected');
+    }, 600);
+  }
+  selectedWord = null; selectedDef = null;
+}
+
+// ---- QUIZ ----
+const quizData = [
+  {
+    q: "Chloe and Leah ___ identical twins.",
+    opts: ["is", "are", "have", "has"],
+    ans: 1,
+    explain: "We use ARE with plural subjects. 'Chloe and Leah ARE twins.'"
+  },
+  {
+    q: "They ___ an older brother and sister.",
+    opts: ["have got", "has got", "is having", "are have"],
+    ans: 0,
+    explain: "THEY HAVE GOT = they possess/own. This is correct for plural subjects."
+  },
+  {
+    q: "Leah: 'I never feel sad ___ I'm with her.'",
+    opts: ["where", "which", "when", "while"],
+    ans: 2,
+    explain: "WHEN introduces a time clause. 'When I'm with her' = at the time I'm with her."
+  },
+  {
+    q: "Chloe: 'We ___ similar personalities.'",
+    opts: ["have got", "are got", "has got", "is got"],
+    ans: 0,
+    explain: "WE HAVE GOT is correct for plural. 'We have got similar personalities.'"
+  },
+  {
+    q: "Which girl wants to spend MORE time apart?",
+    opts: ["Leah", "Luke", "Jessica", "Chloe"],
+    ans: 3,
+    explain: "Chloe says it's a good idea to spend a bit more time apart as they get older."
+  }
+];
+
+maxPoints += quizData.length * 5;
+
+let qIdx = 0;
+let quizPoints = 0;
+let answered = false;
+
+function buildQuiz() { renderQuestion(); }
+
+function renderQuestion() {
+  const q = quizData[qIdx];
+  answered = false;
+  document.getElementById('quizQuestion').textContent = (qIdx+1) + '. ' + q.q;
+  document.getElementById('quizCounter').textContent = 'Question ' + (qIdx+1) + ' of ' + quizData.length;
+  const fb = document.getElementById('quizFeedback');
+  fb.className = 'quiz-feedback'; fb.textContent = '';
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.disabled = true;
+  nextBtn.textContent = qIdx < quizData.length - 1 ? 'Next →' : 'See Results 🎉';
+
+  const opts = document.getElementById('quizOptions');
+  opts.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  q.opts.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'quiz-opt';
+    b.textContent = letters[i] + ')  ' + o;
+    b.onclick = () => chooseAnswer(i, b, q);
+    opts.appendChild(b);
+  });
+}
+
+function chooseAnswer(i, btn, q) {
+  if (answered) return;
+  answered = true;
+  const all = document.querySelectorAll('.quiz-opt');
+  all.forEach(b => b.disabled = true);
+  const fb = document.getElementById('quizFeedback');
+  if (i === q.ans) {
+    btn.classList.add('correct');
+    fb.textContent = '✅ Correct! ' + q.explain;
+    fb.className = 'quiz-feedback show ok';
+    quizPoints += 5; addPoints(5);
+  } else {
+    btn.classList.add('wrong');
+    all[q.ans].classList.add('correct');
+    fb.textContent = '❌ ' + q.explain;
+    fb.className = 'quiz-feedback show no';
+  }
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  qIdx++;
+  if (qIdx >= quizData.length) {
+    showResult(); return;
+  }
+  renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('quizCard').style.display = 'none';
+  const banner = document.getElementById('resultBanner');
+  banner.classList.add('show');
+  const pct = quizPoints / (quizData.length * 5);
+  let emoji, title, stars, sub;
+  if (pct === 1)       { emoji='🏆'; title='Perfect Score!';   stars='⭐⭐⭐⭐⭐'; sub='Outstanding! You know the text very well!'; spawnConfetti(); }
+  else if (pct >= 0.8) { emoji='🎉'; title='Excellent!';       stars='⭐⭐⭐⭐'; sub='Almost perfect! Keep it up!'; }
+  else if (pct >= 0.6) { emoji='😊'; title='Good Job!';        stars='⭐⭐⭐'; sub='You got ' + quizPoints + '/' + (quizData.length*5) + ' points. Try again to improve!'; }
+  else                 { emoji='💪'; title='Keep Practising!'; stars='⭐⭐'; sub='Read the text again and try once more!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultStars').textContent = stars;
+  document.getElementById('resultSub').textContent   = sub;
+}
+
+function restartQuiz() {
+  qIdx = 0; quizPoints = 0; answered = false;
+  totalPoints = Math.max(0, totalPoints - quizPoints);
+  document.getElementById('quizCard').style.display = 'block';
+  document.getElementById('resultBanner').classList.remove('show');
+  renderQuestion();
+}
+
+// ---- CONFETTI ----
+function spawnConfetti() {
+  const colors = ['#3dd6ac','#ff6b6b','#4fc3f7','#ffd54f','#b39ddb'];
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.top = '-20px';
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+    c.style.animationDelay = (Math.random() * 1.5) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
+}
+
+// ---- INIT ----
+buildSpeaking();
+buildVocab();
+buildQuiz();
+startTimer();
+updateProgress();
+</script>
+</body>
+</html>
