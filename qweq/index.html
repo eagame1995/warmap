@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Warm-up: Twins & Personality</title>
+  <style>
+    :root {
+      --bg1: #eef7ff;
+      --bg2: #fff4fb;
+      --card: rgba(255,255,255,0.9);
+      --ink: #24324a;
+      --accent: #5b7cfa;
+      --accent2: #9b5de5;
+      --accent3: #ff7aa2;
+      --good: #d9f7e8;
+      --line: #dbe4ff;
+      --shadow: 0 12px 30px rgba(54, 75, 140, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(91,124,250,0.20) 0, transparent 25%),
+        radial-gradient(circle at 90% 10%, rgba(255,122,162,0.18) 0, transparent 22%),
+        radial-gradient(circle at 80% 80%, rgba(155,93,229,0.16) 0, transparent 25%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      padding: 30px 28px;
+      color: white;
+      background: linear-gradient(135deg, #5b7cfa 0%, #9b5de5 50%, #ff7aa2 100%);
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .hero::before {
+      width: 180px;
+      height: 180px;
+      top: -50px;
+      right: -40px;
+    }
+
+    .hero::after {
+      width: 110px;
+      height: 110px;
+      bottom: -30px;
+      left: 25px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 36px;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 18px;
+      max-width: 700px;
+    }
+
+    .hero-icons {
+      font-size: 48px;
+      letter-spacing: 8px;
+      user-select: none;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(50,70,120,0.06);
+    }
+
+    .layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 26px;
+    }
+
+    .subtitle {
+      margin-top: 0;
+      color: #52627f;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .word-chip {
+      background: linear-gradient(135deg, #ffffff, #f6f4ff);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .match-item, .def-item, .question, .sentence {
+      background: #fcfdff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .match-item strong, .def-item strong {
+      display: inline-block;
+      min-width: 28px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #c9d7ff;
+      background: white;
+      font-size: 15px;
+    }
+
+    .question label {
+      display: block;
+      margin-top: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      border-radius: 14px;
+      border: 1px solid #c9d7ff;
+      padding: 10px 12px;
+      margin-top: 8px;
+      resize: vertical;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .sentence input {
+      display: inline-block;
+      width: 280px;
+      max-width: 100%;
+      margin-left: 6px;
+      margin-top: 6px;
+      vertical-align: middle;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    .primary { background: linear-gradient(135deg, #5b7cfa, #9b5de5); color: white; }
+    .secondary { background: #ffe9f1; color: #b03d66; }
+    .ghost { background: #eef3ff; color: #40568f; }
+
+    .result {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #f7fbff;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      display: none;
+    }
+
+    .answers {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--good);
+      border: 1px solid #bde9cf;
+      display: none;
+    }
+
+    .sticker-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 28px;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      color: #556581;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .two-col { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 30px; }
+      .hero-icons { font-size: 36px; }
+    }
+
+    @media print {
+      body { background: white; }
+      .card, .hero { box-shadow: none; }
+      button { display: none; }
+      .result, .answers { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <h1>Interactive Warm-up: Twins & Personality</h1>
+          <p>Read, choose, type, discuss, and check your answers. A fun vocabulary warm-up with colorful design.</p>
+        </div>
+        <div class="hero-icons">👯 💬 🌈 ⭐</div>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="pill">Level: A2–B1</div>
+      <div class="pill">Topic: Twins & personality</div>
+      <div class="pill">Skills: Vocabulary + Speaking</div>
+    </div>
+
+    <div class="layout">
+      <section class="card">
+        <h2 class="section-title">🎨 Vocabulary Box</h2>
+        <p class="subtitle">Look at the new words before you start.</p>
+        <div class="vocab-grid">
+          <div class="word-chip">👯 identical twins</div>
+          <div class="word-chip">🧠 personality</div>
+          <div class="word-chip">🏆 competitive</div>
+          <div class="word-chip">🧍 spend time apart</div>
+          <div class="word-chip">🌟 independent</div>
+          <div class="word-chip">😒 jealous</div>
+          <div class="word-chip">🧑 grown-ups</div>
+          <div class="word-chip">🥇 beat someone at something</div>
+          <div class="word-chip">🙈 shy</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">1. Match the ideas</h2>
+        <p class="subtitle">Click a word (left), then click the correct definition (right).</p>
+        <div class="two-col">
+          <div id="words">
+            <div class="match-item" data-word="1">1. identical twins</div>
+            <div class="match-item" data-word="2">2. personality</div>
+            <div class="match-item" data-word="3">3. competitive</div>
+            <div class="match-item" data-word="4">4. independent</div>
+            <div class="match-item" data-word="5">5. jealous</div>
+            <div class="match-item" data-word="6">6. shy</div>
+            <div class="match-item" data-word="7">7. grown-ups</div>
+            <div class="match-item" data-word="8">8. to beat someone at something</div>
+            <div class="match-item" data-word="9">9. spend time apart</div>
+          </div>
+
+          <div id="defs">
+            <div class="def-item" data-def="a">a. people who are not children</div>
+            <div class="def-item" data-def="b">b. not wanting help from others</div>
+            <div class="def-item" data-def="c">c. feeling bad because someone has something you want</div>
+            <div class="def-item" data-def="d">d. winning against someone</div>
+            <div class="def-item" data-def="e">e. two children who look exactly the same</div>
+            <div class="def-item" data-def="f">f. your character and how you behave</div>
+            <div class="def-item" data-def="g">g. not together</div>
+            <div class="def-item" data-def="h">h. wanting to win all the time</div>
+            <div class="def-item" data-def="i">i. quiet and a bit afraid to talk</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="primary" onclick="checkMatch()">Check matching</button>
+          <button class="ghost" onclick="resetMatch()">Reset matching</button>
+        </div>
+
+        <div id="matchResult" class="result"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">2. Choose & Speak</h2>
+        <p class="subtitle">Choose 3–4 questions and write short answers, or discuss with a partner.</p>
+        <div class="question">1. Are you a <b>competitive</b> person? In what situations?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">2. Do you like to <b>spend time apart</b> from your friends or always together? Why?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">3. Are you more <b>independent</b> or do you like help?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">4. Do you sometimes feel <b>jealous</b>? When?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">5. Are you <b>shy</b> when you meet new people?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">6. Do you know any <b>identical twins</b>? Are they really the same?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">3. Complete the sentences</h2>
+        <p class="subtitle">Type the correct word or phrase.</p>
+        <div class="sentence">1. Tom always wants to win every game. He is very <input id="g1" type="text" /></div>
+        <div class="sentence">2. Anna doesn’t like to ask for help. She is <input id="g2" type="text" /></div>
+        <div class="sentence">3. Mike doesn’t talk much in class. He is <input id="g3" type="text" /></div>
+        <div class="sentence">4. Lisa is sad because her friend got a new phone. She feels <input id="g4" type="text" /></div>
+        <div class="sentence">5. Two sisters look exactly the same — they are <input id="g5" type="text" /></div>
+        <div class="sentence">6. My parents are strict. They are <input id="g6" type="text" /></div>
+        <div class="sentence">7. I can <input id="g7" type="text" /> at chess — I always win!</div>
+        <div class="sentence">8. We are tired of each other. Let’s <input id="g8" type="text" /> for a day.</div>
+
+        <div class="actions">
+          <button class="primary" onclick="checkAnswers()">Check answers</button>
+          <button class="secondary" onclick="showAnswers()">Show answers</button>
+          <button class="ghost" onclick="resetWork()">Reset</button>
+        </div>
+
+        <div id="result" class="result"></div>
+        <div id="answers" class="answers">
+          <b>Answers:</b><br>
+          Match: 1-e, 2-f, 3-h, 4-b, 5-c, 6-i, 7-a, 8-d, 9-g<br>
+          Gaps: 1. competitive  2. independent  3. shy  4. jealous  5. identical twins  6. grown-ups  7. beat someone  8. spend time apart
+        </div>
+
+        <div class="sticker-row">🌟 🎈 🧠 👯 🏆 💬</div>
+        <div class="footer-note">Teacher’s tip: after checking, students can make 2 of their own sentences using the new words.</div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    function normalize(text) {
+      return text.toLowerCase().trim().replace(/\s+/g, ' ');
+    }
+
+    function checkAnswers() {
+      const matchKey = {
+        m1: 'e', m2: 'f', m3: 'h', m4: 'b', m5: 'c',
+        m6: 'i', m7: 'a', m8: 'd', m9: 'g'
+      };
+
+      const gapKey = {
+        g1: ['competitive'],
+        g2: ['independent'],
+        g3: ['shy'],
+        g4: ['jealous'],
+        g5: ['identical twins'],
+        g6: ['grown-ups', 'grownups'],
+        g7: ['beat someone', 'beat someone at something', 'beat my brother', 'beat my sister'],
+        g8: ['spend time apart']
+      };
+
+      let score = 0;
+      let total = 17;
+
+      for (const id in matchKey) {
+        const el = document.getElementById(id);
+        if (el.value === matchKey[id]) score++;
+      }
+
+      for (const id in gapKey) {
+        const value = normalize(document.getElementById(id).value);
+        if (gapKey[id].includes(value)) score++;
+      }
+
+      const result = document.getElementById('result');
+      result.style.display = 'block';
+      result.innerHTML = `Your score: <b>${score}/${total}</b> ${score >= 14 ? '🌟 Excellent!' : score >= 10 ? '👍 Good job!' : '💪 Keep practicing!'}`;
+    }
+
+    function showAnswers() {
+      document.getElementById('answers').style.display = 'block';
+    }
+
+    function resetWork() {
+      document.querySelectorAll('select').forEach(el => el.value = '');
+      document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
+      document.querySelectorAll('textarea').forEach(el => el.value = '');
+      document.getElementById('result').style.display = 'none';
+      document.getElementById('answers').style.display = 'none';
+    }
+  
+    let selectedWord = null;
+    let matches = {};
+
+    document.querySelectorAll('#words .match-item').forEach(el => {
+      el.onclick = () => {
+        document.querySelectorAll('#words .match-item').forEach(w => w.style.background='');
+        el.style.background = '#e0e7ff';
+        selectedWord = el.dataset.word;
+      };
+    });
+
+    document.querySelectorAll('#defs .def-item').forEach(el => {
+      el.onclick = () => {
+        if (!selectedWord) return;
+
+        const correct = {
+          1:'e',2:'f',3:'h',4:'b',5:'c',6:'i',7:'a',8:'d',9:'g'
+        };
+
+        const def = el.dataset.def;
+        const wordEl = document.querySelector(`#words .match-item[data-word='${selectedWord}']`);
+
+        if (correct[selectedWord] === def) {
+          el.style.background = '#d9f7e8';
+          wordEl.style.background = '#d9f7e8';
+
+          // lock correct pair
+          el.style.pointerEvents = 'none';
+          wordEl.style.pointerEvents = 'none';
+        } else {
+          el.style.background = '#ffd6d6';
+          wordEl.style.background = '#ffd6d6';
+
+          setTimeout(() => {
+            el.style.background = '';
+            wordEl.style.background = '';
+          }, 800);
+        }
+
+        selectedWord = null;
+      };
+    });
+
+    function checkMatch() {
+      const correct = {
+        1:'e',2:'f',3:'h',4:'b',5:'c',6:'i',7:'a',8:'d',9:'g'
+      };
+
+      let score = 0;
+      for (let key in correct) {
+        if (matches[key] === correct[key]) score++;
+      }
+
+      const res = document.getElementById('matchResult');
+      res.style.display = 'block';
+      res.innerHTML = `Matching score: <b>${score}/9</b>`;
+    }
+
+    function resetMatch() {
+      matches = {};
+      selectedWord = null;
+      document.querySelectorAll('#words .match-item, #defs .def-item').forEach(el => el.style.background='');
+      document.getElementById('matchResult').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
