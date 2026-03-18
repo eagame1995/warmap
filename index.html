@@ -1,835 +1,527 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Being a Twin — Warm-Up</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --mint: #3dd6ac;
-    --coral: #ff6b6b;
-    --sky: #4fc3f7;
-    --yellow: #ffd54f;
-    --purple: #b39ddb;
-    --bg: #f0faf7;
-    --card: #ffffff;
-    --text: #1a2e2a;
-    --muted: #6b8f85;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Warm-up: Twins & Personality</title>
+  <style>
+    :root {
+      --bg1: #eef7ff;
+      --bg2: #fff4fb;
+      --card: rgba(255,255,255,0.9);
+      --ink: #24324a;
+      --accent: #5b7cfa;
+      --accent2: #9b5de5;
+      --accent3: #ff7aa2;
+      --good: #d9f7e8;
+      --line: #dbe4ff;
+      --shadow: 0 12px 30px rgba(54, 75, 140, 0.12);
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; }
 
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0 0 60px;
-    overflow-x: hidden;
-  }
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(91,124,250,0.20) 0, transparent 25%),
+        radial-gradient(circle at 90% 10%, rgba(255,122,162,0.18) 0, transparent 22%),
+        radial-gradient(circle at 80% 80%, rgba(155,93,229,0.16) 0, transparent 25%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height: 100vh;
+    }
 
-  /* HEADER */
-  header {
-    background: linear-gradient(135deg, #1a6b52 0%, #0d4a3a 100%);
-    color: white;
-    padding: 36px 24px 28px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 180px; height: 180px;
-    border-radius: 50%;
-    background: rgba(61,214,172,0.18);
-  }
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -30px; left: -20px;
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: rgba(255,107,107,0.13);
-  }
-  .header-tag {
-    display: inline-block;
-    background: var(--mint);
-    color: #0d4a3a;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 4px 14px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
-  header h1 {
-    font-family: 'Fredoka One', cursive;
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-  header p {
-    font-size: 15px;
-    opacity: 0.8;
-    font-weight: 600;
-  }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
 
-  /* PROGRESS BAR */
-  .progress-wrap {
-    background: #e0f2ec;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .progress-label {
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--muted);
-    white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .progress-bar {
-    flex: 1;
-    height: 10px;
-    background: #c4e8df;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--mint), var(--sky));
-    border-radius: 10px;
-    transition: width 0.5s ease;
-    width: 0%;
-  }
-  .progress-score {
-    font-family: 'Fredoka One', cursive;
-    font-size: 18px;
-    color: #1a6b52;
-    min-width: 48px;
-    text-align: right;
-  }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      padding: 30px 28px;
+      color: white;
+      background: linear-gradient(135deg, #5b7cfa 0%, #9b5de5 50%, #ff7aa2 100%);
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
 
-  /* SECTIONS */
-  .section {
-    max-width: 760px;
-    margin: 32px auto 0;
-    padding: 0 16px;
-  }
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+    }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .section-icon {
-    width: 44px; height: 44px;
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-  .section-title {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.5rem;
-    color: #0d4a3a;
-  }
-  .section-subtitle {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 600;
-    margin-top: 2px;
-  }
+    .hero::before {
+      width: 180px;
+      height: 180px;
+      top: -50px;
+      right: -40px;
+    }
 
-  /* CARDS */
-  .card {
-    background: var(--card);
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-    border: 2px solid transparent;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .card:hover { transform: translateY(-2px); }
+    .hero::after {
+      width: 110px;
+      height: 110px;
+      bottom: -30px;
+      left: 25px;
+    }
 
-  /* SPEAKING QUESTIONS */
-  .question-card {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    animation: slideIn 0.4s ease both;
-  }
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-20px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-  .q-number {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fredoka One', cursive;
-    font-size: 18px;
-    color: white;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .q-text {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.5;
-    flex: 1;
-  }
-  .q-check {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 2.5px solid #c4e8df;
-    background: white;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    transition: all 0.2s;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .q-check.done {
-    background: var(--mint);
-    border-color: var(--mint);
-    color: white;
-  }
-  .q-check:hover { transform: scale(1.1); }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-  /* VOCABULARY MATCH */
-  .vocab-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  @media (max-width: 500px) { .vocab-grid { grid-template-columns: 1fr; } }
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 36px;
+    }
 
-  .vocab-col-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-    padding-left: 4px;
-  }
+    .hero p {
+      margin: 0;
+      font-size: 18px;
+      max-width: 700px;
+    }
 
-  .word-pill, .def-pill {
-    padding: 12px 16px;
-    border-radius: 14px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    user-select: none;
-    text-align: center;
-    border: 2.5px solid transparent;
-  }
-  .word-pill {
-    background: #e8f8f3;
-    color: #0d4a3a;
-    border-color: #c4e8df;
-  }
-  .def-pill {
-    background: #fff3e0;
-    color: #6d4c28;
-    border-color: #ffe0b2;
-  }
-  .word-pill.selected, .def-pill.selected {
-    transform: scale(1.04);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  }
-  .word-pill.selected { background: var(--sky); color: white; border-color: var(--sky); }
-  .def-pill.selected  { background: var(--coral); color: white; border-color: var(--coral); }
-  .word-pill.matched, .def-pill.matched {
-    background: var(--mint) !important;
-    color: white !important;
-    border-color: var(--mint) !important;
-    cursor: default;
-  }
-  .word-pill.wrong, .def-pill.wrong {
-    animation: shake 0.3s ease;
-    background: #ffebee !important;
-    border-color: var(--coral) !important;
-  }
-  @keyframes shake {
-    0%,100% { transform: translateX(0); }
-    25% { transform: translateX(-6px); }
-    75% { transform: translateX(6px); }
-  }
+    .hero-icons {
+      font-size: 48px;
+      letter-spacing: 8px;
+      user-select: none;
+    }
 
-  /* QUIZ */
-  .quiz-question {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 16px;
-    line-height: 1.5;
-  }
-  .quiz-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  @media (max-width: 480px) { .quiz-options { grid-template-columns: 1fr; } }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
 
-  .quiz-opt {
-    padding: 13px 16px;
-    border-radius: 14px;
-    border: 2.5px solid #e0f2ec;
-    background: white;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.18s;
-    text-align: left;
-    color: var(--text);
-  }
-  .quiz-opt:hover:not(:disabled) {
-    border-color: var(--sky);
-    background: #e1f5fe;
-    transform: translateY(-1px);
-  }
-  .quiz-opt.correct {
-    background: #e8f8f3;
-    border-color: var(--mint);
-    color: #0d4a3a;
-  }
-  .quiz-opt.wrong {
-    background: #ffebee;
-    border-color: var(--coral);
-    color: #c0392b;
-  }
-  .quiz-opt:disabled { cursor: default; }
+    .pill {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(50,70,120,0.06);
+    }
 
-  .quiz-feedback {
-    margin-top: 14px;
-    padding: 12px 16px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 700;
-    display: none;
-  }
-  .quiz-feedback.show { display: block; }
-  .quiz-feedback.ok { background: #e8f8f3; color: #0d4a3a; }
-  .quiz-feedback.no { background: #ffebee; color: #c0392b; }
+    .layout {
+      display: grid;
+      gap: 18px;
+    }
 
-  .quiz-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 18px;
-  }
-  .quiz-counter {
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
 
-  /* BUTTONS */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 11px 22px;
-    border-radius: 12px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 14px;
-    font-weight: 800;
-    border: none;
-    cursor: pointer;
-    transition: all 0.18s;
-    text-decoration: none;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--mint), #2abf96);
-    color: white;
-    box-shadow: 0 4px 14px rgba(61,214,172,0.35);
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(61,214,172,0.4); }
-  .btn-secondary {
-    background: #e0f2ec;
-    color: #1a6b52;
-  }
-  .btn-secondary:hover { background: #c4e8df; }
-  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+    .section-title {
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 26px;
+    }
 
-  /* RESULT BANNER */
-  .result-banner {
-    background: linear-gradient(135deg, #1a6b52, #0d4a3a);
-    color: white;
-    border-radius: 20px;
-    padding: 28px 24px;
-    text-align: center;
-    display: none;
-    margin-top: 20px;
-  }
-  .result-banner.show { display: block; animation: popIn 0.4s ease; }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to   { opacity: 1; transform: scale(1); }
-  }
-  .result-emoji { font-size: 52px; margin-bottom: 10px; }
-  .result-title { font-family: 'Fredoka One', cursive; font-size: 1.8rem; margin-bottom: 8px; }
-  .result-sub { font-size: 15px; opacity: 0.85; }
+    .subtitle {
+      margin-top: 0;
+      color: #52627f;
+    }
 
-  /* TIMER */
-  .timer-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #fff3e0;
-    color: #e65100;
-    border-radius: 20px;
-    padding: 5px 14px;
-    font-size: 13px;
-    font-weight: 800;
-    border: 2px solid #ffe0b2;
-  }
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
 
-  /* DIVIDER */
-  .divider {
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #c4e8df, transparent);
-    margin: 8px 0 24px;
-    border-radius: 2px;
-  }
+    .word-chip {
+      background: linear-gradient(135deg, #ffffff, #f6f4ff);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-  /* HINT */
-  .hint-box {
-    background: #fffde7;
-    border: 2px solid var(--yellow);
-    border-radius: 14px;
-    padding: 12px 16px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #6d5800;
-    margin-bottom: 16px;
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-  }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
 
-  /* STAR RATING */
-  .stars { font-size: 26px; letter-spacing: 4px; }
+    .match-item, .def-item, .question, .sentence {
+      background: #fcfdff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
 
-  /* CONFETTI */
-  .confetti-piece {
-    position: fixed;
-    width: 10px; height: 10px;
-    border-radius: 2px;
-    pointer-events: none;
-    animation: confettiFall linear both;
-    z-index: 9999;
-  }
-  @keyframes confettiFall {
-    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-  }
-</style>
+    .match-item strong, .def-item strong {
+      display: inline-block;
+      min-width: 28px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #c9d7ff;
+      background: white;
+      font-size: 15px;
+    }
+
+    .question label {
+      display: block;
+      margin-top: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      border-radius: 14px;
+      border: 1px solid #c9d7ff;
+      padding: 10px 12px;
+      margin-top: 8px;
+      resize: vertical;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .sentence input {
+      display: inline-block;
+      width: 280px;
+      max-width: 100%;
+      margin-left: 6px;
+      margin-top: 6px;
+      vertical-align: middle;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    .primary { background: linear-gradient(135deg, #5b7cfa, #9b5de5); color: white; }
+    .secondary { background: #ffe9f1; color: #b03d66; }
+    .ghost { background: #eef3ff; color: #40568f; }
+
+    .result {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #f7fbff;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      display: none;
+    }
+
+    .answers {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--good);
+      border: 1px solid #bde9cf;
+      display: none;
+    }
+
+    .sticker-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 28px;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      color: #556581;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .two-col { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 30px; }
+      .hero-icons { font-size: 36px; }
+    }
+
+    @media print {
+      body { background: white; }
+      .card, .hero { box-shadow: none; }
+      button { display: none; }
+      .result, .answers { display: block !important; }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="header-tag">Pre-Intermediate · Warm-Up</div>
-  <h1>🌟 Being a Twin</h1>
-  <p>Grammar: Present Tenses &amp; <em>have / have got</em></p>
-</header>
-
-<!-- PROGRESS -->
-<div class="progress-wrap">
-  <span class="progress-label">Progress</span>
-  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  <span class="progress-score" id="scoreDisplay">0 pts</span>
-</div>
-
-<!-- ======== SECTION 1: SPEAKING ======== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-icon" style="background:#e0f7fa;">🗣️</div>
-    <div>
-      <div class="section-title">Part 1 — Speaking Warm-Up</div>
-      <div class="section-subtitle">Discuss with your partner · 3–4 minutes · Mark questions you've discussed</div>
-    </div>
-  </div>
-
-  <div class="hint-box">💡 <span>Take turns! Try to use full sentences and add details to your answers.</span></div>
-
-  <div id="speakingCards"></div>
-
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-    <span id="speakCount" style="font-size:13px;font-weight:800;color:var(--muted);">0 / 5 discussed</span>
-    <div class="timer-badge" id="timerBadge">⏱ 04:00</div>
-  </div>
-</div>
-
-<div class="section"><div class="divider"></div></div>
-
-<!-- ======== SECTION 2: VOCAB MATCH ======== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-icon" style="background:#fce4ec;">📖</div>
-    <div>
-      <div class="section-title">Part 2 — Vocabulary Match</div>
-      <div class="section-subtitle">Click a word, then click its definition</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="vocab-grid">
-      <div>
-        <div class="vocab-col-label">Words</div>
-        <div id="wordList" style="display:flex;flex-direction:column;gap:10px;"></div>
+  <div class="page">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <h1>Interactive Warm-up: Twins & Personality</h1>
+          <p>Read, choose, type, discuss, and check your answers. A fun vocabulary warm-up with colorful design.</p>
+        </div>
+        <div class="hero-icons">👯 💬 🌈 ⭐</div>
       </div>
-      <div>
-        <div class="vocab-col-label">Definitions</div>
-        <div id="defList" style="display:flex;flex-direction:column;gap:10px;"></div>
-      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="pill">Level: A2–B1</div>
+      <div class="pill">Topic: Twins & personality</div>
+      <div class="pill">Skills: Vocabulary + Speaking</div>
     </div>
-    <div id="vocabFeedback" style="margin-top:16px;font-size:14px;font-weight:700;color:#1a6b52;min-height:20px;"></div>
-  </div>
-</div>
 
-<div class="section"><div class="divider"></div></div>
+    <div class="layout">
+      <section class="card">
+        <h2 class="section-title">🎨 Vocabulary Box</h2>
+        <p class="subtitle">Look at the new words before you start.</p>
+        <div class="vocab-grid">
+          <div class="word-chip">👯 identical twins</div>
+          <div class="word-chip">🧠 personality</div>
+          <div class="word-chip">🏆 competitive</div>
+          <div class="word-chip">🧍 spend time apart</div>
+          <div class="word-chip">🌟 independent</div>
+          <div class="word-chip">😒 jealous</div>
+          <div class="word-chip">🧑 grown-ups</div>
+          <div class="word-chip">🥇 beat someone at something</div>
+          <div class="word-chip">🙈 shy</div>
+        </div>
+      </section>
 
-<!-- ======== SECTION 3: QUIZ ======== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-icon" style="background:#f3e5f5;">❓</div>
-    <div>
-      <div class="section-title">Part 3 — Quick Quiz</div>
-      <div class="section-subtitle">Choose the correct answer · 5 questions</div>
+      <section class="card">
+        <h2 class="section-title">1. Match the ideas</h2>
+        <p class="subtitle">Click a word (left), then click the correct definition (right).</p>
+        <div class="two-col">
+          <div id="words">
+            <div class="match-item" data-word="1">1. identical twins</div>
+            <div class="match-item" data-word="2">2. personality</div>
+            <div class="match-item" data-word="3">3. competitive</div>
+            <div class="match-item" data-word="4">4. independent</div>
+            <div class="match-item" data-word="5">5. jealous</div>
+            <div class="match-item" data-word="6">6. shy</div>
+            <div class="match-item" data-word="7">7. grown-ups</div>
+            <div class="match-item" data-word="8">8. to beat someone at something</div>
+            <div class="match-item" data-word="9">9. spend time apart</div>
+          </div>
+
+          <div id="defs">
+            <div class="def-item" data-def="a">a. people who are not children</div>
+            <div class="def-item" data-def="b">b. not wanting help from others</div>
+            <div class="def-item" data-def="c">c. feeling bad because someone has something you want</div>
+            <div class="def-item" data-def="d">d. winning against someone</div>
+            <div class="def-item" data-def="e">e. two children who look exactly the same</div>
+            <div class="def-item" data-def="f">f. your character and how you behave</div>
+            <div class="def-item" data-def="g">g. not together</div>
+            <div class="def-item" data-def="h">h. wanting to win all the time</div>
+            <div class="def-item" data-def="i">i. quiet and a bit afraid to talk</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="primary" onclick="checkMatch()">Check matching</button>
+          <button class="ghost" onclick="resetMatch()">Reset matching</button>
+        </div>
+
+        <div id="matchResult" class="result"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">2. Choose & Speak</h2>
+        <p class="subtitle">Choose 3–4 questions and write short answers, or discuss with a partner.</p>
+        <div class="question">1. Are you a <b>competitive</b> person? In what situations?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">2. Do you like to <b>spend time apart</b> from your friends or always together? Why?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">3. Are you more <b>independent</b> or do you like help?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">4. Do you sometimes feel <b>jealous</b>? When?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">5. Are you <b>shy</b> when you meet new people?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+        <div class="question">6. Do you know any <b>identical twins</b>? Are they really the same?
+          <textarea placeholder="Type your idea here..."></textarea>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">3. Complete the sentences</h2>
+        <p class="subtitle">Type the correct word or phrase.</p>
+        <div class="sentence">1. Tom always wants to win every game. He is very <input id="g1" type="text" /></div>
+        <div class="sentence">2. Anna doesn’t like to ask for help. She is <input id="g2" type="text" /></div>
+        <div class="sentence">3. Mike doesn’t talk much in class. He is <input id="g3" type="text" /></div>
+        <div class="sentence">4. Lisa is sad because her friend got a new phone. She feels <input id="g4" type="text" /></div>
+        <div class="sentence">5. Two sisters look exactly the same — they are <input id="g5" type="text" /></div>
+        <div class="sentence">6. My parents are strict. They are <input id="g6" type="text" /></div>
+        <div class="sentence">7. I can <input id="g7" type="text" /> at chess — I always win!</div>
+        <div class="sentence">8. We are tired of each other. Let’s <input id="g8" type="text" /> for a day.</div>
+
+        <div class="actions">
+          <button class="primary" onclick="checkAnswers()">Check answers</button>
+          <button class="secondary" onclick="showAnswers()">Show answers</button>
+          <button class="ghost" onclick="resetWork()">Reset</button>
+        </div>
+
+        <div id="result" class="result"></div>
+        <div id="answers" class="answers">
+          <b>Answers:</b><br>
+          Match: 1-e, 2-f, 3-h, 4-b, 5-c, 6-i, 7-a, 8-d, 9-g<br>
+          Gaps: 1. competitive  2. independent  3. shy  4. jealous  5. identical twins  6. grown-ups  7. beat someone  8. spend time apart
+        </div>
+
+        <div class="sticker-row">🌟 🎈 🧠 👯 🏆 💬</div>
+        <div class="footer-note">Teacher’s tip: after checking, students can make 2 of their own sentences using the new words.</div>
+      </section>
     </div>
   </div>
 
-  <div class="card" id="quizCard">
-    <div class="quiz-question" id="quizQuestion"></div>
-    <div class="quiz-options" id="quizOptions"></div>
-    <div class="quiz-feedback" id="quizFeedback"></div>
-    <div class="quiz-nav">
-      <span class="quiz-counter" id="quizCounter"></span>
-      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next →</button>
-    </div>
-  </div>
-
-  <div class="result-banner" id="resultBanner">
-    <div class="result-emoji" id="resultEmoji"></div>
-    <div class="result-title" id="resultTitle"></div>
-    <div class="stars" id="resultStars"></div>
-    <div class="result-sub" id="resultSub"></div>
-    <button class="btn btn-primary" style="margin-top:20px;" onclick="restartQuiz()">🔄 Try Again</button>
-  </div>
-</div>
-
-<div style="height:40px;"></div>
-
-<script>
-// ---- STATE ----
-let totalPoints = 0;
-let maxPoints = 0;
-
-function addPoints(p) {
-  totalPoints += p;
-  updateProgress();
-}
-
-function updateProgress() {
-  const pct = maxPoints > 0 ? Math.min(100, (totalPoints / maxPoints) * 100) : 0;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('scoreDisplay').textContent = totalPoints + ' pts';
-}
-
-// ---- SPEAKING ----
-const questions = [
-  { text: "How many brothers and sisters have you got?", color: "#3dd6ac" },
-  { text: "Who do you get on with best in your family? Why?", color: "#4fc3f7" },
-  { text: "Do you spend a lot of free time with your family members?", color: "#ff6b6b" },
-  { text: "Are there any twins in your family?", color: "#ffd54f" },
-  { text: "Would you like to have a twin? Why / Why not?", color: "#b39ddb" }
-];
-
-maxPoints += questions.length * 2; // 2pts each
-
-let speakDone = 0;
-
-function buildSpeaking() {
-  const c = document.getElementById('speakingCards');
-  questions.forEach((q, i) => {
-    const d = document.createElement('div');
-    d.className = 'card question-card';
-    d.style.animationDelay = (i * 0.08) + 's';
-    d.innerHTML = `
-      <div class="q-number" style="background:${q.color}">${i+1}</div>
-      <div class="q-text">${q.text}</div>
-      <div class="q-check" id="qc${i}" onclick="toggleSpeak(${i})">✓</div>
-    `;
-    c.appendChild(d);
-  });
-}
-
-function toggleSpeak(i) {
-  const el = document.getElementById('qc' + i);
-  if (el.classList.contains('done')) {
-    el.classList.remove('done');
-    speakDone--;
-    totalPoints -= 2;
-  } else {
-    el.classList.add('done');
-    speakDone++;
-    addPoints(2);
-  }
-  document.getElementById('speakCount').textContent = speakDone + ' / 5 discussed';
-}
-
-// ---- TIMER ----
-let timerSec = 240;
-let timerInt;
-function startTimer() {
-  timerInt = setInterval(() => {
-    timerSec--;
-    const m = String(Math.floor(timerSec / 60)).padStart(2,'0');
-    const s = String(timerSec % 60).padStart(2,'0');
-    const badge = document.getElementById('timerBadge');
-    badge.textContent = '⏱ ' + m + ':' + s;
-    if (timerSec <= 30) badge.style.background = '#ffebee', badge.style.color = '#c0392b', badge.style.borderColor = '#ffcdd2';
-    if (timerSec <= 0) { clearInterval(timerInt); badge.textContent = '⏱ Time!'; }
-  }, 1000);
-}
-
-// ---- VOCAB MATCH ----
-const vocab = [
-  { word: "identical",   def: "exactly the same" },
-  { word: "shy",         def: "nervous with strangers" },
-  { word: "personality", def: "the way a person thinks & behaves" },
-  { word: "similar",     def: "almost the same, but not exactly" },
-];
-
-maxPoints += vocab.length * 3; // 3pts each
-
-let selectedWord = null;
-let selectedDef  = null;
-let matchedPairs = 0;
-
-const shuffledDefs = [...vocab].sort(() => Math.random() - 0.5);
-
-function buildVocab() {
-  const wl = document.getElementById('wordList');
-  const dl = document.getElementById('defList');
-  vocab.forEach(v => {
-    const w = document.createElement('div');
-    w.className = 'word-pill';
-    w.textContent = v.word;
-    w.dataset.key = v.word;
-    w.onclick = () => selectWord(w);
-    wl.appendChild(w);
-  });
-  shuffledDefs.forEach(v => {
-    const d = document.createElement('div');
-    d.className = 'def-pill';
-    d.textContent = v.def;
-    d.dataset.key = v.word;
-    d.onclick = () => selectDef(d);
-    dl.appendChild(d);
-  });
-}
-
-function selectWord(el) {
-  if (el.classList.contains('matched')) return;
-  document.querySelectorAll('.word-pill.selected').forEach(e => e.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedWord = el;
-  tryMatch();
-}
-
-function selectDef(el) {
-  if (el.classList.contains('matched')) return;
-  document.querySelectorAll('.def-pill.selected').forEach(e => e.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedDef = el;
-  tryMatch();
-}
-
-function tryMatch() {
-  if (!selectedWord || !selectedDef) return;
-  const fb = document.getElementById('vocabFeedback');
-  if (selectedWord.dataset.key === selectedDef.dataset.key) {
-    selectedWord.classList.remove('selected'); selectedWord.classList.add('matched');
-    selectedDef.classList.remove('selected');  selectedDef.classList.add('matched');
-    matchedPairs++;
-    addPoints(3);
-    fb.textContent = '✅ Correct! +3 points';
-    fb.style.color = '#1a6b52';
-    if (matchedPairs === vocab.length) {
-      setTimeout(() => { fb.textContent = '🎉 All matched! Great job!'; }, 300);
+  <script>
+    function normalize(text) {
+      return text.toLowerCase().trim().replace(/\s+/g, ' ');
     }
-  } else {
-    selectedWord.classList.add('wrong'); selectedDef.classList.add('wrong');
-    fb.textContent = '❌ Try again!';
-    fb.style.color = '#c0392b';
-    setTimeout(() => {
-      selectedWord.classList.remove('wrong','selected');
-      selectedDef.classList.remove('wrong','selected');
-    }, 600);
-  }
-  selectedWord = null; selectedDef = null;
-}
 
-// ---- QUIZ ----
-const quizData = [
-  {
-    q: "Chloe and Leah ___ identical twins.",
-    opts: ["is", "are", "have", "has"],
-    ans: 1,
-    explain: "We use ARE with plural subjects. 'Chloe and Leah ARE twins.'"
-  },
-  {
-    q: "They ___ an older brother and sister.",
-    opts: ["have got", "has got", "is having", "are have"],
-    ans: 0,
-    explain: "THEY HAVE GOT = they possess/own. This is correct for plural subjects."
-  },
-  {
-    q: "Leah: 'I never feel sad ___ I'm with her.'",
-    opts: ["where", "which", "when", "while"],
-    ans: 2,
-    explain: "WHEN introduces a time clause. 'When I'm with her' = at the time I'm with her."
-  },
-  {
-    q: "Chloe: 'We ___ similar personalities.'",
-    opts: ["have got", "are got", "has got", "is got"],
-    ans: 0,
-    explain: "WE HAVE GOT is correct for plural. 'We have got similar personalities.'"
-  },
-  {
-    q: "Which girl wants to spend MORE time apart?",
-    opts: ["Leah", "Luke", "Jessica", "Chloe"],
-    ans: 3,
-    explain: "Chloe says it's a good idea to spend a bit more time apart as they get older."
-  }
-];
+    function checkAnswers() {
+      const matchKey = {
+        m1: 'e', m2: 'f', m3: 'h', m4: 'b', m5: 'c',
+        m6: 'i', m7: 'a', m8: 'd', m9: 'g'
+      };
 
-maxPoints += quizData.length * 5;
+      const gapKey = {
+        g1: ['competitive'],
+        g2: ['independent'],
+        g3: ['shy'],
+        g4: ['jealous'],
+        g5: ['identical twins'],
+        g6: ['grown-ups', 'grownups'],
+        g7: ['beat someone', 'beat someone at something', 'beat my brother', 'beat my sister'],
+        g8: ['spend time apart']
+      };
 
-let qIdx = 0;
-let quizPoints = 0;
-let answered = false;
+      let score = 0;
+      let total = 17;
 
-function buildQuiz() { renderQuestion(); }
+      for (const id in matchKey) {
+        const el = document.getElementById(id);
+        if (el.value === matchKey[id]) score++;
+      }
 
-function renderQuestion() {
-  const q = quizData[qIdx];
-  answered = false;
-  document.getElementById('quizQuestion').textContent = (qIdx+1) + '. ' + q.q;
-  document.getElementById('quizCounter').textContent = 'Question ' + (qIdx+1) + ' of ' + quizData.length;
-  const fb = document.getElementById('quizFeedback');
-  fb.className = 'quiz-feedback'; fb.textContent = '';
-  const nextBtn = document.getElementById('nextBtn');
-  nextBtn.disabled = true;
-  nextBtn.textContent = qIdx < quizData.length - 1 ? 'Next →' : 'See Results 🎉';
+      for (const id in gapKey) {
+        const value = normalize(document.getElementById(id).value);
+        if (gapKey[id].includes(value)) score++;
+      }
 
-  const opts = document.getElementById('quizOptions');
-  opts.innerHTML = '';
-  const letters = ['A', 'B', 'C', 'D'];
-  q.opts.forEach((o, i) => {
-    const b = document.createElement('button');
-    b.className = 'quiz-opt';
-    b.textContent = letters[i] + ')  ' + o;
-    b.onclick = () => chooseAnswer(i, b, q);
-    opts.appendChild(b);
-  });
-}
+      const result = document.getElementById('result');
+      result.style.display = 'block';
+      result.innerHTML = `Your score: <b>${score}/${total}</b> ${score >= 14 ? '🌟 Excellent!' : score >= 10 ? '👍 Good job!' : '💪 Keep practicing!'}`;
+    }
 
-function chooseAnswer(i, btn, q) {
-  if (answered) return;
-  answered = true;
-  const all = document.querySelectorAll('.quiz-opt');
-  all.forEach(b => b.disabled = true);
-  const fb = document.getElementById('quizFeedback');
-  if (i === q.ans) {
-    btn.classList.add('correct');
-    fb.textContent = '✅ Correct! ' + q.explain;
-    fb.className = 'quiz-feedback show ok';
-    quizPoints += 5; addPoints(5);
-  } else {
-    btn.classList.add('wrong');
-    all[q.ans].classList.add('correct');
-    fb.textContent = '❌ ' + q.explain;
-    fb.className = 'quiz-feedback show no';
-  }
-  document.getElementById('nextBtn').disabled = false;
-}
+    function showAnswers() {
+      document.getElementById('answers').style.display = 'block';
+    }
 
-function nextQuestion() {
-  qIdx++;
-  if (qIdx >= quizData.length) {
-    showResult(); return;
-  }
-  renderQuestion();
-}
+    function resetWork() {
+      document.querySelectorAll('select').forEach(el => el.value = '');
+      document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
+      document.querySelectorAll('textarea').forEach(el => el.value = '');
+      document.getElementById('result').style.display = 'none';
+      document.getElementById('answers').style.display = 'none';
+    }
+  
+    let selectedWord = null;
+    let matches = {};
 
-function showResult() {
-  document.getElementById('quizCard').style.display = 'none';
-  const banner = document.getElementById('resultBanner');
-  banner.classList.add('show');
-  const pct = quizPoints / (quizData.length * 5);
-  let emoji, title, stars, sub;
-  if (pct === 1)       { emoji='🏆'; title='Perfect Score!';   stars='⭐⭐⭐⭐⭐'; sub='Outstanding! You know the text very well!'; spawnConfetti(); }
-  else if (pct >= 0.8) { emoji='🎉'; title='Excellent!';       stars='⭐⭐⭐⭐'; sub='Almost perfect! Keep it up!'; }
-  else if (pct >= 0.6) { emoji='😊'; title='Good Job!';        stars='⭐⭐⭐'; sub='You got ' + quizPoints + '/' + (quizData.length*5) + ' points. Try again to improve!'; }
-  else                 { emoji='💪'; title='Keep Practising!'; stars='⭐⭐'; sub='Read the text again and try once more!'; }
-  document.getElementById('resultEmoji').textContent = emoji;
-  document.getElementById('resultTitle').textContent = title;
-  document.getElementById('resultStars').textContent = stars;
-  document.getElementById('resultSub').textContent   = sub;
-}
+    document.querySelectorAll('#words .match-item').forEach(el => {
+      el.onclick = () => {
+        document.querySelectorAll('#words .match-item').forEach(w => w.style.background='');
+        el.style.background = '#e0e7ff';
+        selectedWord = el.dataset.word;
+      };
+    });
 
-function restartQuiz() {
-  qIdx = 0; quizPoints = 0; answered = false;
-  totalPoints = Math.max(0, totalPoints - quizPoints);
-  document.getElementById('quizCard').style.display = 'block';
-  document.getElementById('resultBanner').classList.remove('show');
-  renderQuestion();
-}
+    document.querySelectorAll('#defs .def-item').forEach(el => {
+      el.onclick = () => {
+        if (!selectedWord) return;
 
-// ---- CONFETTI ----
-function spawnConfetti() {
-  const colors = ['#3dd6ac','#ff6b6b','#4fc3f7','#ffd54f','#b39ddb'];
-  for (let i = 0; i < 60; i++) {
-    const c = document.createElement('div');
-    c.className = 'confetti-piece';
-    c.style.left = Math.random() * 100 + 'vw';
-    c.style.top = '-20px';
-    c.style.background = colors[Math.floor(Math.random() * colors.length)];
-    c.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-    c.style.animationDelay = (Math.random() * 1.5) + 's';
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 5000);
-  }
-}
+        const correct = {
+          1:'e',2:'f',3:'h',4:'b',5:'c',6:'i',7:'a',8:'d',9:'g'
+        };
 
-// ---- INIT ----
-buildSpeaking();
-buildVocab();
-buildQuiz();
-startTimer();
-updateProgress();
-</script>
+        const def = el.dataset.def;
+        const wordEl = document.querySelector(`#words .match-item[data-word='${selectedWord}']`);
+
+        if (correct[selectedWord] === def) {
+          el.style.background = '#d9f7e8';
+          wordEl.style.background = '#d9f7e8';
+
+          // lock correct pair
+          el.style.pointerEvents = 'none';
+          wordEl.style.pointerEvents = 'none';
+        } else {
+          el.style.background = '#ffd6d6';
+          wordEl.style.background = '#ffd6d6';
+
+          setTimeout(() => {
+            el.style.background = '';
+            wordEl.style.background = '';
+          }, 800);
+        }
+
+        selectedWord = null;
+      };
+    });
+
+    function checkMatch() {
+      const correct = {
+        1:'e',2:'f',3:'h',4:'b',5:'c',6:'i',7:'a',8:'d',9:'g'
+      };
+
+      let score = 0;
+      for (let key in correct) {
+        if (matches[key] === correct[key]) score++;
+      }
+
+      const res = document.getElementById('matchResult');
+      res.style.display = 'block';
+      res.innerHTML = `Matching score: <b>${score}/9</b>`;
+    }
+
+    function resetMatch() {
+      matches = {};
+      selectedWord = null;
+      document.querySelectorAll('#words .match-item, #defs .def-item').forEach(el => el.style.background='');
+      document.getElementById('matchResult').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
