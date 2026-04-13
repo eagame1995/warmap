@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Vocabulary Practice</title>
+  <style>
+    :root {
+      --bg: #f4fbfc;
+      --card: #ffffff;
+      --accent: #5ec3cf;
+      --accent-dark: #2f97a5;
+      --text: #1f2d3d;
+      --muted: #6b7a89;
+      --good: #1c9b5f;
+      --bad: #d64545;
+      --soft: #dff4f7;
+      --border: #d9ecef;
+      --shadow: 0 12px 30px rgba(40, 118, 130, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef9fb 0%, #f9fcfd 100%);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .vocab-box {
+      margin-top: 18px;
+      background: var(--soft);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid #cde8ec;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .vocab-group {
+      background: rgba(255,255,255,0.75);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .vocab-group h3 {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 1rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      background: white;
+      border: 1px solid #cfe5e9;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.95rem;
+    }
+
+    .panel {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 8px;
+      color: var(--accent-dark);
+    }
+
+    .panel p {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    .exercise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fcffff;
+    }
+
+    .emoji {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    button, .btn {
+      border: none;
+      background: var(--accent);
+      color: white;
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover, .btn:hover { transform: translateY(-1px); }
+    button:active, .btn:active { transform: translateY(0); }
+
+    .secondary {
+      background: #e9f7f9;
+      color: var(--accent-dark);
+      border: 1px solid #cfe8ec;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #cfdfe3;
+      font-size: 1rem;
+      background: white;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+      min-height: 24px;
+    }
+
+    .good { color: var(--good); }
+    .bad { color: var(--bad); }
+
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #effafb;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--accent-dark);
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .drop-zone, .word-bank button {
+      width: 100%;
+      text-align: left;
+    }
+
+    .drop-zone {
+      min-height: 56px;
+      padding: 14px;
+      border: 2px dashed #b8dde2;
+      border-radius: 14px;
+      background: #f8fdfe;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    .drop-zone.filled {
+      border-style: solid;
+      background: #eefafb;
+    }
+
+    .zone-label {
+      color: var(--muted);
+      font-weight: normal;
+      font-size: 0.92rem;
+    }
+
+    .word-bank {
+      display: grid;
+      gap: 10px;
+    }
+
+    .word-bank button {
+      background: white;
+      color: var(--text);
+      border: 1px solid #cfe3e7;
+      font-weight: 600;
+    }
+
+    .word-bank button.used {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .sentence {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      background: #f8fcfd;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .sentence select {
+      display: inline-block;
+      width: auto;
+      min-width: 140px;
+      margin: 0 6px;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .memory-card {
+      height: 90px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .memory-card.hidden {
+      background: linear-gradient(135deg, #65c7d1, #93dde3);
+      color: transparent;
+    }
+
+    .memory-card.matched {
+      background: #e8fbf1;
+      border-color: #b9ebd0;
+      color: var(--good);
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 8px 0 20px;
+    }
+
+    @media (max-width: 760px) {
+      .match-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.6rem; }
+      .sentence { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>Interactive House Vocabulary</h1>
+      <p class="subtitle">Тренажёр по словам из темы <b>In the house</b>. Здесь есть разные задания: сортировка слов, выбор правильного слова, заполнение пропусков и игра на память.</p>
+
+      <div class="vocab-box">
+        <strong>Words to practise</strong>
+        <div class="vocab-grid">
+          <div class="vocab-group">
+            <h3>Parts of the house</h3>
+            <div class="chips" id="partsList"></div>
+          </div>
+          <div class="vocab-group">
+            <h3>Inside the house</h3>
+            <div class="chips" id="insideList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>1. Sort the words</h2>
+      <p>Нажимай на слова и распределяй их по двум группам.</p>
+      <div class="match-grid">
+        <div>
+          <div class="drop-zone" id="partsZone"><span>Parts of the house</span><span class="zone-label" id="partsCount">0 words</span></div>
+          <div id="partsAnswers"></div>
+        </div>
+        <div>
+          <div class="drop-zone" id="insideZone"><span>Inside the house</span><span class="zone-label" id="insideCount">0 words</span></div>
+          <div id="insideAnswers"></div>
+        </div>
+      </div>
+      <div class="word-bank" id="sortBank" style="margin-top:16px"></div>
+      <div class="row" style="margin-top:16px">
+        <button onclick="checkSorting()">Check</button>
+        <button class="secondary" onclick="resetSorting()">Reset</button>
+      </div>
+      <div class="feedback" id="sortingFeedback"></div>
+    </section>
+
+    <section class="panel">
+      <h2>2. Choose the right word</h2>
+      <p>Прочитай подсказку и выбери правильное слово.</p>
+      <div class="exercise-grid" id="quizContainer"></div>
+      <div class="row" style="margin-top:16px">
+        <button onclick="checkQuiz()">Check answers</button>
+        <button class="secondary" onclick="resetQuiz()">Try again</button>
+      </div>
+      <div class="feedback" id="quizFeedback"></div>
+    </section>
+
+    <section class="panel">
+      <h2>3. Complete the sentences</h2>
+      <p>Выбери слово, которое лучше всего подходит по смыслу.</p>
+      <div class="sentence">
+        1. We cook in the
+        <select id="gap1"></select>.
+        <br><br>
+        2. I sleep in my
+        <select id="gap2"></select>.
+        <br><br>
+        3. We watch TV in the
+        <select id="gap3"></select>.
+        <br><br>
+        4. Milk is in the
+        <select id="gap4"></select>.
+        <br><br>
+        5. I sit on the
+        <select id="gap5"></select>.
+      </div>
+      <div class="row" style="margin-top:16px">
+        <button onclick="checkGaps()">Check</button>
+        <button class="secondary" onclick="resetGaps()">Reset</button>
+      </div>
+      <div class="feedback" id="gapsFeedback"></div>
+    </section>
+
+    <section class="panel">
+      <h2>4. Memory game</h2>
+      <p>Найди пары: слово и его категория.</p>
+      <div class="score" id="memoryScore">Pairs found: 0 / 6</div>
+      <div class="memory-grid" id="memoryBoard"></div>
+      <div class="row" style="margin-top:16px">
+        <button class="secondary" onclick="resetMemory()">New game</button>
+      </div>
+    </section>
+
+    <div class="footer-note">Сделано для тренировки лексики по теме house vocabulary.</div>
+  </div>
+
+  <script>
+    const partsWords = ["bathroom", "bedroom", "door", "floor", "garage", "garden", "kitchen", "living room", "wall", "window"];
+    const insideWords = ["armchair", "bath", "bed", "chair", "desk", "fridge", "sofa", "table", "wardrobe"];
+    const allWords = [...partsWords, ...insideWords];
+
+    function renderChips() {
+      document.getElementById('partsList').innerHTML = partsWords.map(w => `<span class="chip">${w}</span>`).join('');
+      document.getElementById('insideList').innerHTML = insideWords.map(w => `<span class="chip">${w}</span>`).join('');
+    }
+
+    // SORTING
+    let sortingState = {};
+
+    function shuffle(arr) {
+      return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    function initSorting() {
+      sortingState = {};
+      const bank = document.getElementById('sortBank');
+      bank.innerHTML = '';
+      shuffle(allWords).forEach(word => {
+        const btn = document.createElement('button');
+        btn.textContent = word;
+        btn.onclick = () => assignWord(word);
+        btn.id = `sort-${cssSafe(word)}`;
+        bank.appendChild(btn);
+      });
+      document.getElementById('partsAnswers').innerHTML = '';
+      document.getElementById('insideAnswers').innerHTML = '';
+      updateSortCounts();
+      setFeedback('sortingFeedback', '');
+    }
+
+    function assignWord(word) {
+      const current = sortingState[word];
+      const correctCategory = partsWords.includes(word) ? 'parts' : 'inside';
+      const newCategory = current ? null : correctCategory;
+      sortingState[word] = newCategory;
+      renderSortingAnswers();
+    }
+
+    function renderSortingAnswers() {
+      const partsBox = document.getElementById('partsAnswers');
+      const insideBox = document.getElementById('insideAnswers');
+      partsBox.innerHTML = '';
+      insideBox.innerHTML = '';
+
+      allWords.forEach(word => {
+        const btn = document.getElementById(`sort-${cssSafe(word)}`);
+        if (sortingState[word]) {
+          btn.classList.add('used');
+        } else {
+          btn.classList.remove('used');
+        }
+
+        if (sortingState[word] === 'parts') {
+          partsBox.innerHTML += `<div class="chip">${word}</div>`;
+        }
+        if (sortingState[word] === 'inside') {
+          insideBox.innerHTML += `<div class="chip">${word}</div>`;
+        }
+      });
+      updateSortCounts();
+    }
+
+    function updateSortCounts() {
+      const partsCount = Object.values(sortingState).filter(v => v === 'parts').length;
+      const insideCount = Object.values(sortingState).filter(v => v === 'inside').length;
+      document.getElementById('partsCount').textContent = `${partsCount} words`;
+      document.getElementById('insideCount').textContent = `${insideCount} words`;
+    }
+
+    function checkSorting() {
+      const done = allWords.every(w => sortingState[w]);
+      if (!done) {
+        setFeedback('sortingFeedback', 'Place all the words first.', false);
+        return;
+      }
+      setFeedback('sortingFeedback', 'Great job! All words are in the correct groups.', true);
+    }
+
+    function resetSorting() {
+      initSorting();
+    }
+
+    // QUIZ
+    const quizData = [
+      { clue: 'You sleep here.', options: ['garage', 'bed', 'window'], answer: 'bed', emoji: '😴' },
+      { clue: 'This room is for cooking.', options: ['kitchen', 'garden', 'bathroom'], answer: 'kitchen', emoji: '🍳' },
+      { clue: 'You can sit on it in the living room.', options: ['sofa', 'floor', 'fridge'], answer: 'sofa', emoji: '🛋️' },
+      { clue: 'It keeps food cold.', options: ['desk', 'fridge', 'wall'], answer: 'fridge', emoji: '🥛' },
+      { clue: 'You look through it.', options: ['window', 'wardrobe', 'bath'], answer: 'window', emoji: '🪟' },
+      { clue: 'Cars go here.', options: ['garage', 'bedroom', 'chair'], answer: 'garage', emoji: '🚗' }
+    ];
+
+    function initQuiz() {
+      const container = document.getElementById('quizContainer');
+      container.innerHTML = quizData.map((q, i) => `
+        <div class="card">
+          <div class="emoji">${q.emoji}</div>
+          <strong>${q.clue}</strong>
+          <div style="margin-top: 12px">
+            <select id="quiz-${i}">
+              <option value="">Choose...</option>
+              ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+      `).join('');
+      setFeedback('quizFeedback', '');
+    }
+
+    function checkQuiz() {
+      let score = 0;
+      let allDone = true;
+      quizData.forEach((q, i) => {
+        const val = document.getElementById(`quiz-${i}`).value;
+        if (!val) allDone = false;
+        if (val === q.answer) score++;
+      });
+      if (!allDone) {
+        setFeedback('quizFeedback', 'Answer every question first.', false);
+        return;
+      }
+      const ok = score === quizData.length;
+      setFeedback('quizFeedback', `You got ${score} out of ${quizData.length}.`, ok);
+    }
+
+    function resetQuiz() {
+      initQuiz();
+    }
+
+    // GAPS
+    const gapOptions = ['kitchen', 'bedroom', 'living room', 'fridge', 'sofa', 'garage', 'garden'];
+    const gapAnswers = {
+      gap1: 'kitchen',
+      gap2: 'bedroom',
+      gap3: 'living room',
+      gap4: 'fridge',
+      gap5: 'sofa'
+    };
+
+    function fillGapSelect(id) {
+      const el = document.getElementById(id);
+      el.innerHTML = `<option value="">Choose...</option>` + gapOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+    }
+
+    function initGaps() {
+      Object.keys(gapAnswers).forEach(fillGapSelect);
+      setFeedback('gapsFeedback', '');
+    }
+
+    function checkGaps() {
+      let score = 0;
+      let allDone = true;
+      for (const [id, answer] of Object.entries(gapAnswers)) {
+        const val = document.getElementById(id).value;
+        if (!val) allDone = false;
+        if (val === answer) score++;
+      }
+      if (!allDone) {
+        setFeedback('gapsFeedback', 'Complete all the sentences first.', false);
+        return;
+      }
+      setFeedback('gapsFeedback', `Correct: ${score} / ${Object.keys(gapAnswers).length}`, score === Object.keys(gapAnswers).length);
+    }
+
+    function resetGaps() {
+      initGaps();
+    }
+
+    // MEMORY
+    const memoryBase = [
+      ['kitchen', 'parts of the house'],
+      ['window', 'parts of the house'],
+      ['garage', 'parts of the house'],
+      ['sofa', 'inside the house'],
+      ['fridge', 'inside the house'],
+      ['wardrobe', 'inside the house']
+    ];
+
+    let memoryCards = [];
+    let flipped = [];
+    let matchedCount = 0;
+    let lockBoard = false;
+
+    function initMemoryData() {
+      memoryCards = [];
+      memoryBase.forEach((pair, index) => {
+        memoryCards.push({ id: `${index}-a`, pairId: index, text: pair[0], matched: false });
+        memoryCards.push({ id: `${index}-b`, pairId: index, text: pair[1], matched: false });
+      });
+      memoryCards = shuffle(memoryCards);
+      flipped = [];
+      matchedCount = 0;
+      lockBoard = false;
+      renderMemory();
+      updateMemoryScore();
+    }
+
+    function renderMemory() {
+      const board = document.getElementById('memoryBoard');
+      board.innerHTML = '';
+      memoryCards.forEach((card, index) => {
+        const isFlipped = flipped.includes(index) || card.matched;
+        const div = document.createElement('div');
+        div.className = `memory-card ${isFlipped ? '' : 'hidden'} ${card.matched ? 'matched' : ''}`;
+        div.textContent = card.text;
+        div.onclick = () => flipCard(index);
+        board.appendChild(div);
+      });
+    }
+
+    function flipCard(index) {
+      if (lockBoard) return;
+      const card = memoryCards[index];
+      if (card.matched || flipped.includes(index)) return;
+      flipped.push(index);
+      renderMemory();
+
+      if (flipped.length === 2) {
+        const [a, b] = flipped;
+        if (memoryCards[a].pairId === memoryCards[b].pairId) {
+          memoryCards[a].matched = true;
+          memoryCards[b].matched = true;
+          matchedCount++;
+          flipped = [];
+          updateMemoryScore();
+          renderMemory();
+        } else {
+          lockBoard = true;
+          setTimeout(() => {
+            flipped = [];
+            lockBoard = false;
+            renderMemory();
+          }, 800);
+        }
+      }
+    }
+
+    function updateMemoryScore() {
+      document.getElementById('memoryScore').textContent = `Pairs found: ${matchedCount} / 6`;
+    }
+
+    function resetMemory() {
+      initMemoryData();
+    }
+
+    function cssSafe(text) {
+      return text.replace(/\s+/g, '-');
+    }
+
+    function setFeedback(id, text, success = null) {
+      const el = document.getElementById(id);
+      el.textContent = text;
+      el.className = 'feedback';
+      if (success === true) el.classList.add('good');
+      if (success === false) el.classList.add('bad');
+    }
+
+    renderChips();
+    initSorting();
+    initQuiz();
+    initGaps();
+    initMemoryData();
+  </script>
+</body>
+</html>
