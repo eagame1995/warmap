@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opinion Vocabulary Warm-up</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 45%, #172554 100%);
+      color: #e5eefc;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(59,130,246,0.22), rgba(168,85,247,0.22), rgba(34,211,238,0.18));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+      backdrop-filter: blur(10px);
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(34,211,238,0.35), transparent 70%);
+      pointer-events: none;
+    }
+
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.2rem;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e0e7ff;
+      font-size: 0.92rem;
+    }
+
+    .progress-card {
+      background: rgba(15, 23, 42, 0.68);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 18px 20px;
+      margin: 18px 0 24px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 14px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #22d3ee, #3b82f6, #a855f7);
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.24);
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #ffffff;
+      font-size: 1.35rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-note {
+      color: #cbd5e1;
+      font-size: 0.96rem;
+      margin-bottom: 16px;
+    }
+
+    .question {
+      margin-bottom: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(15,23,42,0.95));
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .question p {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1rem;
+      color: #f8fafc;
+    }
+
+    .options {
+      display: grid;
+      gap: 8px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .option-label:hover {
+      transform: translateY(-1px);
+      border-color: rgba(96,165,250,0.65);
+      background: rgba(59,130,246,0.10);
+    }
+
+    input[type="radio"] {
+      accent-color: #22d3ee;
+      transform: scale(1.1);
+    }
+
+    input[type="text"], select {
+      width: min(100%, 360px);
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      font-size: 0.98rem;
+      margin-top: 6px;
+      background: rgba(255,255,255,0.06);
+      color: #ffffff;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    input[type="text"]::placeholder {
+      color: #94a3b8;
+    }
+
+    input[type="text"]:focus, select:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 4px rgba(56,189,248,0.14);
+    }
+
+    select option {
+      color: #111827;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-size: 0.96rem;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .primary-btn {
+      background: linear-gradient(90deg, #06b6d4, #3b82f6);
+      color: white;
+      box-shadow: 0 10px 24px rgba(59,130,246,0.25);
+    }
+
+    .secondary-btn {
+      background: rgba(255,255,255,0.08);
+      color: #e2e8f0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    .result {
+      margin-top: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 10px 14px;
+      border-radius: 14px;
+      display: inline-block;
+    }
+
+    .correct {
+      color: #d1fae5;
+      background: rgba(22,163,74,0.16);
+      border: 1px solid rgba(34,197,94,0.35);
+    }
+
+    .incorrect {
+      color: #fee2e2;
+      background: rgba(220,38,38,0.16);
+      border: 1px solid rgba(248,113,113,0.35);
+    }
+
+    .matching-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .match-item {
+      background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(15,23,42,0.95));
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .match-word {
+      font-size: 1rem;
+      color: #93c5fd;
+      margin-bottom: 8px;
+    }
+
+    .speaking-box {
+      background: linear-gradient(135deg, rgba(34,211,238,0.12), rgba(168,85,247,0.10));
+      border: 1px solid rgba(125,211,252,0.22);
+      padding: 18px;
+      border-radius: 18px;
+      margin-top: 10px;
+    }
+
+    .model {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      margin-bottom: 14px;
+      color: #e0f2fe;
+    }
+
+    ol {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero, .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>🔥 Opinion Vocabulary Challenge</h1>
+      <div class="subtitle">A fast, visual warm-up for teens: choose, type, match, then speak.</div>
+      <div class="chips">
+        <div class="chip">opinion</div>
+        <div class="chip">difficult</div>
+        <div class="chip">expensive</div>
+        <div class="chip">subjects</div>
+        <div class="chip">difference</div>
+        <div class="chip">easy</div>
+        <div class="chip">fair</div>
+        <div class="chip">send texts</div>
+        <div class="chip">use</div>
+        <div class="chip">useful</div>
+        <div class="chip">buy</div>
+      </div>
+    </div>
+
+    <div class="progress-card">
+      <div class="progress-top">
+        <strong>Your progress</strong>
+        <span id="progress-text">0 / 3 tasks checked</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>🎯 1. Choose the correct answer</h2>
+        <div class="section-note">Pick the best word to complete each sentence.</div>
+        <div id="mcq"></div>
+        <div class="actions">
+          <button class="primary-btn" onclick="checkMCQ()">Check answers</button>
+          <button class="secondary-btn" onclick="resetMCQ()">Reset</button>
+        </div>
+        <div id="mcq-result" class="result"></div>
+      </div>
+
+      <div class="card">
+        <h2>✍️ 2. Write the missing word</h2>
+        <div class="section-note">Type the correct vocabulary item in each sentence.</div>
+        <div id="fill"></div>
+        <div class="actions">
+          <button class="primary-btn" onclick="checkFill()">Check answers</button>
+          <button class="secondary-btn" onclick="resetFill()">Reset</button>
+        </div>
+        <div id="fill-result" class="result"></div>
+      </div>
+
+      <div class="card">
+        <h2>🧩 3. Match the word and the meaning</h2>
+        <div class="section-note">Connect each word with its correct definition.</div>
+        <div id="matching" class="matching-grid"></div>
+        <div class="actions">
+          <button class="primary-btn" onclick="checkMatching()">Check answers</button>
+          <button class="secondary-btn" onclick="resetMatching()">Reset</button>
+        </div>
+        <div id="matching-result" class="result"></div>
+      </div>
+
+      <div class="card">
+        <h2>🗣️ 4. Easy speaking</h2>
+        <div class="section-note">Now use the words in your own short answers.</div>
+        <div class="speaking-box">
+          <div class="model"><strong>Model:</strong> In my opinion, English is easy. / I think Maths is difficult. / It is useful to use phones for homework.</div>
+          <ol>
+            <li>What school subjects are easy for you?</li>
+            <li>What subjects are difficult for you?</li>
+            <li>Is it fair to use phones in class?</li>
+            <li>Is it useful to send texts to classmates about homework?</li>
+            <li>What is the difference between English and Maths?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">Mini warm-up • teen-friendly version • interactive vocabulary practice</div>
+  </div>
+
+  <script>
+    const mcqData = [
+      {
+        q: 'This book is very ____ . It costs a lot of money.',
+        options: ['easy', 'expensive', 'fair'],
+        answer: 'expensive'
+      },
+      {
+        q: 'Maths is not easy. It is ____ .',
+        options: ['useful', 'difficult', 'fair'],
+        answer: 'difficult'
+      },
+      {
+        q: 'English and Art are school ____ .',
+        options: ['subjects', 'opinions', 'texts'],
+        answer: 'subjects'
+      },
+      {
+        q: 'A phone is ____ . You can use it every day.',
+        options: ['useful', 'fair', 'easy'],
+        answer: 'useful'
+      },
+      {
+        q: 'My ____ is that homework should be short.',
+        options: ['difference', 'opinion', 'buy'],
+        answer: 'opinion'
+      }
+    ];
+
+    const fillData = [
+      { sentence: 'I ____ my phone to do homework.', answer: 'use' },
+      { sentence: 'We sometimes ____ to our friends after school.', answer: 'send texts' },
+      { sentence: 'I want to ____ a new school bag.', answer: 'buy' },
+      { sentence: 'English is ____ for me. I can do it well.', answer: 'easy' },
+      { sentence: 'It is ____ when all students have the same rules.', answer: 'fair' },
+      { sentence: 'There is a big ____ between a phone and a book.', answer: 'difference' }
+    ];
+
+    const matchingData = [
+      { word: 'opinion', meanings: ['what you think'] },
+      { word: 'useful', meanings: ['good and helpful'] },
+      { word: 'buy', meanings: ['get something for money'] },
+      { word: 'subjects', meanings: ['school lessons'] },
+      { word: 'send texts', meanings: ['write messages on a phone'] }
+    ];
+
+    const checkedState = {
+      mcq: false,
+      fill: false,
+      matching: false
+    };
+
+    function updateProgress() {
+      const done = Object.values(checkedState).filter(Boolean).length;
+      const total = 3;
+      document.getElementById('progress-text').textContent = `${done} / ${total} tasks checked`;
+      document.getElementById('progress-fill').style.width = `${(done / total) * 100}%`;
+    }
+
+    function renderMCQ() {
+      const container = document.getElementById('mcq');
+      container.innerHTML = '';
+      mcqData.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.innerHTML = `<p><strong>${index + 1}.</strong> ${item.q}</p>` +
+          `<div class="options">` +
+          item.options.map(opt => `
+            <label class="option-label">
+              <input type="radio" name="mcq-${index}" value="${opt}"> ${opt}
+            </label>
+          `).join('') +
+          `</div>`;
+        container.appendChild(div);
+      });
+    }
+
+    function checkMCQ() {
+      let score = 0;
+      mcqData.forEach((item, index) => {
+        const selected = document.querySelector(`input[name="mcq-${index}"]:checked`);
+        if (selected && selected.value === item.answer) score++;
+      });
+      const result = document.getElementById('mcq-result');
+      result.textContent = `Score: ${score} / ${mcqData.length}`;
+      result.className = 'result ' + (score === mcqData.length ? 'correct' : 'incorrect');
+      checkedState.mcq = true;
+      updateProgress();
+    }
+
+    function resetMCQ() {
+      document.querySelectorAll('#mcq input[type="radio"]').forEach(el => el.checked = false);
+      document.getElementById('mcq-result').textContent = '';
+      document.getElementById('mcq-result').className = 'result';
+      checkedState.mcq = false;
+      updateProgress();
+    }
+
+    function renderFill() {
+      const container = document.getElementById('fill');
+      container.innerHTML = '';
+      fillData.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.innerHTML = `<p><strong>${index + 1}.</strong> ${item.sentence}</p>
+                         <input type="text" id="fill-${index}" placeholder="Type the word">`;
+        container.appendChild(div);
+      });
+    }
+
+    function normalize(str) {
+      return str.trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+
+    function checkFill() {
+      let score = 0;
+      fillData.forEach((item, index) => {
+        const input = document.getElementById(`fill-${index}`);
+        if (normalize(input.value) === normalize(item.answer)) {
+          score++;
+          input.style.borderColor = '#22c55e';
+        } else {
+          input.style.borderColor = '#ef4444';
+        }
+      });
+      const result = document.getElementById('fill-result');
+      result.textContent = `Score: ${score} / ${fillData.length}`;
+      result.className = 'result ' + (score === fillData.length ? 'correct' : 'incorrect');
+      checkedState.fill = true;
+      updateProgress();
+    }
+
+    function resetFill() {
+      fillData.forEach((_, index) => {
+        const input = document.getElementById(`fill-${index}`);
+        input.value = '';
+        input.style.borderColor = 'rgba(255,255,255,0.12)';
+      });
+      document.getElementById('fill-result').textContent = '';
+      document.getElementById('fill-result').className = 'result';
+      checkedState.fill = false;
+      updateProgress();
+    }
+
+    function renderMatching() {
+      const container = document.getElementById('matching');
+      container.innerHTML = '';
+      const meanings = matchingData.map(x => x.meanings[0]).sort(() => Math.random() - 0.5);
+      matchingData.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'match-item';
+        div.innerHTML = `
+          <div class="match-word"><strong>${item.word}</strong></div>
+          <select id="match-${index}">
+            <option value="">Choose meaning</option>
+            ${meanings.map(m => `<option value="${m}">${m}</option>`).join('')}
+          </select>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function checkMatching() {
+      let score = 0;
+      matchingData.forEach((item, index) => {
+        const select = document.getElementById(`match-${index}`);
+        if (select.value === item.meanings[0]) {
+          score++;
+          select.style.borderColor = '#22c55e';
+        } else {
+          select.style.borderColor = '#ef4444';
+        }
+      });
+      const result = document.getElementById('matching-result');
+      result.textContent = `Score: ${score} / ${matchingData.length}`;
+      result.className = 'result ' + (score === matchingData.length ? 'correct' : 'incorrect');
+      checkedState.matching = true;
+      updateProgress();
+    }
+
+    function resetMatching() {
+      matchingData.forEach((_, index) => {
+        const select = document.getElementById(`match-${index}`);
+        select.value = '';
+        select.style.borderColor = 'rgba(255,255,255,0.12)';
+      });
+      document.getElementById('matching-result').textContent = '';
+      document.getElementById('matching-result').className = 'result';
+      checkedState.matching = false;
+      updateProgress();
+    }
+
+    renderMCQ();
+    renderFill();
+    renderMatching();
+    updateProgress();
+  </script>
+</body>
+</html>
