@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vocabulary Warm-up | Pre-Intermediate</title>
+  <style>
+    :root{
+      --bg:#f4f0e8;
+      --card:#fffaf2;
+      --ink:#2d2a26;
+      --muted:#6f665c;
+      --accent:#b86b3e;
+      --accent-dark:#8e4c2a;
+      --good:#2e8b57;
+      --bad:#c94c4c;
+      --line:#e2d5c3;
+      --soft:#eadcc9;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(184,107,62,.22), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(91,126,131,.18), transparent 35%),
+        var(--bg);
+      color:var(--ink);
+      min-height:100vh;
+    }
+
+    .wrap{
+      width:min(1100px, 94vw);
+      margin:0 auto;
+      padding:34px 0 60px;
+    }
+
+    header{
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap:22px;
+      align-items:stretch;
+      margin-bottom:22px;
+    }
+
+    .hero, .teacher-note, .card{
+      background:rgba(255,250,242,.9);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:0 18px 42px rgba(74,52,31,.10);
+    }
+
+    .hero{
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      right:-70px;
+      top:-70px;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:rgba(184,107,62,.12);
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(34px,5vw,60px);
+      line-height:.95;
+      letter-spacing:-1.7px;
+    }
+
+    .subtitle{
+      max-width:700px;
+      font-size:18px;
+      line-height:1.55;
+      color:var(--muted);
+      margin:0;
+    }
+
+    .badge-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:22px;
+    }
+
+    .badge{
+      padding:9px 13px;
+      border-radius:999px;
+      background:var(--soft);
+      font-weight:700;
+      color:#5d4635;
+      font-size:14px;
+    }
+
+    .teacher-note{
+      padding:26px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .timer{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-size:42px;
+      font-weight:900;
+      letter-spacing:-1px;
+      color:var(--accent-dark);
+    }
+
+    .timer small{
+      font-size:14px;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:0;
+    }
+
+    button{
+      border:0;
+      border-radius:16px;
+      background:var(--accent);
+      color:white;
+      padding:13px 18px;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
+      box-shadow:0 8px 18px rgba(184,107,62,.25);
+    }
+
+    button:hover{transform:translateY(-1px); background:var(--accent-dark)}
+    button.secondary{
+      background:#2f5f67;
+      box-shadow:0 8px 18px rgba(47,95,103,.2);
+    }
+    button.light{
+      background:#e9ddd0;
+      color:#4e4339;
+      box-shadow:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:20px;
+    }
+
+    .card{
+      padding:28px;
+    }
+
+    h2{
+      margin:0 0 8px;
+      font-size:27px;
+      letter-spacing:-.5px;
+    }
+
+    .task-intro{
+      color:var(--muted);
+      margin:0 0 22px;
+      line-height:1.45;
+    }
+
+    .word-bank{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:18px 0 4px;
+    }
+
+    .chip{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 13px;
+      font-weight:800;
+      color:#42372f;
+    }
+
+    .matching{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .match-row{
+      display:grid;
+      grid-template-columns:1fr 230px;
+      align-items:center;
+      gap:14px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+    }
+
+    .definition{
+      line-height:1.35;
+      color:#3e3934;
+    }
+
+    select, input{
+      width:100%;
+      border:2px solid #e2d5c3;
+      background:#fff;
+      border-radius:14px;
+      padding:12px 13px;
+      font-size:16px;
+      color:var(--ink);
+      outline:none;
+    }
+
+    select:focus, input:focus{
+      border-color:var(--accent);
+    }
+
+    .sentences{
+      display:grid;
+      gap:13px;
+    }
+
+    .sentence{
+      display:grid;
+      grid-template-columns:1fr 220px;
+      gap:14px;
+      align-items:center;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      line-height:1.4;
+    }
+
+    .discussion{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .question{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      min-height:112px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .question span{
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:900;
+      color:var(--accent-dark);
+    }
+
+    .question p{
+      margin:0;
+      line-height:1.45;
+      font-size:18px;
+    }
+
+    .status{
+      min-height:26px;
+      margin-top:14px;
+      font-weight:800;
+      color:var(--muted);
+    }
+
+    .correct{
+      border-color:rgba(46,139,87,.85)!important;
+      background:#f0fff6!important;
+    }
+
+    .wrong{
+      border-color:rgba(201,76,76,.85)!important;
+      background:#fff4f4!important;
+    }
+
+    .score{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      font-weight:900;
+      color:var(--accent-dark);
+      margin-left:10px;
+    }
+
+    .footer-controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      align-items:center;
+    }
+
+    .hidden-answer{
+      display:none;
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:#f1e4d2;
+      line-height:1.5;
+      color:#4a3e34;
+    }
+
+    .hidden-answer.show{display:block}
+
+    .mini{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:12px;
+      line-height:1.45;
+    }
+
+    @media (max-width:850px){
+      header{grid-template-columns:1fr}
+      .matching{grid-template-columns:1fr}
+      .match-row, .sentence{grid-template-columns:1fr}
+      .discussion{grid-template-columns:1fr}
+    }
+
+    @media print{
+      body{background:white}
+      button, .teacher-note{display:none}
+      .card,.hero{box-shadow:none}
+      .wrap{padding:10px;width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <section class="hero">
+        <h1>Vocabulary Warm-up</h1>
+        <p class="subtitle">
+          Quick revision before reading / speaking. Match meanings, complete short contexts,
+          then use the words in natural conversation.
+        </p>
+        <div class="badge-row">
+          <div class="badge">Level: Pre-Intermediate</div>
+          <div class="badge">Adult learner</div>
+          <div class="badge">Time: 7–10 min</div>
+          <div class="badge">Focus: words from the text</div>
+        </div>
+      </section>
+
+      <aside class="teacher-note">
+        <div>
+          <h2>Class timer</h2>
+          <p class="task-intro">Use 3 minutes for Task 1, 3 minutes for Task 2, then discussion.</p>
+        </div>
+        <div>
+          <div class="timer"><span id="timer">03:00</span> <small>min</small></div>
+          <div class="footer-controls">
+            <button onclick="startTimer(180)">Start 3 min</button>
+            <button class="light" onclick="resetTimer()">Reset</button>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>1. Match the word with the meaning</h2>
+        <p class="task-intro">Choose the correct word or phrase for each definition.</p>
+
+        <div class="word-bank">
+          <span class="chip">bricklayer</span>
+          <span class="chip">part-time job</span>
+          <span class="chip">fisherman</span>
+          <span class="chip">feel sorry</span>
+          <span class="chip">seashore</span>
+          <span class="chip">feathers</span>
+          <span class="chip">disappeared</span>
+          <span class="chip">to lose</span>
+          <span class="chip">return</span>
+          <span class="chip">familiar</span>
+        </div>
+
+        <div class="matching" id="matching">
+          <div class="match-row">
+            <div class="definition">a person who catches fish as a job or hobby</div>
+            <select data-answer="fisherman"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">the land next to the sea</div>
+            <select data-answer="seashore"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">to come or go back to a place</div>
+            <select data-answer="return"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">not strange because you know it or have seen it before</div>
+            <select data-answer="familiar"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">a job that you do for only part of the working week</div>
+            <select data-answer="part-time job"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">soft things that cover a bird’s body</div>
+            <select data-answer="feathers"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">to not know where something is; to no longer have something</div>
+            <select data-answer="to lose"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">a person who builds walls and houses with bricks</div>
+            <select data-answer="bricklayer"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">went away or became impossible to see/find</div>
+            <select data-answer="disappeared"><option value="">Choose...</option></select>
+          </div>
+          <div class="match-row">
+            <div class="definition">to be sad about another person’s problem</div>
+            <select data-answer="feel sorry"><option value="">Choose...</option></select>
+          </div>
+        </div>
+
+        <div class="footer-controls">
+          <button onclick="checkMatching()">Check Task 1</button>
+          <button class="light" onclick="clearTask('matching')">Clear</button>
+          <span class="score" id="score1">Score: —</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. Complete the sentences</h2>
+        <p class="task-intro">Type the correct word or phrase. Use the word bank from Task 1.</p>
+
+        <div class="sentences" id="sentences">
+          <div class="sentence">
+            <div>1. My uncle works near the river. He is a __________.</div>
+            <input data-answer="fisherman" placeholder="type here..." />
+          </div>
+          <div class="sentence">
+            <div>2. I only work on Saturdays, so it is a __________.</div>
+            <input data-answer="part-time job" placeholder="type here..." />
+          </div>
+          <div class="sentence">
+            <div>3. The bird had beautiful blue and green __________.</div>
+            <input data-answer="feathers" placeholder="type here..." />
+          </div>
+          <div class="sentence">
+            <div>4. After ten minutes, the boat __________ in the fog.</div>
+            <input data-answer="disappeared" placeholder="type here..." />
+          </div>
+          <div class="sentence">
+            <div>5. This street looks __________. I think I was here last year.</div>
+            <input data-answer="familiar" placeholder="type here..." />
+          </div>
+          <div class="sentence">
+            <div>6. Please __________ my book tomorrow. I need it for class.</div>
+            <input data-answer="return" placeholder="type here..." />
+          </div>
+          <div class="sentence">
+            <div>7. Be careful. It is easy __________ your keys at the beach.</div>
+            <input data-answer="to lose" placeholder="type here..." />
+          </div>
+          <div class="sentence">
+            <div>8. I really __________ for him because he failed the exam.</div>
+            <input data-answer="feel sorry" placeholder="type here..." />
+          </div>
+        </div>
+
+        <div class="footer-controls">
+          <button onclick="checkSentences()">Check Task 2</button>
+          <button class="light" onclick="clearTask('sentences')">Clear</button>
+          <span class="score" id="score2">Score: —</span>
+        </div>
+        <p class="mini">Tip: answers are checked without capital letters. Extra spaces are ignored.</p>
+      </section>
+
+      <section class="card">
+        <h2>3. Speak for 30 seconds</h2>
+        <p class="task-intro">Choose 2–3 questions. Try to use at least one target word in each answer.</p>
+
+        <div class="discussion">
+          <div class="question">
+            <span>Question 1</span>
+            <p>Have you ever had a part-time job? What was good or bad about it?</p>
+          </div>
+          <div class="question">
+            <span>Question 2</span>
+            <p>What place near the sea or a river feels familiar to you?</p>
+          </div>
+          <div class="question">
+            <span>Question 3</span>
+            <p>When was the last time you lost something important? Did it return?</p>
+          </div>
+          <div class="question">
+            <span>Question 4</span>
+            <p>Which job sounds harder to you: a fisherman or a bricklayer? Why?</p>
+          </div>
+          <div class="question">
+            <span>Question 5</span>
+            <p>Do you usually feel sorry for people quickly, or do you need to know the full story?</p>
+          </div>
+          <div class="question">
+            <span>Question 6</span>
+            <p>Imagine something suddenly disappeared from your room. What would you check first?</p>
+          </div>
+        </div>
+
+        <div class="footer-controls">
+          <button class="secondary" onclick="showRandomQuestion()">Give me one random question</button>
+          <button class="light" onclick="toggleAnswers()">Teacher key</button>
+        </div>
+
+        <div class="hidden-answer" id="answers">
+          <strong>Answer key:</strong><br>
+          Task 1: fisherman, seashore, return, familiar, part-time job, feathers, to lose, bricklayer, disappeared, feel sorry.<br>
+          Task 2: 1 fisherman; 2 part-time job; 3 feathers; 4 disappeared; 5 familiar; 6 return; 7 to lose; 8 feel sorry.
+        </div>
+
+        <p class="status" id="randomQ"></p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const words = [
+      "bricklayer", "part-time job", "fisherman", "feel sorry", "seashore",
+      "feathers", "disappeared", "to lose", "return", "familiar"
+    ];
+
+    document.querySelectorAll("select").forEach(select => {
+      words.forEach(word => {
+        const option = document.createElement("option");
+        option.value = word;
+        option.textContent = word;
+        select.appendChild(option);
+      });
+    });
+
+    function normalize(str){
+      return (str || "").trim().toLowerCase().replace(/\s+/g, " ");
+    }
+
+    function checkMatching(){
+      const selects = document.querySelectorAll("#matching select");
+      let score = 0;
+      selects.forEach(s => {
+        s.classList.remove("correct","wrong");
+        if(normalize(s.value) === normalize(s.dataset.answer)){
+          s.classList.add("correct");
+          score++;
+        } else {
+          s.classList.add("wrong");
+        }
+      });
+      document.getElementById("score1").textContent = `Score: ${score}/${selects.length}`;
+    }
+
+    function checkSentences(){
+      const inputs = document.querySelectorAll("#sentences input");
+      let score = 0;
+      inputs.forEach(i => {
+        i.classList.remove("correct","wrong");
+        if(normalize(i.value) === normalize(i.dataset.answer)){
+          i.classList.add("correct");
+          score++;
+        } else {
+          i.classList.add("wrong");
+        }
+      });
+      document.getElementById("score2").textContent = `Score: ${score}/${inputs.length}`;
+    }
+
+    function clearTask(id){
+      const area = document.getElementById(id);
+      area.querySelectorAll("input, select").forEach(el => {
+        el.value = "";
+        el.classList.remove("correct","wrong");
+      });
+      if(id === "matching") document.getElementById("score1").textContent = "Score: —";
+      if(id === "sentences") document.getElementById("score2").textContent = "Score: —";
+    }
+
+    function toggleAnswers(){
+      document.getElementById("answers").classList.toggle("show");
+    }
+
+    function showRandomQuestion(){
+      const questions = Array.from(document.querySelectorAll(".question p")).map(q => q.textContent);
+      const selected = questions[Math.floor(Math.random() * questions.length)];
+      document.getElementById("randomQ").textContent = "Random question: " + selected;
+    }
+
+    let timerInterval;
+    let secondsLeft = 180;
+
+    function renderTimer(){
+      const m = String(Math.floor(secondsLeft / 60)).padStart(2,"0");
+      const s = String(secondsLeft % 60).padStart(2,"0");
+      document.getElementById("timer").textContent = `${m}:${s}`;
+    }
+
+    function startTimer(seconds){
+      clearInterval(timerInterval);
+      secondsLeft = seconds;
+      renderTimer();
+      timerInterval = setInterval(() => {
+        secondsLeft--;
+        renderTimer();
+        if(secondsLeft <= 0){
+          clearInterval(timerInterval);
+          document.getElementById("timer").textContent = "Time!";
+        }
+      }, 1000);
+    }
+
+    function resetTimer(){
+      clearInterval(timerInterval);
+      secondsLeft = 180;
+      renderTimer();
+    }
+
+    renderTimer();
+  </script>
+</body>
+</html>
