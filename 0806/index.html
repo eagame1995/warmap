@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>24/7 Vocabulary Mission</title>
+  <style>
+    :root{
+      --red:#e53935;
+      --yellow:#ffd54f;
+      --blue:#4fc3f7;
+      --dark:#263238;
+      --light:#fff8e1;
+      --green:#66bb6a;
+      --purple:#7e57c2;
+      --orange:#ff9800;
+      --card:#ffffff;
+      --shadow: 0 8px 24px rgba(0,0,0,.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Arial", sans-serif;
+      color:var(--dark);
+      background:
+        radial-gradient(circle at top left, rgba(255,213,79,.35), transparent 28%),
+        radial-gradient(circle at top right, rgba(79,195,247,.28), transparent 30%),
+        linear-gradient(135deg,#fffdf5 0%,#eef8ff 100%);
+      min-height:100vh;
+    }
+    header{
+      background:linear-gradient(90deg,var(--red),#ff7043);
+      color:white;
+      padding:28px 22px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    header:before{
+      content:"24/7";
+      position:absolute;
+      right:25px;
+      top:2px;
+      font-size:82px;
+      font-weight:900;
+      opacity:.14;
+      transform:rotate(-7deg);
+    }
+    h1{margin:0;font-size:36px;letter-spacing:.5px}
+    header p{margin:8px 0 0;font-size:17px;opacity:.95}
+    main{max-width:1100px;margin:0 auto;padding:24px}
+    .teacher-note{
+      background:#fff;
+      border-left:8px solid var(--yellow);
+      box-shadow:var(--shadow);
+      padding:16px 18px;
+      border-radius:14px;
+      margin-bottom:22px;
+      font-size:16px;
+    }
+    .section{
+      background:var(--card);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      margin:22px 0;
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .section h2{
+      margin:0 0 8px;
+      font-size:25px;
+      color:#c62828;
+    }
+    .subtitle{margin:0 0 18px;color:#546e7a}
+    .row{display:flex;gap:18px;flex-wrap:wrap}
+    .col{flex:1 1 310px}
+    button{
+      border:0;
+      background:var(--dark);
+      color:white;
+      padding:11px 16px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:15px;
+      transition:.15s;
+    }
+    button:hover{transform:translateY(-1px);filter:brightness(1.08)}
+    .small-btn{padding:8px 12px;font-size:13px;border-radius:10px}
+    .red-btn{background:var(--red)}
+    .blue-btn{background:#0288d1}
+    .green-btn{background:#2e7d32}
+    .purple-btn{background:var(--purple)}
+    .yellow-tag{
+      display:inline-block;
+      background:var(--yellow);
+      padding:5px 10px;
+      border-radius:999px;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+    .word-bank{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:14px 0;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:9px 12px;
+      border-radius:999px;
+      background:#f5f7fa;
+      border:2px solid transparent;
+      cursor:pointer;
+      user-select:none;
+      font-weight:700;
+      transition:.15s;
+    }
+    .chip:hover{transform:scale(1.03)}
+    .chip.selected{border-color:var(--blue);background:#e1f5fe}
+    .chip.correct{border-color:var(--green);background:#e8f5e9}
+    .chip.wrong{border-color:var(--red);background:#ffebee}
+    .drop-zone{
+      min-height:80px;
+      border:3px dashed #b0bec5;
+      border-radius:18px;
+      padding:14px;
+      background:#fafafa;
+      margin:10px 0 14px;
+    }
+    .drop-zone h3{margin:0 0 9px;font-size:18px}
+    .feedback{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:12px;
+      background:#f5f5f5;
+      font-weight:700;
+      min-height:44px;
+    }
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:12px;
+    }
+    .pic-card{
+      background:#f8fbff;
+      border:2px solid #e0e0e0;
+      border-radius:18px;
+      padding:14px;
+      text-align:center;
+    }
+    .emoji{
+      font-size:42px;
+      display:block;
+      margin-bottom:7px;
+    }
+    select,input,textarea{
+      width:100%;
+      border:2px solid #cfd8dc;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:15px;
+      background:white;
+    }
+    .input-line{
+      display:grid;
+      grid-template-columns:90px 1fr;
+      gap:10px;
+      align-items:center;
+      margin:10px 0;
+    }
+    .timeline{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin:15px 0;
+    }
+    .timebox{
+      border-radius:18px;
+      padding:15px;
+      background:#f5f5f5;
+      min-height:135px;
+      border:2px solid #eceff1;
+    }
+    .timebox h3{margin:0 0 10px}
+    .activity-card{
+      background:white;
+      border:2px solid #e0e0e0;
+      padding:9px;
+      border-radius:12px;
+      margin:7px 0;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .activity-card.active{border-color:var(--orange);background:#fff3e0}
+    .final-game{
+      background:linear-gradient(135deg,#263238,#455a64);
+      color:white;
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+    .mission-card{
+      background:white;
+      color:var(--dark);
+      border-radius:20px;
+      padding:18px;
+      margin-top:15px;
+      border:4px solid var(--yellow);
+    }
+    .big-prompt{
+      font-size:24px;
+      line-height:1.35;
+      font-weight:900;
+      margin:12px 0;
+    }
+    .speaking-box{
+      background:#fffde7;
+      border-radius:18px;
+      padding:15px;
+      margin:14px 0;
+      border:2px solid #ffe082;
+      color:var(--dark);
+    }
+    .footer{
+      text-align:center;
+      color:#78909c;
+      padding:20px;
+      font-size:14px;
+    }
+    .score{
+      display:inline-block;
+      background:#263238;
+      color:white;
+      padding:7px 12px;
+      border-radius:999px;
+      font-weight:900;
+      margin-left:7px;
+    }
+    .hidden{display:none}
+    @media(max-width:720px){
+      h1{font-size:28px}
+      .timeline{grid-template-columns:1fr}
+      .input-line{grid-template-columns:1fr}
+    }
+    @media print{
+      button{display:none}
+      body{background:white}
+      .section,.teacher-note,.final-game{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>24/7 Vocabulary Mission</h1>
+  <p>Everyday activities + free-time activities</p>
+</header>
+
+<main>
+  <div class="teacher-note">
+    <b>Teacher mode:</b> This page is for the <b>production / final practice</b> stage. 
+    Students check how well they remember the vocabulary, then use it creatively in a speaking game.
+  </div>
+
+  <section class="section">
+    <span class="yellow-tag">Task 1</span>
+    <h2>Daily or Free Time?</h2>
+    <p class="subtitle">Click a phrase, then click the correct box. Check your answers.</p>
+
+    <div class="word-bank" id="sortBank"></div>
+
+    <div class="row">
+      <div class="col">
+        <div class="drop-zone" data-zone="daily">
+          <h3>🌞 Everyday activities</h3>
+          <div id="dailyZone"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="drop-zone" data-zone="free">
+          <h3>🎮 Free-time activities</h3>
+          <div id="freeZone"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="green-btn" onclick="checkSort()">Check</button>
+    <button onclick="resetSort()">Reset</button>
+    <div class="feedback" id="sortFeedback">Choose the correct category for each phrase.</div>
+  </section>
+
+  <section class="section">
+    <span class="yellow-tag">Task 2</span>
+    <h2>Emoji Code</h2>
+    <p class="subtitle">Choose the activity for each picture clue.</p>
+
+    <div class="cards-grid" id="emojiGrid"></div>
+    <button class="green-btn" onclick="checkEmoji()">Check</button>
+    <button onclick="resetEmoji()">Reset</button>
+    <div class="feedback" id="emojiFeedback">Match the emoji clues with the phrases.</div>
+  </section>
+
+  <section class="section">
+    <span class="yellow-tag">Task 3</span>
+    <h2>Build a Realistic Day</h2>
+    <p class="subtitle">Click cards and put them into the best part of the day. There can be different answers, but make your day logical.</p>
+
+    <div class="word-bank" id="timelineBank"></div>
+
+    <div class="timeline">
+      <div class="timebox" data-time="morning"><h3>🌅 Morning</h3><div id="morningBox"></div></div>
+      <div class="timebox" data-time="afternoon"><h3>☀️ Afternoon</h3><div id="afternoonBox"></div></div>
+      <div class="timebox" data-time="evening"><h3>🌆 Evening</h3><div id="eveningBox"></div></div>
+      <div class="timebox" data-time="night"><h3>🌙 Night</h3><div id="nightBox"></div></div>
+    </div>
+
+    <button class="blue-btn" onclick="checkTimeline()">Check logic</button>
+    <button onclick="resetTimeline()">Reset</button>
+    <div class="feedback" id="timelineFeedback">Make a logical day. Then compare with a partner.</div>
+  </section>
+
+  <section class="section">
+    <span class="yellow-tag">Task 4</span>
+    <h2>Missing Words Challenge</h2>
+    <p class="subtitle">Type the missing verbs. Example: <b>go</b> to school.</p>
+
+    <div id="gapTask"></div>
+    <button class="green-btn" onclick="checkGaps()">Check</button>
+    <button onclick="resetGaps()">Reset</button>
+    <div class="feedback" id="gapFeedback">Type the correct verbs: go, have, play, do, watch, listen, read, chat, surf, get.</div>
+  </section>
+
+  <section class="final-game">
+    <h2 style="color:white;margin-top:0;">🎲 Speaking Production: The Weird Day Show</h2>
+    <p>
+      Students create and present a strange but possible day. The class listens and decides:
+      <b>Is this a good day, a crazy day, or a boring day?</b>
+    </p>
+
+    <div class="mission-card">
+      <button class="purple-btn" onclick="generateMission()">Generate my weird day</button>
+      <div class="big-prompt" id="missionText">Click the button to get your speaking mission.</div>
+    </div>
+
+    <div class="speaking-box">
+      <h3>Speaking frame</h3>
+      <p>
+        My day is strange. First, I <b>...</b>. Then I <b>...</b>. After that, I <b>...</b>.
+        In my free time, I <b>...</b>. I think this day is <b>great / crazy / boring</b> because <b>...</b>.
+      </p>
+    </div>
+
+    <div class="speaking-box">
+      <h3>Class vote</h3>
+      <p>After each presentation, classmates vote with fingers:</p>
+      <p><b>1 finger</b> = boring day &nbsp; | &nbsp; <b>3 fingers</b> = normal day &nbsp; | &nbsp; <b>5 fingers</b> = crazy but great day</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    Vocabulary: get up, have a shower, have breakfast/lunch/dinner, go to school, go home, do homework, go to bed, chat online, do sport, draw, go out with friends, listen to music, paint, play computer games, play the guitar/piano, read, surf the Internet, watch films/TV.
+  </div>
+</main>
+
+<script>
+  const daily = [
+    "get up","have a shower","have breakfast","go to school","start school",
+    "have lunch","finish school","go home","have dinner","do homework","go to bed"
+  ];
+  const free = [
+    "chat online","do sport","draw","go out with friends","listen to music",
+    "paint","play computer games","play the guitar","play the piano","read",
+    "surf the Internet","watch films","watch TV"
+  ];
+
+  const emojiItems = [
+    {emoji:"🛏️➡️🌞", answer:"get up"},
+    {emoji:"🚿🧼", answer:"have a shower"},
+    {emoji:"🥣🍞", answer:"have breakfast"},
+    {emoji:"🎒🏫", answer:"go to school"},
+    {emoji:"📚✏️", answer:"do homework"},
+    {emoji:"💻💬", answer:"chat online"},
+    {emoji:"⚽🏃", answer:"do sport"},
+    {emoji:"🎧🎵", answer:"listen to music"},
+    {emoji:"🎮🕹️", answer:"play computer games"},
+    {emoji:"🌐📱", answer:"surf the Internet"},
+    {emoji:"📺🎬", answer:"watch films"},
+    {emoji:"🌙🛏️", answer:"go to bed"}
+  ];
+
+  let selectedSort = null;
+  let selectedTimeline = null;
+
+  function shuffle(arr){
+    return [...arr].sort(()=>Math.random()-0.5);
+  }
+
+  function initSort(){
+    const bank = document.getElementById("sortBank");
+    bank.innerHTML = "";
+    shuffle([...daily, ...free]).forEach(text=>{
+      const chip = document.createElement("div");
+      chip.className = "chip";
+      chip.textContent = text;
+      chip.dataset.answer = daily.includes(text) ? "daily" : "free";
+      chip.onclick = () => {
+        document.querySelectorAll("#sortBank .chip").forEach(c=>c.classList.remove("selected"));
+        chip.classList.add("selected");
+        selectedSort = chip;
+      };
+      bank.appendChild(chip);
+    });
+
+    document.querySelectorAll(".drop-zone").forEach(zone=>{
+      zone.onclick = () => {
+        if(!selectedSort) return;
+        const target = zone.dataset.zone === "daily" ? document.getElementById("dailyZone") : document.getElementById("freeZone");
+        selectedSort.classList.remove("selected");
+        target.appendChild(selectedSort);
+        selectedSort = null;
+      };
+    });
+  }
+
+  function resetSort(){
+    document.getElementById("dailyZone").innerHTML = "";
+    document.getElementById("freeZone").innerHTML = "";
+    document.getElementById("sortFeedback").textContent = "Choose the correct category for each phrase.";
+    initSort();
+  }
+
+  function checkSort(){
+    let total = 0, correct = 0;
+    document.querySelectorAll("#dailyZone .chip, #freeZone .chip").forEach(chip=>{
+      total++;
+      const parent = chip.parentElement.id === "dailyZone" ? "daily" : "free";
+      chip.classList.remove("correct","wrong");
+      if(chip.dataset.answer === parent){ correct++; chip.classList.add("correct"); }
+      else chip.classList.add("wrong");
+    });
+    const all = daily.length + free.length;
+    document.getElementById("sortFeedback").innerHTML =
+      `Score: <span class="score">${correct}/${all}</span> ${total < all ? "Move all phrases into the boxes." : correct === all ? "Excellent!" : "Check the red phrases."}`;
+  }
+
+  function initEmoji(){
+    const grid = document.getElementById("emojiGrid");
+    grid.innerHTML = "";
+    const options = shuffle([...daily, ...free]);
+    emojiItems.forEach((item, i)=>{
+      const card = document.createElement("div");
+      card.className = "pic-card";
+      card.innerHTML = `
+        <span class="emoji">${item.emoji}</span>
+        <select id="emoji${i}">
+          <option value="">Choose...</option>
+          ${options.map(o=>`<option value="${o}">${o}</option>`).join("")}
+        </select>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function checkEmoji(){
+    let correct = 0;
+    emojiItems.forEach((item,i)=>{
+      const sel = document.getElementById("emoji"+i);
+      sel.style.borderColor = "#cfd8dc";
+      if(sel.value === item.answer){ correct++; sel.style.borderColor = "#66bb6a"; }
+      else sel.style.borderColor = "#e53935";
+    });
+    document.getElementById("emojiFeedback").innerHTML =
+      `Score: <span class="score">${correct}/${emojiItems.length}</span> ${correct === emojiItems.length ? "Perfect memory!" : "Look carefully at the clues."}`;
+  }
+
+  function resetEmoji(){
+    initEmoji();
+    document.getElementById("emojiFeedback").textContent = "Match the emoji clues with the phrases.";
+  }
+
+  const timelineItems = [
+    "get up","have a shower","have breakfast","go to school","have lunch",
+    "go home","do homework","have dinner","watch TV","chat online","read","go to bed"
+  ];
+  const logicMap = {
+    "get up":["morning"],
+    "have a shower":["morning"],
+    "have breakfast":["morning"],
+    "go to school":["morning"],
+    "have lunch":["afternoon"],
+    "go home":["afternoon"],
+    "do homework":["afternoon","evening"],
+    "have dinner":["evening"],
+    "watch TV":["evening"],
+    "chat online":["afternoon","evening"],
+    "read":["afternoon","evening","night"],
+    "go to bed":["night"]
+  };
+
+  function initTimeline(){
+    document.getElementById("timelineBank").innerHTML = "";
+    ["morningBox","afternoonBox","eveningBox","nightBox"].forEach(id=>document.getElementById(id).innerHTML = "");
+    shuffle(timelineItems).forEach(text=>{
+      const card = document.createElement("div");
+      card.className = "activity-card";
+      card.textContent = text;
+      card.dataset.text = text;
+      card.onclick = () => {
+        document.querySelectorAll(".activity-card").forEach(c=>c.classList.remove("active"));
+        card.classList.add("active");
+        selectedTimeline = card;
+      };
+      document.getElementById("timelineBank").appendChild(card);
+    });
+
+    document.querySelectorAll(".timebox").forEach(box=>{
+      box.onclick = (e) => {
+        if(e.target.classList.contains("activity-card")) return;
+        if(!selectedTimeline) return;
+        selectedTimeline.classList.remove("active");
+        box.querySelector("div").appendChild(selectedTimeline);
+        selectedTimeline = null;
+      };
+    });
+  }
+
+  function checkTimeline(){
+    let total = 0, ok = 0;
+    document.querySelectorAll(".timebox .activity-card").forEach(card=>{
+      total++;
+      const time = card.closest(".timebox").dataset.time;
+      card.style.borderColor = logicMap[card.dataset.text].includes(time) ? "#66bb6a" : "#e53935";
+      if(logicMap[card.dataset.text].includes(time)) ok++;
+    });
+    document.getElementById("timelineFeedback").innerHTML =
+      `Logic score: <span class="score">${ok}/${timelineItems.length}</span> ${total < timelineItems.length ? "Use all cards." : ok >= 10 ? "Good! Now tell your partner about this day." : "Some activities are in a strange time of day — but maybe you can explain why!"}`;
+  }
+
+  function resetTimeline(){
+    selectedTimeline = null;
+    initTimeline();
+    document.getElementById("timelineFeedback").textContent = "Make a logical day. Then compare with a partner.";
+  }
+
+  const gaps = [
+    {start:"I", gap:"get", end:"up at seven o’clock."},
+    {start:"I", gap:"have", end:"breakfast in the morning."},
+    {start:"I", gap:"go", end:"to school by bus."},
+    {start:"I", gap:"do", end:"homework after school."},
+    {start:"I", gap:"play", end:"computer games in the evening."},
+    {start:"I", gap:"listen", end:"to music after dinner."},
+    {start:"I", gap:"watch", end:"TV with my family."},
+    {start:"I", gap:"chat", end:"online with friends."},
+    {start:"I", gap:"surf", end:"the Internet."},
+    {start:"I", gap:"go", end:"to bed at ten o’clock."}
+  ];
+
+  function initGaps(){
+    const box = document.getElementById("gapTask");
+    box.innerHTML = "";
+    gaps.forEach((g,i)=>{
+      const line = document.createElement("div");
+      line.className = "input-line";
+      line.innerHTML = `<label>${i+1}. ${g.start}</label><input id="gap${i}" placeholder="verb"> <span>${g.end}</span>`;
+      line.style.gridTemplateColumns = "70px 160px 1fr";
+      box.appendChild(line);
+    });
+  }
+
+  function checkGaps(){
+    let correct = 0;
+    gaps.forEach((g,i)=>{
+      const inp = document.getElementById("gap"+i);
+      const val = inp.value.trim().toLowerCase();
+      inp.style.borderColor = "#cfd8dc";
+      if(val === g.gap){ correct++; inp.style.borderColor = "#66bb6a"; }
+      else inp.style.borderColor = "#e53935";
+    });
+    document.getElementById("gapFeedback").innerHTML =
+      `Score: <span class="score">${correct}/${gaps.length}</span> ${correct === gaps.length ? "Great job!" : "Check the verbs and try again."}`;
+  }
+
+  function resetGaps(){
+    gaps.forEach((g,i)=>{ document.getElementById("gap"+i).value = ""; document.getElementById("gap"+i).style.borderColor = "#cfd8dc"; });
+    document.getElementById("gapFeedback").textContent = "Type the correct verbs: go, have, play, do, watch, listen, read, chat, surf, get.";
+  }
+
+  const weirdStarts = [
+    "You get up at 3 a.m.",
+    "You start school at midnight.",
+    "You have breakfast three times.",
+    "You do sport before school.",
+    "You go to bed after lunch.",
+    "You have dinner in the morning."
+  ];
+  const mustUse = [
+    ["have a shower","go to school","play computer games","go to bed"],
+    ["get up","have breakfast","listen to music","do homework"],
+    ["go home","have dinner","watch films","chat online"],
+    ["have lunch","do sport","read","go out with friends"],
+    ["go to school","finish school","paint","watch TV"],
+    ["get up","draw","surf the Internet","go to bed"]
+  ];
+  const moods = ["very happy","very tired","like a robot","like a famous blogger","like a secret agent","like a superhero"];
+
+  function generateMission(){
+    const a = weirdStarts[Math.floor(Math.random()*weirdStarts.length)];
+    const b = mustUse[Math.floor(Math.random()*mustUse.length)];
+    const c = moods[Math.floor(Math.random()*moods.length)];
+    document.getElementById("missionText").innerHTML =
+      `${a}<br>Use these phrases: <span style="color:#c62828">${b.join(", ")}</span>.<br>You feel <span style="color:#7e57c2">${c}</span>.`;
+  }
+
+  initSort();
+  initEmoji();
+  initTimeline();
+  initGaps();
+</script>
+</body>
+</html>
