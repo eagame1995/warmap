@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jobs & Work-life Balance — Interactive Video Lesson</title>
+  <style>
+    :root{
+      --bg:#f6f4ee;--paper:#fffdf8;--ink:#222;--muted:#6f6a60;--accent:#3157d5;--accent2:#ffb545;--soft:#e9ecff;--soft2:#fff1d7;--line:#ddd5c7;--green:#2f8f63;--red:#d64b4b;--shadow:0 14px 35px rgba(36,30,18,.10);--radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at top left,rgba(255,181,69,.25),transparent 32%),radial-gradient(circle at 85% 8%,rgba(49,87,213,.16),transparent 28%),var(--bg);color:var(--ink);line-height:1.55}
+    .page{max-width:1180px;margin:0 auto;padding:30px 18px 90px}
+    .hero{background:linear-gradient(135deg,#fffdf8 0%,#fff8ea 56%,#eef1ff 100%);border:1px solid var(--line);border-radius:32px;padding:34px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero:after{content:"✂︎ 🚑 🎂 💐";position:absolute;right:28px;bottom:22px;font-size:42px;opacity:.18;letter-spacing:10px}.eyebrow{font-weight:900;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-size:13px;margin-bottom:8px}h1{font-size:44px;line-height:1.05;margin:0 0 12px;font-weight:900;max-width:850px}.subtitle{font-size:19px;color:var(--muted);max-width:850px;margin:0}.tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.tag{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 13px;font-weight:800;font-size:14px}
+    nav{margin:22px 0;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}nav a{text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px 10px;font-weight:900;box-shadow:0 7px 18px rgba(36,30,18,.06);text-align:center}nav a:hover{border-color:var(--accent);color:var(--accent)}
+    section{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:0 10px 25px rgba(36,30,18,.06);margin:18px 0}h2{font-size:30px;margin:0 0 14px;line-height:1.15}h3{font-size:22px;margin:28px 0 10px;color:#1c2d76}h4{font-size:18px;margin:18px 0 8px}.note{background:var(--soft2);border-left:6px solid var(--accent2);padding:14px 16px;border-radius:14px;margin:14px 0}.teacher-note{background:var(--soft);border-left:6px solid var(--accent);padding:14px 16px;border-radius:14px;margin:14px 0}.speech{background:#f7fbf8;border-left:6px solid var(--green);padding:14px 16px;border-radius:14px;margin:14px 0}.small{font-size:14px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}.jobcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;min-height:132px}.icon{font-size:34px;display:block;margin-bottom:8px}.part-header{display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:12px}.badge{font-size:34px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px 14px}
+    .task{border:1px dashed #c8bdab;background:#fff;padding:16px;border-radius:18px;margin:16px 0}.task-title{font-weight:900;color:#1c2d76;margin-bottom:8px;font-size:18px}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}.btn{border:0;background:var(--accent);color:#fff;font-weight:900;padding:11px 15px;border-radius:999px;box-shadow:0 8px 20px rgba(49,87,213,.20);cursor:pointer}.btn.secondary{background:#222}.btn.light{background:#fff;color:#222;border:1px solid var(--line);box-shadow:none}.score{font-weight:900;color:#1c2d76}.feedback{margin-top:8px;font-weight:800}.ok{color:var(--green)!important}.bad{color:var(--red)!important}.soft-result{background:#f8f8f8;border-radius:12px;padding:8px 10px;margin-top:8px}
+    table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;border-radius:14px;overflow:hidden}th,td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left}th{background:#f0f2ff;color:#1d2e7a;font-weight:900}.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.choice{display:flex;gap:8px;align-items:flex-start;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff}.choice input{margin-top:4px}.select-line{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}.select-line select,.text-input,select{padding:9px 10px;border:1px solid #cfc7b8;border-radius:10px;background:#fff;font:inherit;min-width:135px}.text-input{min-width:180px}.short{width:120px;min-width:100px}.wide{width:100%;min-width:0}.correct-field{border-color:var(--green)!important;background:#effaf4!important}.wrong-field{border-color:var(--red)!important;background:#fff0f0!important}
+    .drag-area{display:grid;grid-template-columns:1fr 1.25fr;gap:14px}.bank,.drop-grid{background:#fafafa;border:1px solid var(--line);border-radius:14px;padding:12px;min-height:80px}.bank h4,.drop-grid h4{margin-top:0}.draggable{display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1px solid #bfc6ed;color:#1c2d76;border-radius:999px;padding:8px 12px;margin:5px;font-weight:900;cursor:grab;user-select:none}.draggable:active{cursor:grabbing}.dropzone{min-height:48px;border:2px dashed #c7c0b1;border-radius:14px;padding:8px;background:#fff;margin:7px 0}.dropzone.dragover{border-color:var(--accent);background:#eef1ff}.drop-label{font-weight:900}.dropzone .draggable{margin:2px}.sortable{list-style:none;padding:0;margin:10px 0}.sortable li{background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 12px;margin:8px 0;cursor:grab;display:flex;gap:10px;align-items:center}.handle{font-weight:900;color:var(--accent)}.sentence{margin:10px 0;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff}.mini-columns{columns:2;column-gap:30px}.award-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.printbar{position:sticky;bottom:14px;z-index:5;display:flex;justify-content:center;gap:10px;margin-top:26px}
+    textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit;resize:vertical;background:#fff}.rubric{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.rubric label{border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff}
+    @media(max-width:850px){h1{font-size:34px}.grid,.cards,.drag-area,.choice-grid,.award-grid,.rubric{grid-template-columns:1fr}nav{grid-template-columns:1fr 1fr}.mini-columns{columns:1}.hero{padding:24px}.hero:after{display:none}}
+    @media print{body{background:white}.page{max-width:none;padding:0}.hero,section{box-shadow:none;break-inside:avoid;border-color:#bbb}nav,.printbar,.toolbar{display:none}.hero{border-radius:0}.task{break-inside:avoid}.draggable{border:1px solid #aaa}.dropzone{border:1px solid #aaa}}
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="eyebrow">Headway Elementary 5th edition · Unit 3 Jobs</div>
+    <h1>Interactive Video Lesson: Jobs & Work-life Balance</h1>
+    <p class="subtitle">Интерактивные задания к 4 частям видео: можно перетаскивать карточки, выбирать ответы, вписывать слова и запускать автопроверку.</p>
+    <div class="tags"><span class="tag">Level: A1–A2</span><span class="tag">Present Simple</span><span class="tag">Listening + Speaking</span><span class="tag">Auto-check</span></div>
+  </header>
+
+  <nav>
+    <a href="#warmup">Warm-up</a><a href="#vocab">Vocabulary</a><a href="#hairdresser">Part 1</a><a href="#paramedic">Part 2</a><a href="#cake">Part 3</a><a href="#florist">Part 4</a>
+  </nav>
+
+  <section id="warmup">
+    <h2>1. General Warm-up / Lead-in</h2>
+    <div class="teacher-note"><b>Aim:</b> activate job vocabulary and lead into work routines + work-life balance.</div>
+
+    <div class="task auto" data-task="warmup-match">
+      <div class="task-title">Drag & Drop: Match the object with the job</div>
+      <div class="drag-area">
+        <div class="bank"><h4>Jobs</h4>
+          <span class="draggable" draggable="true" data-value="hairdresser">hairdresser</span>
+          <span class="draggable" draggable="true" data-value="paramedic">paramedic</span>
+          <span class="draggable" draggable="true" data-value="cake decorator">cake decorator</span>
+          <span class="draggable" draggable="true" data-value="florist">florist</span>
+        </div>
+        <div class="drop-grid"><h4>Objects</h4>
+          <div><span class="drop-label">✂️ scissors</span><div class="dropzone" data-answer="hairdresser"></div></div>
+          <div><span class="drop-label">🚑 ambulance</span><div class="dropzone" data-answer="paramedic"></div></div>
+          <div><span class="drop-label">🎂 cakes</span><div class="dropzone" data-answer="cake decorator"></div></div>
+          <div><span class="drop-label">💐 flowers</span><div class="dropzone" data-answer="florist"></div></div>
+        </div>
+      </div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task">
+      <div class="task-title">Pair discussion</div>
+      <div class="choice-grid">
+        <div class="choice">Which job sounds creative?</div>
+        <div class="choice">Which job sounds stressful?</div>
+        <div class="choice">Which job sounds dangerous?</div>
+        <div class="choice">Which job sounds relaxing?</div>
+      </div>
+      <div class="speech"><b>Useful language:</b> I think ... is creative because ... / I would like to try ... for one day.</div>
+    </div>
+  </section>
+
+  <section id="vocab">
+    <h2>2. General Pre-watching Vocabulary</h2>
+    <div class="task auto" data-task="vocab-match">
+      <div class="task-title">Drag & Drop: Match the words with the meanings</div>
+      <div class="drag-area">
+        <div class="bank"><h4>Words</h4>
+          <span class="draggable" draggable="true" data-value="shift">shift</span>
+          <span class="draggable" draggable="true" data-value="emergency">emergency</span>
+          <span class="draggable" draggable="true" data-value="customer">customer</span>
+          <span class="draggable" draggable="true" data-value="advice">advice</span>
+          <span class="draggable" draggable="true" data-value="work-life balance">work-life balance</span>
+          <span class="draggable" draggable="true" data-value="free time">free time</span>
+        </div>
+        <div class="drop-grid"><h4>Meanings</h4>
+          <div><span class="drop-label">a period of work, for example day or night</span><div class="dropzone" data-answer="shift"></div></div>
+          <div><span class="drop-label">a dangerous or serious situation</span><div class="dropzone" data-answer="emergency"></div></div>
+          <div><span class="drop-label">a person who buys something</span><div class="dropzone" data-answer="customer"></div></div>
+          <div><span class="drop-label">help or information about what to do</span><div class="dropzone" data-answer="advice"></div></div>
+          <div><span class="drop-label">time for work and time for your personal life</span><div class="dropzone" data-answer="work-life balance"></div></div>
+          <div><span class="drop-label">time after work</span><div class="dropzone" data-answer="free time"></div></div>
+        </div>
+      </div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+  </section>
+
+  <section id="hairdresser">
+    <div class="part-header"><div><h2>Part 1: A hairdresser</h2><span class="small">Hannah works in a hairdressing salon.</span></div><div class="badge">✂️</div></div>
+
+    <div class="task auto" data-task="h-pre">
+      <div class="task-title">Pre-watching: Predict Hannah’s day</div>
+      <p class="small">Choose <b>Maybe true</b> or <b>Maybe false</b>. This is a prediction task, so there are no wrong answers.</p>
+      <div class="select-line">She works in a big hospital. <select><option></option><option>Maybe true</option><option>Maybe false</option></select></div>
+      <div class="select-line">She cuts men’s and women’s hair. <select><option></option><option>Maybe true</option><option>Maybe false</option></select></div>
+      <div class="select-line">She works on Sundays. <select><option></option><option>Maybe true</option><option>Maybe false</option></select></div>
+      <div class="select-line">She goes to work by bus. <select><option></option><option>Maybe true</option><option>Maybe false</option></select></div>
+    </div>
+
+    <div class="task auto" data-task="h-correct">
+      <div class="task-title">While-watching 1: Correct the wrong information</div>
+      <div class="select-line">1. Hannah is a doctor. → Hannah is a <select data-answer="hairdresser"><option></option><option>hairdresser</option><option>florist</option><option>paramedic</option></select>.</div>
+      <div class="select-line">2. She works in a big supermarket. → She works in a small <select data-answer="hairdressing salon"><option></option><option>hospital</option><option>hairdressing salon</option><option>cake shop</option></select>.</div>
+      <div class="select-line">3. She usually works from nine till <select data-answer="half past five"><option></option><option>half past five</option><option>four o’clock</option><option>seven</option></select>.</div>
+      <div class="select-line">4. On Saturday she works from nine till <select data-answer="four o’clock"><option></option><option>four o’clock</option><option>half past five</option><option>seven</option></select>.</div>
+      <div class="select-line">5. She goes to work by <select data-answer="bus"><option></option><option>train</option><option>bus</option><option>ambulance</option></select>.</div>
+      <div class="select-line">6. In her free time she <select data-answer="doesn't think about work"><option></option><option>thinks about work</option><option>doesn't think about work</option><option>works late</option></select>.</div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task auto" data-task="h-profile">
+      <div class="task-title">While-watching 2: Complete Hannah’s profile</div>
+      <table><tr><th>Name</th><th>Job</th><th>Workplace</th><th>Transport</th><th>Free time</th></tr>
+        <tr><td>Hannah</td><td><input class="text-input" data-answer="hairdresser"></td><td><input class="text-input" data-answer="salon"></td><td><input class="text-input" data-answer="bus"></td><td><input class="text-input" data-answer="shopping"></td></tr></table>
+      <p class="small">For “workplace” and “free time” one key word is enough.</p>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task">
+      <div class="task-title">Post-watching + speaking: Interview Hannah</div>
+      <div class="grid"><div><b>Student A:</b> You are Hannah. Answer the questions.</div><div><b>Student B:</b> Interview Hannah.</div></div>
+      <ol><li>What do you do?</li><li>Where do you work?</li><li>What time do you start and finish?</li><li>Do you work at weekends?</li><li>How do you get to work?</li><li>What do you do in your free time?</li></ol>
+    </div>
+  </section>
+
+  <section id="paramedic">
+    <div class="part-header"><div><h2>Part 2: A paramedic</h2><span class="small">Matt works for the ambulance service.</span></div><div class="badge">🚑</div></div>
+
+    <div class="task auto" data-task="p-pre">
+      <div class="task-title">Pre-watching: What does a paramedic do?</div>
+      <div class="choice-grid">
+        <label class="choice"><input type="checkbox" data-answer="true"> drives an ambulance</label>
+        <label class="choice"><input type="checkbox" data-answer="false"> cuts people’s hair</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> answers emergency calls</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> gives medical advice</label>
+        <label class="choice"><input type="checkbox" data-answer="false"> decorates cakes</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> works day and night shifts</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> helps people in emergencies</label>
+      </div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task auto" data-task="p-order">
+      <div class="task-title">While-watching 1: Put the information in the order you hear it</div>
+      <ul class="sortable">
+        <li draggable="true" data-order="1"><span class="handle">↕</span>Matt works for the ambulance service.</li>
+        <li draggable="true" data-order="2"><span class="handle">↕</span>He answers medical emergency calls.</li>
+        <li draggable="true" data-order="3"><span class="handle">↕</span>He sometimes gives medical advice.</li>
+        <li draggable="true" data-order="4"><span class="handle">↕</span>He drives to emergencies.</li>
+        <li draggable="true" data-order="5"><span class="handle">↕</span>He works day and night shifts.</li>
+        <li draggable="true" data-order="6"><span class="handle">↕</span>He studies part-time at university.</li>
+        <li draggable="true" data-order="7"><span class="handle">↕</span>He has two young children.</li>
+      </ul>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light shuffle">Shuffle</button><span class="score"></span></div>
+    </div>
+
+    <div class="task auto" data-task="p-tf">
+      <div class="task-title">While-watching 2: True / False / Doesn’t say</div>
+      <table><tr><th>Sentence</th><th>Answer</th></tr>
+        <tr><td>Matt works in a hospital.</td><td><select data-answer="False"><option></option><option>True</option><option>False</option><option>Doesn’t say</option></select></td></tr>
+        <tr><td>He helps people on the phone.</td><td><select data-answer="True"><option></option><option>True</option><option>False</option><option>Doesn’t say</option></select></td></tr>
+        <tr><td>He always drives an ambulance.</td><td><select data-answer="False"><option></option><option>True</option><option>False</option><option>Doesn’t say</option></select></td></tr>
+        <tr><td>His day shift is usually 12 hours.</td><td><select data-answer="True"><option></option><option>True</option><option>False</option><option>Doesn’t say</option></select></td></tr>
+        <tr><td>He has a lot of free time.</td><td><select data-answer="False"><option></option><option>True</option><option>False</option><option>Doesn’t say</option></select></td></tr>
+        <tr><td>He thinks his job is boring.</td><td><select data-answer="False"><option></option><option>True</option><option>False</option><option>Doesn’t say</option></select></td></tr>
+        <tr><td>He has a good work-life balance.</td><td><select data-answer="False"><option></option><option>True</option><option>False</option><option>Doesn’t say</option></select></td></tr>
+      </table>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task auto" data-task="p-emergency">
+      <div class="task-title">Post-watching: Emergency or not?</div>
+      <p>Choose the best action.</p>
+      <div class="select-line">A person has a headache. <select data-answer="give advice"><option></option><option>call 999</option><option>give advice</option><option>not an emergency</option></select></div>
+      <div class="select-line">A child can’t breathe. <select data-answer="call 999"><option></option><option>call 999</option><option>give advice</option><option>not an emergency</option></select></div>
+      <div class="select-line">Someone falls and breaks a leg. <select data-answer="call 999"><option></option><option>call 999</option><option>give advice</option><option>not an emergency</option></select></div>
+      <div class="select-line">A person has a small cut. <select data-answer="not an emergency"><option></option><option>call 999</option><option>give advice</option><option>not an emergency</option></select></div>
+      <div class="select-line">A man has chest pain. <select data-answer="call 999"><option></option><option>call 999</option><option>give advice</option><option>not an emergency</option></select></div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+      <div class="speech">Speaking: I think it’s an emergency because… / They need advice because…</div>
+    </div>
+  </section>
+
+  <section id="cake">
+    <div class="part-header"><div><h2>Part 3: A cake decorator</h2><span class="small">Sally decorates and finishes celebration cakes.</span></div><div class="badge">🎂</div></div>
+
+    <div class="task auto" data-task="c-pre">
+      <div class="task-title">Pre-watching: Build predictions</div>
+      <p>Drag the words into any prediction box. Then say your ideas in pairs.</p>
+      <div class="drag-area"><div class="bank"><h4>Words</h4>
+        <span class="draggable" draggable="true" data-value="birthday cakes">birthday cakes</span><span class="draggable" draggable="true" data-value="weddings">weddings</span><span class="draggable" draggable="true" data-value="designs">designs</span><span class="draggable" draggable="true" data-value="orders">orders</span><span class="draggable" draggable="true" data-value="Monday to Friday">Monday to Friday</span><span class="draggable" draggable="true" data-value="different">different</span>
+      </div><div class="drop-grid"><h4>My prediction</h4><div class="dropzone open"></div><div class="dropzone open"></div><div class="dropzone open"></div></div></div>
+    </div>
+
+    <div class="task auto" data-task="c-mc">
+      <div class="task-title">While-watching 1: Choose the correct option</div>
+      <div class="sentence">1. Sally is a <select data-answer="cake decorator"><option></option><option>baker</option><option>cake decorator</option><option>waitress</option></select>.</div>
+      <div class="sentence">2. She works in <select data-answer="a cake shop"><option></option><option>a cake shop</option><option>a supermarket</option><option>a restaurant</option></select>.</div>
+      <div class="sentence">3. People buy cakes for <select data-answer="birthdays and weddings"><option></option><option>birthdays and weddings</option><option>hospitals and schools</option><option>buses and trains</option></select>.</div>
+      <div class="sentence">4. They don’t bake the cakes in the shop, they <select data-answer="decorate them"><option></option><option>sell flowers</option><option>decorate them</option><option>drive them</option></select>.</div>
+      <div class="sentence">5. Sally works <select data-answer="nine to five, Monday to Friday"><option></option><option>night shifts</option><option>nine to five, Monday to Friday</option><option>only at weekends</option></select>.</div>
+      <div class="sentence">6. She says every day is <select data-answer="different"><option></option><option>the same</option><option>boring</option><option>different</option></select>.</div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task auto" data-task="c-numbers">
+      <div class="task-title">While-watching 2: Listen for numbers and time</div>
+      <div class="sentence">1. There are <input class="text-input short" data-answer="three"> cake decorators in the shop.</div>
+      <div class="sentence">2. Sally works from <input class="text-input short" data-answer="nine"> to <input class="text-input short" data-answer="five">.</div>
+      <div class="sentence">3. She works from Monday to <input class="text-input short" data-answer="Friday">.</div>
+      <div class="sentence">4. She leaves for work at <input class="text-input short" data-answer="seven"> o’clock.</div>
+      <div class="sentence">5. It takes her <input class="text-input short" data-answer="one"> hour and <input class="text-input short" data-answer="twenty"> minutes to get to work.</div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task">
+      <div class="task-title">Post-watching + speaking: Cake order challenge</div>
+      <div class="grid"><div><h4>Customer</h4><input class="text-input wide" placeholder="The cake is for..."><br><br><input class="text-input wide" placeholder="Colour"><br><br><input class="text-input wide" placeholder="Design"><br><br><input class="text-input wide" placeholder="Message on the cake"></div><div><h4>Sally’s questions</h4><ol><li>What is the cake for?</li><li>What colour would you like?</li><li>What design would you like?</li><li>What message do you want?</li><li>When do you need it?</li></ol></div></div>
+    </div>
+  </section>
+
+  <section id="florist">
+    <div class="part-header"><div><h2>Part 4: A florist</h2><span class="small">Rob works at Scott’s Flowers in New York City.</span></div><div class="badge">💐</div></div>
+
+    <div class="task">
+      <div class="task-title">Pre-watching: Flower shop brainstorm</div>
+      <p>Write 5 things you can see / buy / do in a flower shop.</p>
+      <div class="grid"><input class="text-input" placeholder="1"><input class="text-input" placeholder="2"><input class="text-input" placeholder="3"><input class="text-input" placeholder="4"><input class="text-input" placeholder="5"></div>
+    </div>
+
+    <div class="task auto" data-task="f-routine">
+      <div class="task-title">While-watching 1: Complete Rob’s daily routine</div>
+      <p>Use the verbs: wakes up / takes / gets / makes / arranges / talks / delivers / leaves</p>
+      <div class="sentence">1. Rob <input class="text-input" data-answer="wakes up"> at 7.00 a.m.</div>
+      <div class="sentence">2. He <input class="text-input" data-answer="takes"> the train into the city.</div>
+      <div class="sentence">3. He <input class="text-input" data-answer="gets"> to the flower shop at 9.00 a.m.</div>
+      <div class="sentence">4. He <input class="text-input" data-answer="makes"> bouquets every day.</div>
+      <div class="sentence">5. He <input class="text-input" data-answer="arranges"> flowers for parties and weddings.</div>
+      <div class="sentence">6. He <input class="text-input" data-answer="talks"> with customers.</div>
+      <div class="sentence">7. He <input class="text-input" data-answer="delivers"> flowers.</div>
+      <div class="sentence">8. He <input class="text-input" data-answer="leaves"> work at 5.00 p.m.</div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task auto" data-task="f-likes">
+      <div class="task-title">While-watching 2: What does Rob like?</div>
+      <div class="choice-grid">
+        <label class="choice"><input type="checkbox" data-answer="true"> talking to people</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> using his hands</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> being creative</label>
+        <label class="choice"><input type="checkbox" data-answer="false"> working at night</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> watching TV</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> meeting new people</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> going out with friends</label>
+        <label class="choice"><input type="checkbox" data-answer="false"> driving an ambulance</label>
+        <label class="choice"><input type="checkbox" data-answer="true"> being a DJ</label>
+      </div>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task auto" data-task="f-map">
+      <div class="task-title">Post-watching: Rob’s work-life balance map</div>
+      <table><tr><th>Work</th><th>Life</th></tr><tr><td>
+        Job: <input class="text-input" data-answer="florist"><br><br>Workplace: <input class="text-input" data-answer="flower shop"><br><br>Working hours: <input class="text-input" data-answer="9 to 5">
+      </td><td>
+        Free time: <input class="text-input" data-answer="relaxing"><br><br>Hobby: <input class="text-input" data-answer="DJ"><br><br>Balance: <select data-answer="good"><option></option><option>good</option><option>not good</option></select>
+      </td></tr></table>
+      <p class="small">For “free time”, any one activity from the video is enough.</p>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+  </section>
+
+  <section id="compare">
+    <h2>5. After All Parts: Compare the jobs</h2>
+    <div class="task auto" data-task="compare-table">
+      <div class="task-title">Complete the comparison table</div>
+      <table><tr><th>Person</th><th>Job</th><th>Works with</th><th>Transport / travel</th><th>Work-life balance</th></tr>
+        <tr><td>Hannah</td><td><select data-answer="hairdresser"><option></option><option>hairdresser</option><option>paramedic</option><option>florist</option></select></td><td><select data-answer="hair"><option></option><option>hair</option><option>cakes</option><option>flowers</option></select></td><td><select data-answer="bus"><option></option><option>bus</option><option>train</option><option>van</option></select></td><td><select data-answer="good"><option></option><option>good</option><option>not good</option></select></td></tr>
+        <tr><td>Matt</td><td><select data-answer="paramedic"><option></option><option>cake decorator</option><option>paramedic</option><option>florist</option></select></td><td><select data-answer="emergencies"><option></option><option>flowers</option><option>emergencies</option><option>cakes</option></select></td><td><select data-answer="ambulance"><option></option><option>ambulance</option><option>train</option><option>bus</option></select></td><td><select data-answer="not good"><option></option><option>good</option><option>not good</option></select></td></tr>
+        <tr><td>Sally</td><td><select data-answer="cake decorator"><option></option><option>cake decorator</option><option>hairdresser</option><option>paramedic</option></select></td><td><select data-answer="cakes"><option></option><option>hair</option><option>flowers</option><option>cakes</option></select></td><td><select data-answer="van"><option></option><option>van</option><option>ambulance</option><option>bus</option></select></td><td><select data-answer="good"><option></option><option>good</option><option>not good</option></select></td></tr>
+        <tr><td>Rob</td><td><select data-answer="florist"><option></option><option>florist</option><option>paramedic</option><option>hairdresser</option></select></td><td><select data-answer="flowers"><option></option><option>cakes</option><option>flowers</option><option>emergencies</option></select></td><td><select data-answer="train"><option></option><option>train</option><option>van</option><option>bus</option></select></td><td><select data-answer="good"><option></option><option>good</option><option>not good</option></select></td></tr>
+      </table>
+      <div class="toolbar"><button class="btn check">Check</button><button class="btn light reset">Reset</button><span class="score"></span></div>
+    </div>
+
+    <div class="task auto" data-task="awards">
+      <div class="task-title">Job Awards: Choose and explain</div>
+      <div class="award-grid">
+        <label>The most creative job <select><option></option><option>hairdresser</option><option>paramedic</option><option>cake decorator</option><option>florist</option></select></label>
+        <label>The most stressful job <select><option></option><option>hairdresser</option><option>paramedic</option><option>cake decorator</option><option>florist</option></select></label>
+        <label>The best working hours <select><option></option><option>hairdresser</option><option>paramedic</option><option>cake decorator</option><option>florist</option></select></label>
+        <label>The most helpful job <select><option></option><option>hairdresser</option><option>paramedic</option><option>cake decorator</option><option>florist</option></select></label>
+      </div>
+      <textarea placeholder="Explain your choice: I think ... because ..."></textarea>
+      <div class="speech"><b>Useful language:</b> In my opinion, ... / I wouldn’t like to be a ... because ... / I’d like to try being a ... because ...</div>
+    </div>
+  </section>
+
+  <section id="final-speaking">
+    <h2>6. Final Speaking Task: My Ideal Job & Work-life Balance</h2>
+    <div class="task">
+      <div class="task-title">Prepare your short speech</div>
+      <div class="grid">
+        <div>
+          <label>My ideal job:<input class="text-input wide" placeholder="I would like to be a..."></label><br><br>
+          <label>Workplace:<input class="text-input wide" placeholder="I would like to work in / at..."></label><br><br>
+          <label>Working hours:<input class="text-input wide" placeholder="I would start at... and finish at..."></label><br><br>
+          <label>Transport:<input class="text-input wide" placeholder="I would go to work by..."></label>
+        </div>
+        <div>
+          <label>Every day I would:<textarea placeholder="Every day I would..."></textarea></label>
+          <label>In my free time:<textarea placeholder="In my free time, I would..."></textarea></label>
+        </div>
+      </div>
+      <div class="speech"><b>Speaking frame:</b> I would like to be a… I would like to work in/at… Every day I would… I think I would have a good work-life balance because…</div>
+    </div>
+
+    <div class="task">
+      <div class="task-title">Creative option: Job Fair</div>
+      <p>Create a mini job advert and present it to the class.</p>
+      <textarea placeholder="We need a... You work from... to... You work with... This job is good because... This job is difficult because..."></textarea>
+    </div>
+  </section>
+
+  <div class="printbar"><button class="btn" onclick="checkAll()">Check all auto-check tasks</button><button class="btn secondary" onclick="window.print()">Print / Save as PDF</button><button class="btn light" onclick="resetAll()">Reset all</button></div>
+</div>
+
+<script>
+let dragged=null;
+function initDnD(){
+  document.querySelectorAll('.draggable').forEach(el=>{
+    el.addEventListener('dragstart',e=>{dragged=el;setTimeout(()=>el.style.opacity='.45',0);});
+    el.addEventListener('dragend',e=>{el.style.opacity='1';dragged=null;});
+  });
+  document.querySelectorAll('.dropzone,.bank').forEach(zone=>{
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('dragover');});
+    zone.addEventListener('dragleave',()=>zone.classList.remove('dragover'));
+    zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('dragover');if(!dragged)return;if(zone.classList.contains('dropzone')&&!zone.classList.contains('open')){zone.innerHTML='';} zone.appendChild(dragged);});
+  });
+}
+function initSortable(){
+  document.querySelectorAll('.sortable').forEach(list=>{
+    let item=null;
+    list.querySelectorAll('li').forEach(li=>{
+      li.addEventListener('dragstart',()=>{item=li;setTimeout(()=>li.style.opacity='.45',0);});
+      li.addEventListener('dragend',()=>{li.style.opacity='1';item=null;});
+      li.addEventListener('dragover',e=>{e.preventDefault();const after=getDragAfterElement(list,e.clientY);if(after==null)list.appendChild(item);else list.insertBefore(item,after);});
+    });
+  });
+}
+function getDragAfterElement(container,y){
+  const els=[...container.querySelectorAll('li:not([style*="opacity: 0.45"])')];
+  return els.reduce((closest,child)=>{const box=child.getBoundingClientRect();const offset=y-box.top-box.height/2;if(offset<0&&offset>closest.offset){return{offset,element:child};}return closest;},{offset:Number.NEGATIVE_INFINITY}).element;
+}
+function normalize(s){return (s||'').toString().trim().toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ')}
+function acceptable(value, answer){
+  const v=normalize(value), a=normalize(answer);
+  if(!v) return false;
+  if(a==='9 to 5') return ['9 to 5','nine to five','from 9 to 5','from nine to five'].includes(v);
+  if(a==='dj') return ['dj','a dj'].includes(v);
+  if(a==='salon') return v.includes('salon') || v.includes('philosophy');
+  if(a==='shopping') return v.includes('shopping') || v.includes('relax') || v.includes('friends') || v.includes('socialize');
+  if(a==='relaxing') return v.includes('relax') || v.includes('tv') || v.includes('friends') || v.includes('dj') || v.includes('meeting') || v.includes('going out');
+  if(a==='flower shop') return v.includes('flower shop') || v.includes("scott's flowers") || v.includes('scotts flowers');
+  return v===a;
+}
+function mark(el, good){el.classList.remove('correct-field','wrong-field');el.classList.add(good?'correct-field':'wrong-field');}
+function checkTask(task){
+  let total=0, correct=0;
+  task.querySelectorAll('select[data-answer]').forEach(sel=>{total++;const good=acceptable(sel.value,sel.dataset.answer);if(good)correct++;mark(sel,good);});
+  task.querySelectorAll('input[type="text"][data-answer], input:not([type])[data-answer]').forEach(inp=>{total++;const good=acceptable(inp.value,inp.dataset.answer);if(good)correct++;mark(inp,good);});
+  task.querySelectorAll('input[type="checkbox"][data-answer]').forEach(cb=>{total++;const should=cb.dataset.answer==='true';const good=cb.checked===should;if(good)correct++;cb.closest('.choice')?.classList.remove('correct-field','wrong-field');cb.closest('.choice')?.classList.add(good?'correct-field':'wrong-field');});
+  task.querySelectorAll('.dropzone[data-answer]').forEach(zone=>{total++;const chip=zone.querySelector('.draggable');const good=chip && acceptable(chip.dataset.value,zone.dataset.answer);if(good)correct++;zone.classList.remove('correct-field','wrong-field');zone.classList.add(good?'correct-field':'wrong-field');});
+  task.querySelectorAll('.sortable').forEach(list=>{[...list.children].forEach((li,i)=>{total++;const good=Number(li.dataset.order)===i+1;if(good)correct++;li.classList.remove('correct-field','wrong-field');li.classList.add(good?'correct-field':'wrong-field');});});
+  const score=task.querySelector('.score');if(score){score.textContent=`${correct}/${total}`;score.className='score '+(correct===total?'ok':'bad');}
+  let fb=task.querySelector('.feedback');if(!fb){fb=document.createElement('div');fb.className='feedback';task.appendChild(fb);} if(total>0){fb.textContent=correct===total?'Great! Everything is correct.':'Check the highlighted answers and try again.';fb.className='feedback '+(correct===total?'ok':'bad');}
+  return {correct,total};
+}
+function resetTask(task){
+  task.querySelectorAll('select').forEach(s=>{s.selectedIndex=0;s.classList.remove('correct-field','wrong-field')});
+  task.querySelectorAll('input[type="text"], input:not([type])').forEach(i=>{i.value='';i.classList.remove('correct-field','wrong-field')});
+  task.querySelectorAll('input[type="checkbox"]').forEach(c=>{c.checked=false;c.closest('.choice')?.classList.remove('correct-field','wrong-field')});
+  task.querySelectorAll('.dropzone').forEach(z=>{z.classList.remove('correct-field','wrong-field')});
+  task.querySelectorAll('.correct-field,.wrong-field').forEach(e=>e.classList.remove('correct-field','wrong-field'));
+  const score=task.querySelector('.score');if(score)score.textContent='';const fb=task.querySelector('.feedback');if(fb)fb.remove();
+}
+function checkAll(){let c=0,t=0;document.querySelectorAll('.task.auto').forEach(task=>{const r=checkTask(task);c+=r.correct;t+=r.total;});alert(`Total score: ${c}/${t}`)}
+function resetAll(){document.querySelectorAll('.task').forEach(resetTask)}
+function shuffleList(list){const items=[...list.children];for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));list.appendChild(items[j]);items.splice(j,1)}}
+document.addEventListener('click',e=>{if(e.target.classList.contains('check'))checkTask(e.target.closest('.task'));if(e.target.classList.contains('reset'))resetTask(e.target.closest('.task'));if(e.target.classList.contains('shuffle'))shuffleList(e.target.closest('.task').querySelector('.sortable'));});
+initDnD();initSortable();
+document.querySelectorAll('.sortable').forEach(shuffleList);
+</script>
+</body>
+</html>
