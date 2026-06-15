@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flight Attendant Vocabulary Practice</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent2: #0f766e;
+      --good: #16a34a;
+      --bad: #dc2626;
+      --soft: #e0ecff;
+      --line: #dbe3f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eef5ff, #f8fbff 45%, #eefdf8);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 28px 18px 18px;
+      text-align: center;
+      background: linear-gradient(135deg, #1d4ed8, #0f766e);
+      color: white;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      box-shadow: 0 10px 30px rgba(30, 64, 175, 0.18);
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 42px);
+      letter-spacing: 0.3px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 17px;
+      opacity: 0.92;
+    }
+
+    main {
+      width: min(1180px, 94vw);
+      margin: 24px auto 50px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .nav-btn, button {
+      border: none;
+      background: var(--accent);
+      color: white;
+      padding: 11px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.18);
+      transition: 0.18s ease;
+    }
+
+    .nav-btn:hover, button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .nav-btn.secondary, button.secondary {
+      background: #334155;
+      box-shadow: 0 8px 16px rgba(51, 65, 85, 0.16);
+    }
+
+    section {
+      background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(219, 227, 240, 0.95);
+      border-radius: 26px;
+      padding: 24px;
+      margin: 22px 0;
+      box-shadow: 0 16px 34px rgba(30, 41, 59, 0.08);
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      color: #0f172a;
+    }
+
+    .instruction {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .score {
+      margin: 14px 0 0;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 130px;
+    }
+
+    .question-card.correct { border-color: rgba(22, 163, 74, 0.7); background: #f0fdf4; }
+    .question-card.wrong { border-color: rgba(220, 38, 38, 0.65); background: #fef2f2; }
+
+    .question-card label {
+      display: block;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 14px;
+      border: 1.5px solid #cbd5e1;
+      font-size: 16px;
+      background: white;
+      outline: none;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.13);
+    }
+
+    .feedback {
+      margin-top: 9px;
+      font-size: 14px;
+      font-weight: 700;
+      min-height: 18px;
+    }
+
+    .drag-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .word-bank, .drop-zone-wrap {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 16px;
+      border: 1px dashed #94a3b8;
+      min-height: 180px;
+    }
+
+    .word-bank h3, .drop-zone-wrap h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1e3a8a;
+      font-weight: 800;
+      cursor: grab;
+      user-select: none;
+      border: 1px solid #bfdbfe;
+    }
+
+    .chip:active { cursor: grabbing; }
+
+    .drop-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .ru-text {
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .drop-box {
+      min-height: 44px;
+      border: 2px dashed #cbd5e1;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      padding: 6px;
+      background: #f8fafc;
+    }
+
+    .drop-box.correct { border-color: var(--good); background: #ecfdf5; }
+    .drop-box.wrong { border-color: var(--bad); background: #fff1f2; }
+
+    .sentence-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .sentence {
+      background: white;
+      border: 2px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .sentence.correct { border-color: var(--good); background: #f0fdf4; }
+    .sentence.wrong { border-color: var(--bad); background: #fef2f2; }
+
+    .sentence input {
+      display: inline-block;
+      max-width: 190px;
+      margin: 0 6px;
+      vertical-align: middle;
+      font-weight: 800;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mini-pill {
+      background: #eef2ff;
+      color: #312e81;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .controls {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .final-box {
+      background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1px solid #bae6fd;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 720px) {
+      .drag-area { grid-template-columns: 1fr; }
+      .drop-row { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Flight Attendant Vocabulary Practice</h1>
+    <p>Тренируем слова для собеседования на бортпроводницу</p>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <a href="#task1"><button class="nav-btn">1. Выбери перевод</button></a>
+      <a href="#task2"><button class="nav-btn">2. Перетащи слова</button></a>
+      <a href="#task3"><button class="nav-btn">3. Вставь слово</button></a>
+      <a href="#task4"><button class="nav-btn">4. Мини-интервью</button></a>
+    </div>
+
+    <section id="task1">
+      <h2>Task 1. Choose the correct translation</h2>
+      <p class="instruction">Выбери правильный русский перевод для английского слова. Подходит для быстрого повторения после Memo.</p>
+      <div class="task-grid" id="selectTask"></div>
+      <div class="controls">
+        <button onclick="checkSelectTask()">Проверить</button>
+        <button class="secondary" onclick="resetSelectTask()">Сбросить</button>
+      </div>
+      <div class="score" id="selectScore">Результат: —</div>
+    </section>
+
+    <section id="task2">
+      <h2>Task 2. Drag the English words</h2>
+      <p class="instruction">Перетащи английское слово к русскому переводу. Если нужно упростить, можно выполнять вместе с карточками-подсказками.</p>
+      <div class="drag-area">
+        <div class="word-bank">
+          <h3>English words</h3>
+          <div class="chips" id="dragBank"></div>
+        </div>
+        <div class="drop-zone-wrap">
+          <h3>Russian meanings</h3>
+          <div id="dropTask"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <button onclick="checkDragTask()">Проверить</button>
+        <button class="secondary" onclick="resetDragTask()">Перемешать заново</button>
+      </div>
+      <div class="score" id="dragScore">Результат: —</div>
+    </section>
+
+    <section id="task3">
+      <h2>Task 3. Complete the cabin phrases</h2>
+      <p class="instruction">Вставь подходящее слово в фразы бортпроводника. Слова можно брать из подсказок ниже.</p>
+      <div class="pill-row" id="wordHints"></div>
+      <div class="sentence-list" id="sentenceTask"></div>
+      <div class="controls">
+        <button onclick="checkSentenceTask()">Проверить</button>
+        <button class="secondary" onclick="resetSentenceTask()">Сбросить</button>
+      </div>
+      <div class="score" id="sentenceScore">Результат: —</div>
+    </section>
+
+    <section id="task4">
+      <h2>Task 4. Mini interview builder</h2>
+      <p class="instruction">Выбери лучший ответ на вопрос собеседования. Это задание связывает лексику с реальной ситуацией интервью.</p>
+      <div class="task-grid" id="interviewTask"></div>
+      <div class="controls">
+        <button onclick="checkInterviewTask()">Проверить</button>
+        <button class="secondary" onclick="resetInterviewTask()">Сбросить</button>
+      </div>
+      <div class="score" id="interviewScore">Результат: —</div>
+    </section>
+
+    <section>
+      <div class="final-box">
+        <h2>Speaking finish</h2>
+        <p class="instruction">После заданий ученица читает вслух 3 фразы. Можно сначала с опорой, потом без опоры.</p>
+        <ol>
+          <li><strong>Ladies and gentlemen, welcome on board.</strong></li>
+          <li><strong>Please place your hand luggage in the overhead bins.</strong></li>
+          <li><strong>Please return to your seats and fasten your seat belts immediately.</strong></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const vocab = [
+      {en: 'board', ru: 'борт самолета'},
+      {en: 'crew', ru: 'экипаж'},
+      {en: 'flight attendant', ru: 'бортпроводник'},
+      {en: 'passenger', ru: 'пассажир'},
+      {en: 'seat', ru: 'кресло / место в салоне'},
+      {en: 'aisle', ru: 'проход между креслами'},
+      {en: 'overhead bin', ru: 'багажная полка над головой'},
+      {en: 'lavatory', ru: 'туалет'},
+      {en: 'exit', ru: 'выход'},
+      {en: 'luggage / baggage', ru: 'багаж'},
+      {en: 'hand luggage', ru: 'ручная кладь'},
+      {en: 'seat belt', ru: 'ремень безопасности'},
+      {en: 'safety', ru: 'безопасность'},
+      {en: 'turbulence', ru: 'турбулентность'},
+      {en: 'emergency', ru: 'чрезвычайная ситуация'},
+      {en: 'welcome', ru: 'добро пожаловать'},
+      {en: 'fasten', ru: 'пристегнуть'},
+      {en: 'unfasten', ru: 'расстегнуть'},
+      {en: 'place / put', ru: 'положить / разместить'},
+      {en: 'remain', ru: 'оставаться'},
+      {en: 'return', ru: 'вернуться'},
+      {en: 'close', ru: 'закрыть'},
+      {en: 'open', ru: 'открыть'},
+      {en: 'forbid / prohibit', ru: 'запрещать'},
+      {en: 'immediately', ru: 'немедленно / сразу же'},
+      {en: 'straight away', ru: 'прямо сейчас'}
+    ];
+
+    const selectItems = [
+      'flight attendant', 'passenger', 'aisle', 'overhead bin', 'hand luggage',
+      'seat belt', 'safety', 'turbulence', 'emergency', 'fasten', 'remain', 'immediately'
+    ];
+
+    const dragItems = [
+      'board', 'crew', 'seat', 'lavatory', 'luggage / baggage', 'welcome', 'unfasten', 'return', 'close', 'open'
+    ];
+
+    const sentences = [
+      {text: 'Ladies and gentlemen, ___ on board.', answer: 'welcome'},
+      {text: 'Please ___ your hand luggage in the overhead bins.', answer: 'place'},
+      {text: 'Fasten your ___, please.', answer: 'seat belt'},
+      {text: 'Please return to your ___ immediately.', answer: 'seats'},
+      {text: 'We are passing through an area of ___.', answer: 'turbulence'},
+      {text: 'Please ___ seated.', answer: 'remain'},
+      {text: 'Do not smoke. Smoking is ___.', answer: 'prohibited'},
+      {text: 'Please go to the nearest ___.', answer: 'exit'}
+    ];
+
+    const sentenceHints = ['welcome', 'place', 'seat belt', 'seats', 'turbulence', 'remain', 'prohibited', 'exit'];
+
+    const interviewItems = [
+      {
+        q: 'Can you tell me a little bit about yourself?',
+        correct: 'My name is Anna. I want to work as a flight attendant.',
+        options: [
+          'My name is Anna. I want to work as a flight attendant.',
+          'Please fasten your seat belts immediately.',
+          'The weather in Moscow is fine.'
+        ]
+      },
+      {
+        q: 'What is your level of English?',
+        correct: 'My English is basic now, but I am studying hard to improve it.',
+        options: [
+          'My English is basic now, but I am studying hard to improve it.',
+          'I am an overhead bin.',
+          'Please place your seat belt in the aisle.'
+        ]
+      },
+      {
+        q: 'Are you ready to relocate to Moscow?',
+        correct: 'Yes, I am ready to relocate to Moscow.',
+        options: [
+          'Yes, I am ready to relocate to Moscow.',
+          'No, it is turbulence.',
+          'I close the lavatory.'
+        ]
+      },
+      {
+        q: 'What is important for a flight attendant?',
+        correct: 'Safety, politeness and teamwork are important.',
+        options: [
+          'Safety, politeness and teamwork are important.',
+          'The aisle is under the passenger.',
+          'I unfasten the emergency.'
+        ]
+      },
+      {
+        q: 'What do you do if there is turbulence?',
+        correct: 'I ask passengers to return to their seats and fasten seat belts.',
+        options: [
+          'I ask passengers to return to their seats and fasten seat belts.',
+          'I open hand luggage.',
+          'I forbid the crew to welcome passengers.'
+        ]
+      },
+      {
+        q: 'Where can passengers put hand luggage?',
+        correct: 'In the overhead bins or under the seat.',
+        options: [
+          'In the overhead bins or under the seat.',
+          'In the lavatory only.',
+          'In the aisle only.'
+        ]
+      }
+    ];
+
+    function shuffle(arr) {
+      return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    function findRu(en) {
+      return vocab.find(item => item.en === en).ru;
+    }
+
+    function makeSelectTask() {
+      const container = document.getElementById('selectTask');
+      container.innerHTML = '';
+      selectItems.forEach(en => {
+        const correctRu = findRu(en);
+        const wrongs = shuffle(vocab.filter(v => v.en !== en)).slice(0, 3).map(v => v.ru);
+        const options = shuffle([correctRu, ...wrongs]);
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.answer = correctRu;
+        card.innerHTML = `
+          <label>${en}</label>
+          <select>
+            <option value="">Выбери перевод</option>
+            ${options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+          </select>
+          <div class="feedback"></div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function checkSelectTask() {
+      let correct = 0;
+      const cards = document.querySelectorAll('#selectTask .question-card');
+      cards.forEach(card => {
+        const select = card.querySelector('select');
+        const feedback = card.querySelector('.feedback');
+        card.classList.remove('correct', 'wrong');
+        if (select.value === card.dataset.answer) {
+          correct++;
+          card.classList.add('correct');
+          feedback.textContent = '✓ Верно';
+          feedback.style.color = 'var(--good)';
+        } else {
+          card.classList.add('wrong');
+          feedback.textContent = `✗ Правильно: ${card.dataset.answer}`;
+          feedback.style.color = 'var(--bad)';
+        }
+      });
+      document.getElementById('selectScore').textContent = `Результат: ${correct} / ${cards.length}`;
+    }
+
+    function resetSelectTask() {
+      makeSelectTask();
+      document.getElementById('selectScore').textContent = 'Результат: —';
+    }
+
+    let dragged = null;
+
+    function makeDragTask() {
+      const bank = document.getElementById('dragBank');
+      const drops = document.getElementById('dropTask');
+      bank.innerHTML = '';
+      drops.innerHTML = '';
+      shuffle(dragItems).forEach(en => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.textContent = en;
+        chip.draggable = true;
+        chip.dataset.en = en;
+        chip.addEventListener('dragstart', () => dragged = chip);
+        bank.appendChild(chip);
+      });
+      shuffle(dragItems).forEach(en => {
+        const row = document.createElement('div');
+        row.className = 'drop-row';
+        row.innerHTML = `<div class="ru-text">${findRu(en)}</div><div class="drop-box" data-answer="${en}"></div>`;
+        const box = row.querySelector('.drop-box');
+        box.addEventListener('dragover', e => e.preventDefault());
+        box.addEventListener('drop', e => {
+          e.preventDefault();
+          if (dragged) {
+            if (box.firstElementChild) bank.appendChild(box.firstElementChild);
+            box.appendChild(dragged);
+          }
+        });
+        drops.appendChild(row);
+      });
+      document.getElementById('dragScore').textContent = 'Результат: —';
+    }
+
+    function checkDragTask() {
+      let correct = 0;
+      const boxes = document.querySelectorAll('.drop-box');
+      boxes.forEach(box => {
+        box.classList.remove('correct', 'wrong');
+        const chip = box.querySelector('.chip');
+        if (chip && chip.dataset.en === box.dataset.answer) {
+          correct++;
+          box.classList.add('correct');
+        } else {
+          box.classList.add('wrong');
+        }
+      });
+      document.getElementById('dragScore').textContent = `Результат: ${correct} / ${boxes.length}`;
+    }
+
+    function resetDragTask() {
+      makeDragTask();
+    }
+
+    function makeSentenceTask() {
+      const hints = document.getElementById('wordHints');
+      hints.innerHTML = '';
+      shuffle(sentenceHints).forEach(word => {
+        const pill = document.createElement('span');
+        pill.className = 'mini-pill';
+        pill.textContent = word;
+        hints.appendChild(pill);
+      });
+      const container = document.getElementById('sentenceTask');
+      container.innerHTML = '';
+      sentences.forEach((s, index) => {
+        const div = document.createElement('div');
+        div.className = 'sentence';
+        div.dataset.answer = s.answer.toLowerCase();
+        const html = s.text.replace('___', `<input type="text" id="sent-${index}" placeholder="word">`);
+        div.innerHTML = `${index + 1}. ${html}<div class="feedback"></div>`;
+        container.appendChild(div);
+      });
+    }
+
+    function checkSentenceTask() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#sentenceTask .sentence');
+      rows.forEach(row => {
+        const input = row.querySelector('input');
+        const feedback = row.querySelector('.feedback');
+        const value = input.value.trim().toLowerCase();
+        row.classList.remove('correct', 'wrong');
+        if (value === row.dataset.answer) {
+          correct++;
+          row.classList.add('correct');
+          feedback.textContent = '✓ Верно';
+          feedback.style.color = 'var(--good)';
+        } else {
+          row.classList.add('wrong');
+          feedback.textContent = `✗ Правильно: ${row.dataset.answer}`;
+          feedback.style.color = 'var(--bad)';
+        }
+      });
+      document.getElementById('sentenceScore').textContent = `Результат: ${correct} / ${rows.length}`;
+    }
+
+    function resetSentenceTask() {
+      makeSentenceTask();
+      document.getElementById('sentenceScore').textContent = 'Результат: —';
+    }
+
+    function makeInterviewTask() {
+      const container = document.getElementById('interviewTask');
+      container.innerHTML = '';
+      interviewItems.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.answer = item.correct;
+        card.innerHTML = `
+          <label style="font-size:18px;">${item.q}</label>
+          <select>
+            <option value="">Выбери ответ</option>
+            ${shuffle(item.options).map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+          </select>
+          <div class="feedback"></div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function checkInterviewTask() {
+      let correct = 0;
+      const cards = document.querySelectorAll('#interviewTask .question-card');
+      cards.forEach(card => {
+        const select = card.querySelector('select');
+        const feedback = card.querySelector('.feedback');
+        card.classList.remove('correct', 'wrong');
+        if (select.value === card.dataset.answer) {
+          correct++;
+          card.classList.add('correct');
+          feedback.textContent = '✓ Отличный ответ';
+          feedback.style.color = 'var(--good)';
+        } else {
+          card.classList.add('wrong');
+          feedback.textContent = `✗ Лучше так: ${card.dataset.answer}`;
+          feedback.style.color = 'var(--bad)';
+        }
+      });
+      document.getElementById('interviewScore').textContent = `Результат: ${correct} / ${cards.length}`;
+    }
+
+    function resetInterviewTask() {
+      makeInterviewTask();
+      document.getElementById('interviewScore').textContent = 'Результат: —';
+    }
+
+    makeSelectTask();
+    makeDragTask();
+    makeSentenceTask();
+    makeInterviewTask();
+  </script>
+</body>
+</html>

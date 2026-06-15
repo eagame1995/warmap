@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flight Attendant Vocabulary Memo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eaf4ff 0%, #f8fbff 45%, #fff7e8 100%);
+      color: #1f2937;
+      padding: 24px;
+    }
+
+    .app {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 20px;
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 12px 35px rgba(31, 41, 55, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: -0.04em;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.45;
+      color: #4b5563;
+      max-width: 740px;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      min-width: 210px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 16px;
+      padding: 13px 18px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      color: white;
+      background: #2563eb;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      background: #1d4ed8;
+      box-shadow: 0 14px 24px rgba(37, 99, 235, 0.22);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 8px 18px rgba(31, 41, 55, 0.06);
+    }
+
+    .stat span {
+      display: block;
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .stat small {
+      color: #6b7280;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .rules {
+      margin-bottom: 18px;
+      background: rgba(15, 23, 42, 0.88);
+      color: white;
+      border-radius: 20px;
+      padding: 16px 20px;
+      line-height: 1.5;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
+    }
+
+    .rules strong {
+      color: #fde68a;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 12px;
+      padding-bottom: 28px;
+    }
+
+    .card {
+      position: relative;
+      min-height: 112px;
+      perspective: 900px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .card-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner,
+    .card.matched .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    .card-front {
+      background: linear-gradient(145deg, #2563eb, #38bdf8);
+      color: white;
+      box-shadow: 0 12px 22px rgba(37, 99, 235, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .number {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background: #ffffff;
+      color: #111827;
+      border: 2px solid #dbeafe;
+      box-shadow: 0 12px 22px rgba(31, 41, 55, 0.1);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .card-back.english {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+
+    .card-back.russian {
+      background: #fff7ed;
+      border-color: #fdba74;
+      color: #9a3412;
+    }
+
+    .card.matched {
+      cursor: default;
+      opacity: 0.82;
+    }
+
+    .card.matched .card-back {
+      border-color: #86efac;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .message {
+      position: sticky;
+      bottom: 16px;
+      margin: 0 auto;
+      max-width: 620px;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+      border: 1px solid #e5e7eb;
+      font-weight: 800;
+      text-align: center;
+      color: #1f2937;
+      z-index: 10;
+    }
+
+    .message.success {
+      color: #166534;
+      border-color: #86efac;
+      background: rgba(240, 253, 244, 0.96);
+    }
+
+    .message.try {
+      color: #92400e;
+      border-color: #fcd34d;
+      background: rgba(255, 251, 235, 0.96);
+    }
+
+    @media (max-width: 800px) {
+      body {
+        padding: 14px;
+      }
+
+      header {
+        flex-direction: column;
+      }
+
+      .controls {
+        width: 100%;
+      }
+
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+        gap: 9px;
+      }
+
+      .card {
+        min-height: 98px;
+      }
+
+      .card-back {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>Memo: Flight Attendant Vocabulary</h1>
+        <p class="subtitle">
+          Переворачивай карточки и находи пары: <strong>английское слово</strong> + <strong>русский перевод</strong>. На закрытой стороне карточки видна только цифра.
+        </p>
+      </div>
+      <div class="controls">
+        <button id="restartBtn">Перемешать / начать заново</button>
+        <div class="stats">
+          <div class="stat"><span id="pairsFound">0</span><small>пар</small></div>
+          <div class="stat"><span id="moves">0</span><small>ходов</small></div>
+          <div class="stat"><span id="totalPairs">0</span><small>всего</small></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="rules">
+      <strong>Как играть:</strong> открой две карточки. Если это английское слово и его русский перевод — пара останется открытой. Если нет — карточки закроются обратно.
+    </div>
+
+    <main class="grid" id="gameGrid"></main>
+
+    <div class="message" id="message">Найди первую пару ✈️</div>
+  </div>
+
+  <script>
+    const vocabulary = [
+      { id: 1, en: "Board", ru: "борт самолета" },
+      { id: 2, en: "Crew", ru: "экипаж" },
+      { id: 3, en: "Flight attendant", ru: "бортпроводник" },
+      { id: 4, en: "Passenger", ru: "пассажир" },
+      { id: 5, en: "Seat", ru: "кресло / место в салоне" },
+      { id: 6, en: "Aisle", ru: "проход между креслами" },
+      { id: 7, en: "Overhead bin", ru: "багажная полка над головой" },
+      { id: 8, en: "Lavatory", ru: "туалет" },
+      { id: 9, en: "Exit", ru: "выход" },
+      { id: 10, en: "Luggage / Baggage", ru: "багаж" },
+      { id: 11, en: "Hand luggage", ru: "ручная кладь" },
+      { id: 12, en: "Seat belt", ru: "ремень безопасности" },
+      { id: 13, en: "Safety", ru: "безопасность" },
+      { id: 14, en: "Turbulence", ru: "турбулентность" },
+      { id: 15, en: "Emergency", ru: "аварийная / чрезвычайная ситуация" },
+      { id: 16, en: "Welcome", ru: "добро пожаловать" },
+      { id: 17, en: "Fasten", ru: "пристегнуть" },
+      { id: 18, en: "Unfasten", ru: "расстегнуть" },
+      { id: 19, en: "Place / Put", ru: "положить / разместить" },
+      { id: 20, en: "Remain", ru: "оставаться" },
+      { id: 21, en: "Return", ru: "вернуться" },
+      { id: 22, en: "Close", ru: "закрыть" },
+      { id: 23, en: "Open", ru: "открыть" },
+      { id: 24, en: "Forbid / Prohibit", ru: "запрещать" },
+      { id: 25, en: "Immediately", ru: "немедленно / сразу же" },
+      { id: 26, en: "Straight away", ru: "прямо сейчас" }
+    ];
+
+    const grid = document.getElementById("gameGrid");
+    const pairsFoundEl = document.getElementById("pairsFound");
+    const movesEl = document.getElementById("moves");
+    const totalPairsEl = document.getElementById("totalPairs");
+    const messageEl = document.getElementById("message");
+    const restartBtn = document.getElementById("restartBtn");
+
+    let cards = [];
+    let flippedCards = [];
+    let lockBoard = false;
+    let pairsFound = 0;
+    let moves = 0;
+
+    function shuffle(array) {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function buildCards() {
+      const gameCards = [];
+      vocabulary.forEach(item => {
+        gameCards.push({ pairId: item.id, type: "en", text: item.en });
+        gameCards.push({ pairId: item.id, type: "ru", text: item.ru });
+      });
+      return shuffle(gameCards);
+    }
+
+    function renderGame() {
+      grid.innerHTML = "";
+      cards.forEach((card, index) => {
+        const cardEl = document.createElement("div");
+        cardEl.className = "card";
+        cardEl.dataset.index = index;
+        cardEl.innerHTML = `
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="number">${index + 1}</div>
+            </div>
+            <div class="card-face card-back ${card.type === "en" ? "english" : "russian"}">
+              ${card.text}
+            </div>
+          </div>
+        `;
+        cardEl.addEventListener("click", () => flipCard(cardEl, card));
+        grid.appendChild(cardEl);
+      });
+    }
+
+    function flipCard(cardEl, card) {
+      if (lockBoard) return;
+      if (cardEl.classList.contains("flipped")) return;
+      if (cardEl.classList.contains("matched")) return;
+      if (flippedCards.length === 2) return;
+
+      cardEl.classList.add("flipped");
+      flippedCards.push({ element: cardEl, card });
+
+      if (flippedCards.length === 2) {
+        moves++;
+        movesEl.textContent = moves;
+        checkMatch();
+      }
+    }
+
+    function checkMatch() {
+      const [first, second] = flippedCards;
+      const isMatch = first.card.pairId === second.card.pairId && first.card.type !== second.card.type;
+
+      if (isMatch) {
+        first.element.classList.add("matched");
+        second.element.classList.add("matched");
+        pairsFound++;
+        pairsFoundEl.textContent = pairsFound;
+        setMessage("Отлично! Пара найдена ✅", "success");
+        flippedCards = [];
+
+        if (pairsFound === vocabulary.length) {
+          setTimeout(() => {
+            setMessage(`Готово! Все ${vocabulary.length} пар найдены. Ходов: ${moves} 🎉`, "success");
+          }, 300);
+        }
+      } else {
+        lockBoard = true;
+        setMessage("Не пара. Попробуй ещё раз 🙂", "try");
+        setTimeout(() => {
+          first.element.classList.remove("flipped");
+          second.element.classList.remove("flipped");
+          flippedCards = [];
+          lockBoard = false;
+          setMessage("Продолжай искать пары ✈️", "");
+        }, 950);
+      }
+    }
+
+    function setMessage(text, type) {
+      messageEl.textContent = text;
+      messageEl.className = "message";
+      if (type) messageEl.classList.add(type);
+    }
+
+    function startGame() {
+      cards = buildCards();
+      flippedCards = [];
+      lockBoard = false;
+      pairsFound = 0;
+      moves = 0;
+      pairsFoundEl.textContent = pairsFound;
+      movesEl.textContent = moves;
+      totalPairsEl.textContent = vocabulary.length;
+      setMessage("Найди первую пару ✈️", "");
+      renderGame();
+    }
+
+    restartBtn.addEventListener("click", startGame);
+    startGame();
+  </script>
+</body>
+</html>
