@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Present Simple: Affirmative & Negative — A1+</title>
+  <style>
+    :root{
+      --pink:#ff4fa3;
+      --purple:#7b61ff;
+      --blue:#25c2ff;
+      --mint:#3ee6a8;
+      --yellow:#ffd84d;
+      --orange:#ff9b42;
+      --dark:#25233a;
+      --text:#2d2b3f;
+      --soft:#fff8ff;
+      --card:#ffffff;
+      --good:#18b875;
+      --bad:#ee4c67;
+      --shadow: 0 18px 40px rgba(45, 43, 63, .16);
+      --radius: 28px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-rounded, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,216,77,.6) 0 9%, transparent 10%),
+        radial-gradient(circle at 90% 0%, rgba(37,194,255,.38) 0 12%, transparent 13%),
+        radial-gradient(circle at 95% 78%, rgba(255,79,163,.35) 0 10%, transparent 11%),
+        linear-gradient(135deg, #fff5fb 0%, #f4fbff 45%, #fff9dd 100%);
+      min-height:100vh;
+    }
+    header{
+      position:relative;
+      overflow:hidden;
+      padding:48px 18px 34px;
+      color:#fff;
+      background:
+        linear-gradient(135deg, rgba(123,97,255,1), rgba(255,79,163,.95) 55%, rgba(255,155,66,.96));
+      border-bottom-left-radius:38px;
+      border-bottom-right-radius:38px;
+      box-shadow: var(--shadow);
+    }
+    header:before, header:after{
+      content:"";
+      position:absolute;
+      border-radius:999px;
+      opacity:.25;
+      background:#fff;
+      filter: blur(.2px);
+    }
+    header:before{width:240px;height:240px;right:-80px;top:-70px}
+    header:after{width:160px;height:160px;left:-45px;bottom:-70px}
+    .wrap{width:min(1100px, 94vw); margin:0 auto; position:relative; z-index:1}
+    .hero{
+      display:grid;
+      grid-template-columns:1.4fr .8fr;
+      gap:22px;
+      align-items:center;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 68px);
+      line-height:.96;
+      letter-spacing:-2px;
+      text-shadow:0 4px 16px rgba(0,0,0,.13);
+    }
+    .subtitle{
+      font-size:clamp(16px,2vw,21px);
+      max-width:740px;
+      margin:0;
+      opacity:.96;
+      line-height:1.45;
+    }
+    .badgeRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:2px solid rgba(255,255,255,.35);
+      background:rgba(255,255,255,.18);
+      backdrop-filter: blur(8px);
+      padding:9px 14px;
+      border-radius:999px;
+      font-weight:800;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+    .mascot{
+      min-height:230px;
+      border-radius:34px;
+      background:rgba(255,255,255,.18);
+      border:2px solid rgba(255,255,255,.25);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      box-shadow:0 16px 32px rgba(0,0,0,.12);
+    }
+    .phone{
+      width:min(210px, 60vw);
+      height:250px;
+      border-radius:30px;
+      background:#1f1d31;
+      border:9px solid #fff;
+      transform:rotate(-5deg);
+      box-shadow:0 24px 35px rgba(0,0,0,.22);
+      overflow:hidden;
+      padding:15px;
+    }
+    .phone .bar{height:12px; width:70px; border-radius:99px; background:#fff; opacity:.25; margin:0 auto 18px}
+    .bubble{
+      border-radius:18px;
+      padding:11px 12px;
+      margin:9px 0;
+      font-weight:800;
+      font-size:15px;
+      line-height:1.15;
+      color:#fff;
+      box-shadow:0 6px 14px rgba(0,0,0,.15);
+    }
+    .b1{background:var(--pink); width:82%}
+    .b2{background:var(--blue); margin-left:auto; width:75%}
+    .b3{background:var(--mint); color:#122; width:88%}
+    .b4{background:var(--yellow); color:#2b2440; margin-left:auto; width:68%}
+    nav.progressBox{
+      margin:24px auto -20px;
+      background:#fff;
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:14px;
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap:8px;
+      border:2px solid rgba(123,97,255,.1);
+    }
+    nav.progressBox a{
+      text-decoration:none;
+      color:var(--dark);
+      text-align:center;
+      background:#f3f0ff;
+      padding:11px 8px;
+      border-radius:17px;
+      font-weight:900;
+      font-size:14px;
+      transition:.18s;
+    }
+    nav.progressBox a.done{background:#d9fff0; color:#087d4b}
+    nav.progressBox a:hover{transform:translateY(-2px); background:#fff1bb}
+    main{padding:48px 0 70px}
+    section.task{
+      background:rgba(255,255,255,.88);
+      border:2px solid rgba(255,255,255,.8);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+      margin:24px auto;
+      padding:22px;
+      overflow:hidden;
+      position:relative;
+    }
+    section.task:before{
+      content:"";
+      position:absolute;
+      width:210px;
+      height:210px;
+      right:-98px;
+      top:-92px;
+      border-radius:999px;
+      background:linear-gradient(135deg, rgba(255,216,77,.55), rgba(255,79,163,.35));
+      z-index:0;
+    }
+    .taskInner{position:relative; z-index:1}
+    .taskTop{
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:16px;
+    }
+    .num{
+      width:52px;height:52px;
+      border-radius:18px;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-size:24px;
+      font-weight:1000;
+      background:linear-gradient(135deg, var(--purple), var(--pink));
+      box-shadow:0 12px 25px rgba(123,97,255,.25);
+    }
+    h2{margin:0 0 6px; font-size:clamp(24px,3vw,34px); color:#25233a}
+    .instruction{margin:0; font-size:16px; line-height:1.45; color:#5b5870}
+    .miniRule{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin:16px 0;
+    }
+    .rulePill{
+      padding:12px;
+      border-radius:20px;
+      font-weight:900;
+      text-align:center;
+      border:2px solid rgba(45,43,63,.07);
+      background:#fff;
+      box-shadow:0 8px 18px rgba(45,43,63,.08);
+    }
+    .rulePill:nth-child(1){background:#fff1f8}
+    .rulePill:nth-child(2){background:#f1efff}
+    .rulePill:nth-child(3){background:#eafff6}
+    .rulePill:nth-child(4){background:#fff7cf}
+    .grid2{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px}
+    .grid3{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px}
+    .qCard{
+      background:#fff;
+      border:2px solid #eee9ff;
+      border-radius:24px;
+      padding:15px;
+      box-shadow:0 9px 22px rgba(45,43,63,.08);
+    }
+    .qTitle{font-weight:1000; margin-bottom:10px; color:#302a56}
+    .choiceGroup{display:flex; flex-wrap:wrap; gap:8px}
+    .choiceBtn, button, .chip, select, input{
+      font:inherit;
+    }
+    .choiceBtn, .actionBtn, .chip, .smallBtn{
+      border:0;
+      cursor:pointer;
+      border-radius:16px;
+      font-weight:900;
+      transition:.16s transform, .16s box-shadow, .16s background;
+    }
+    .choiceBtn{
+      background:#f4f2ff;
+      color:#3c3471;
+      padding:10px 12px;
+      border:2px solid transparent;
+    }
+    .choiceBtn:hover, .chip:hover, .actionBtn:hover, .smallBtn:hover{transform:translateY(-2px)}
+    .choiceBtn.selected{background:#fff1bb; border-color:#ffd84d; box-shadow:0 8px 16px rgba(255,216,77,.25)}
+    .choiceBtn.correct{background:#d9fff0!important; border-color:#18b875!important; color:#087d4b}
+    .choiceBtn.wrong{background:#ffe2e8!important; border-color:#ee4c67!important; color:#9a1d33}
+    .lineItem{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      background:#fff;
+      border:2px solid #eee9ff;
+      border-radius:20px;
+      margin:9px 0;
+      box-shadow:0 5px 14px rgba(45,43,63,.06);
+    }
+    .sentence{font-size:18px; line-height:1.35}
+    select, input[type="text"]{
+      border:2px solid #dad3ff;
+      border-radius:15px;
+      padding:10px 12px;
+      background:#fff;
+      min-width:130px;
+      color:#25233a;
+      outline:none;
+      box-shadow:0 4px 9px rgba(45,43,63,.05);
+    }
+    input[type="text"]{min-width:240px}
+    select:focus, input[type="text"]:focus{border-color:var(--purple); box-shadow:0 0 0 4px rgba(123,97,255,.12)}
+    .controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px}
+    .actionBtn{
+      background:linear-gradient(135deg, var(--purple), var(--pink));
+      color:#fff;
+      padding:12px 18px;
+      box-shadow:0 12px 25px rgba(123,97,255,.25);
+    }
+    .smallBtn{
+      background:#fff1bb;
+      color:#4f3c00;
+      padding:10px 14px;
+    }
+    .feedback{
+      min-height:24px;
+      font-weight:1000;
+      margin-top:12px;
+      color:#4b4664;
+    }
+    .feedback.good{color:var(--good)}
+    .feedback.bad{color:var(--bad)}
+    .sortArea{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; margin-top:14px}
+    .dragBank{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      padding:14px;
+      min-height:80px;
+      border-radius:24px;
+      background:linear-gradient(135deg,#fff,#fff8d9);
+      border:2px dashed #ffd84d;
+      margin-top:12px;
+    }
+    .dragChip{
+      user-select:none;
+      cursor:grab;
+      border-radius:16px;
+      padding:10px 12px;
+      background:#fff;
+      border:2px solid #eee9ff;
+      box-shadow:0 8px 18px rgba(45,43,63,.08);
+      font-weight:1000;
+    }
+    .dragChip.selectedDrag{outline:4px solid rgba(37,194,255,.25); border-color:var(--blue)}
+    .dropZone{
+      min-height:180px;
+      border-radius:26px;
+      padding:14px;
+      background:#fff;
+      border:3px dashed #d9d3ff;
+      box-shadow:0 9px 22px rgba(45,43,63,.07);
+    }
+    .dropZone h3{margin:0 0 8px; font-size:22px}
+    .dropZone[data-zone="dont"] h3{color:#0c9972}
+    .dropZone[data-zone="doesnt"] h3{color:#9b39d8}
+    .dropZone.over{background:#f4f2ff; border-color:var(--purple)}
+    .dropZone .dragChip{margin:6px 6px 0 0; display:inline-block}
+    .builderBox{
+      background:#fff;
+      border:2px solid #eee9ff;
+      border-radius:26px;
+      padding:16px;
+      box-shadow:0 9px 22px rgba(45,43,63,.08);
+    }
+    .builderPrompt{
+      font-size:20px;
+      font-weight:1000;
+      color:#302a56;
+      margin-bottom:12px;
+    }
+    .answerLine{
+      min-height:58px;
+      border:2px dashed #cfc7ff;
+      border-radius:20px;
+      background:#fbfaff;
+      padding:9px;
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+    .chip{
+      padding:10px 13px;
+      background:#f1efff;
+      color:#302a56;
+      border:2px solid #dcd6ff;
+      box-shadow:0 7px 15px rgba(45,43,63,.06);
+    }
+    .chip.used{opacity:.35; pointer-events:none}
+    .chip.inLine{background:#fff1bb; border-color:#ffd84d}
+    .transformRow{
+      display:grid;
+      grid-template-columns:1.05fr .85fr .65fr;
+      gap:10px;
+      align-items:center;
+      background:#fff;
+      border:2px solid #eee9ff;
+      border-radius:22px;
+      padding:12px;
+      margin:9px 0;
+      box-shadow:0 5px 14px rgba(45,43,63,.06);
+    }
+    .detectiveRow{
+      background:#fff;
+      border:2px solid #eee9ff;
+      border-radius:22px;
+      padding:12px;
+      margin:10px 0;
+      box-shadow:0 5px 14px rgba(45,43,63,.06);
+    }
+    .wrongSentence{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 11px;
+      border-radius:14px;
+      background:#ffe9ef;
+      color:#9a1d33;
+      font-weight:1000;
+      margin-bottom:8px;
+    }
+    .statusMark{font-weight:1000; margin-left:8px}
+    .ok{color:var(--good)} .no{color:var(--bad)}
+    .speakingGrid{display:grid; grid-template-columns:.95fr 1.05fr; gap:16px; align-items:start}
+    .spinnerPanel{
+      background:linear-gradient(135deg,#f4f2ff,#fff1f8);
+      border:2px solid #eee9ff;
+      border-radius:28px;
+      padding:18px;
+      box-shadow:0 9px 22px rgba(45,43,63,.08);
+      text-align:center;
+    }
+    .wheelWrap{
+      position:relative;
+      width:min(320px, 82vw);
+      height:min(320px, 82vw);
+      margin:6px auto 16px;
+      display:grid;
+      place-items:center;
+    }
+    .wheel{
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      border:10px solid #fff;
+      box-shadow:0 18px 34px rgba(45,43,63,.18);
+      background:
+        conic-gradient(
+          #ff4fa3 0deg 30deg,
+          #ffd84d 30deg 60deg,
+          #25c2ff 60deg 90deg,
+          #3ee6a8 90deg 120deg,
+          #7b61ff 120deg 150deg,
+          #ff9b42 150deg 180deg,
+          #ff4fa3 180deg 210deg,
+          #ffd84d 210deg 240deg,
+          #25c2ff 240deg 270deg,
+          #3ee6a8 270deg 300deg,
+          #7b61ff 300deg 330deg,
+          #ff9b42 330deg 360deg
+        );
+      position:relative;
+      transition:transform 1.25s cubic-bezier(.2,.85,.25,1);
+      overflow:hidden;
+    }
+    .wheel:after{
+      content:"SPIN";
+      position:absolute;
+      inset:50%;
+      width:92px;
+      height:92px;
+      transform:translate(-50%, -50%);
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#fff;
+      color:#25233a;
+      font-weight:1000;
+      font-size:20px;
+      box-shadow:0 9px 20px rgba(45,43,63,.2);
+      border:5px solid rgba(255,255,255,.75);
+    }
+    .wheelLabels{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      font-weight:1000;
+      color:#fff;
+      text-shadow:0 2px 6px rgba(0,0,0,.2);
+      font-size:28px;
+    }
+    .wheelLabels span{position:absolute; transform:translate(-50%, -50%)}
+    .wheelLabels span:nth-child(1){left:50%; top:15%}
+    .wheelLabels span:nth-child(2){left:82%; top:31%}
+    .wheelLabels span:nth-child(3){left:82%; top:69%}
+    .wheelLabels span:nth-child(4){left:50%; top:85%}
+    .wheelLabels span:nth-child(5){left:18%; top:69%}
+    .wheelLabels span:nth-child(6){left:18%; top:31%}
+    .pointer{
+      position:absolute;
+      top:-2px;
+      left:50%;
+      transform:translateX(-50%);
+      width:0;
+      height:0;
+      border-left:18px solid transparent;
+      border-right:18px solid transparent;
+      border-top:34px solid #25233a;
+      filter:drop-shadow(0 5px 6px rgba(0,0,0,.18));
+      z-index:2;
+    }
+    .spinResult{
+      background:#fff;
+      border:2px solid rgba(123,97,255,.13);
+      border-radius:24px;
+      padding:14px;
+      text-align:left;
+      box-shadow:0 8px 18px rgba(45,43,63,.08);
+      margin-top:12px;
+    }
+    .spinResult .label{
+      display:inline-flex;
+      border-radius:999px;
+      padding:6px 10px;
+      background:#fff1bb;
+      font-size:13px;
+      font-weight:1000;
+      margin-bottom:7px;
+    }
+    .spinPrompt{
+      font-size:22px;
+      font-weight:1000;
+      line-height:1.18;
+      color:#25233a;
+    }
+    .spinHelp{color:#625f76; line-height:1.45; margin:8px 0 0}
+    .spinHistory{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin:12px 0 0}
+    .spinTag{
+      background:#fff;
+      border:2px solid rgba(123,97,255,.1);
+      border-radius:999px;
+      padding:7px 10px;
+      font-weight:900;
+      font-size:13px;
+    }
+    .speakingCard{
+      background:#fff;
+      border:2px solid #eee9ff;
+      border-radius:28px;
+      padding:18px;
+      box-shadow:0 9px 22px rgba(45,43,63,.08);
+    }
+    .sentenceStarters{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .starter{
+      background:#f7fbff;
+      border:2px solid #dff2ff;
+      border-radius:18px;
+      padding:11px;
+      font-weight:800;
+    }
+    .starter:nth-child(2n){background:#fff7cf; border-color:#ffe98a}
+    .checklist{display:grid; gap:9px; margin-top:14px}
+    label.check{
+      display:flex; gap:10px; align-items:flex-start;
+      background:#fffaf0;
+      border-radius:16px;
+      padding:10px 12px;
+      font-weight:800;
+    }
+    label.check input{width:20px; height:20px; min-width:auto; accent-color:#7b61ff}
+    .timer{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:22px;
+      font-weight:1000;
+      padding:10px 14px;
+      border-radius:18px;
+      background:#25233a;
+      color:#fff;
+    }
+    .teacherNote{
+      margin-top:14px;
+      border-radius:20px;
+      background:#f8f7ff;
+      border:2px solid #ece8ff;
+      padding:13px;
+      color:#5b5870;
+      line-height:1.5;
+    }
+    .toast{
+      position:fixed;
+      bottom:18px;
+      left:50%;
+      transform:translateX(-50%) translateY(100px);
+      background:#25233a;
+      color:#fff;
+      padding:14px 18px;
+      border-radius:20px;
+      font-weight:1000;
+      box-shadow:0 18px 40px rgba(0,0,0,.22);
+      z-index:99;
+      opacity:0;
+      transition:.25s;
+      text-align:center;
+      max-width:min(92vw,620px);
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+    .confetti{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:100}
+    .confetti i{
+      position:absolute; width:10px; height:18px; border-radius:4px;
+      animation:fall 1.35s linear forwards;
+    }
+    @keyframes fall{to{transform:translateY(105vh) rotate(540deg); opacity:.8}}
+    @media (max-width:800px){
+      .hero,.grid2,.grid3,.sortArea,.speakingGrid,.transformRow{grid-template-columns:1fr}
+      nav.progressBox{grid-template-columns:repeat(4,1fr)}
+      .miniRule{grid-template-columns:1fr 1fr}
+      .lineItem{grid-template-columns:1fr}
+      .sentenceStarters{grid-template-columns:1fr}
+      input[type="text"]{min-width:100%; width:100%}
+      .mascot{display:none}
+    }
+    @media print{
+      header, nav.progressBox, .controls, .toast{display:none!important}
+      body{background:#fff}
+      section.task{box-shadow:none; break-inside:avoid; border:1px solid #ddd}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div>
+        <h1>Present Simple<br>Power Lab</h1>
+        <p class="subtitle">Train affirmative and negative sentences: <b>I play</b>, <b>she plays</b>, <b>we don’t play</b>, <b>he doesn’t play</b>. Bright tasks, quick checks, zero boredom.</p>
+        <div class="badgeRow">
+          <span class="badge">✨ Level A1</span>
+          <span class="badge">🎮 7 tasks</span>
+          <span class="badge">✅ Auto-check</span>
+          <span class="badge">🗣️ Speaking finale</span>
+        </div>
+      </div>
+      <div class="mascot" aria-hidden="true">
+        <div class="phone">
+          <div class="bar"></div>
+          <div class="bubble b1">She likes music.</div>
+          <div class="bubble b2">I don’t play tennis.</div>
+          <div class="bubble b3">He watches films.</div>
+          <div class="bubble b4">They don’t swim.</div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <nav class="progressBox" id="progressBox">
+        <a href="#task1" id="p1">1 Rules</a>
+        <a href="#task2" id="p2">2 Tap</a>
+        <a href="#task3" id="p3">3 Sort</a>
+        <a href="#task4" id="p4">4 Build</a>
+        <a href="#task5" id="p5">5 Negative</a>
+        <a href="#task6" id="p6">6 Fix</a>
+        <a href="#task7" id="p7">7 Speak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="task" id="task1">
+      <div class="taskInner">
+        <div class="taskTop">
+          <div class="num">1</div>
+          <div>
+            <h2>Grammar Switchboard</h2>
+            <p class="instruction">Choose the correct grammar pattern. Think like a DJ: switch the grammar beat for each subject.</p>
+          </div>
+        </div>
+        <div class="miniRule">
+          <div class="rulePill">I / you / we / they → <b>play</b></div>
+          <div class="rulePill">he / she / it → <b>plays</b></div>
+          <div class="rulePill">I / you / we / they → <b>don’t play</b></div>
+          <div class="rulePill">he / she / it → <b>doesn’t play</b></div>
+        </div>
+        <div class="grid2" id="ruleQuiz"></div>
+        <div class="controls">
+          <button class="actionBtn" onclick="checkRuleQuiz()">Check task 1</button>
+          <button class="smallBtn" onclick="resetRuleQuiz()">Reset</button>
+        </div>
+        <div class="feedback" id="fb1"></div>
+      </div>
+    </section>
+
+    <section class="task" id="task2">
+      <div class="taskInner">
+        <div class="taskTop">
+          <div class="num">2</div>
+          <div>
+            <h2>Emoji Chat: tap the verb</h2>
+            <p class="instruction">Read the mini-chat sentences and choose the correct affirmative verb form.</p>
+          </div>
+        </div>
+        <div id="tapVerb"></div>
+        <div class="controls">
+          <button class="actionBtn" onclick="checkTapVerb()">Check task 2</button>
+          <button class="smallBtn" onclick="resetTapVerb()">Reset</button>
+        </div>
+        <div class="feedback" id="fb2"></div>
+      </div>
+    </section>
+
+    <section class="task" id="task3">
+      <div class="taskInner">
+        <div class="taskTop">
+          <div class="num">3</div>
+          <div>
+            <h2>Don’t / Doesn’t Sorting Game</h2>
+            <p class="instruction">Drag the subjects into the correct negative team. On a tablet/phone: tap a card, then tap a box.</p>
+          </div>
+        </div>
+        <div class="dragBank" id="dragBank"></div>
+        <div class="sortArea">
+          <div class="dropZone" data-zone="dont" id="zoneDont">
+            <h3>DON’T + base verb</h3>
+            <p class="instruction">Example: <b>I don’t like tea.</b></p>
+          </div>
+          <div class="dropZone" data-zone="doesnt" id="zoneDoesnt">
+            <h3>DOESN’T + base verb</h3>
+            <p class="instruction">Example: <b>She doesn’t like tea.</b></p>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="actionBtn" onclick="checkSorting()">Check task 3</button>
+          <button class="smallBtn" onclick="resetSorting()">Reset</button>
+        </div>
+        <div class="feedback" id="fb3"></div>
+      </div>
+    </section>
+
+    <section class="task" id="task4">
+      <div class="taskInner">
+        <div class="taskTop">
+          <div class="num">4</div>
+          <div>
+            <h2>Sentence Builder Arcade</h2>
+            <p class="instruction">Click the word chips in the correct order. Build <b>6 mini-sentences</b>, one sentence at a time.</p>
+          </div>
+        </div>
+        <div class="builderBox">
+          <div class="builderPrompt" id="builderPrompt"></div>
+          <div class="answerLine" id="answerLine" aria-label="Your sentence"></div>
+          <div class="choiceGroup" id="chipBank"></div>
+          <div class="controls">
+            <button class="actionBtn" onclick="checkBuilder()">Check sentence</button>
+            <button class="smallBtn" onclick="undoBuilder()">Undo</button>
+            <button class="smallBtn" onclick="nextBuilder()">Next</button>
+            <button class="smallBtn" onclick="resetBuilderTask()">Reset sentence</button>
+          </div>
+          <div class="feedback" id="fb4"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="task" id="task5">
+      <div class="taskInner">
+        <div class="taskTop">
+          <div class="num">5</div>
+          <div>
+            <h2>Positive → Negative Transformer</h2>
+            <p class="instruction">Change the sentences into negatives. Choose <b>don’t/doesn’t</b> and type the base verb.</p>
+          </div>
+        </div>
+        <div id="negativeTransform"></div>
+        <div class="controls">
+          <button class="actionBtn" onclick="checkTransform()">Check task 5</button>
+          <button class="smallBtn" onclick="resetTransform()">Reset</button>
+        </div>
+        <div class="feedback" id="fb5"></div>
+      </div>
+    </section>
+
+    <section class="task" id="task6">
+      <div class="taskInner">
+        <div class="taskTop">
+          <div class="num">6</div>
+          <div>
+            <h2>Grammar Detective</h2>
+            <p class="instruction">Every red sentence has one mistake. Rewrite it correctly.</p>
+          </div>
+        </div>
+        <div id="detective"></div>
+        <div class="controls">
+          <button class="actionBtn" onclick="checkDetective()">Check task 6</button>
+          <button class="smallBtn" onclick="showDetectiveHints()">Show hints</button>
+          <button class="smallBtn" onclick="resetDetective()">Reset</button>
+        </div>
+        <div class="feedback" id="fb6"></div>
+      </div>
+    </section>
+
+    <section class="task" id="task7">
+      <div class="taskInner">
+        <div class="taskTop">
+          <div class="num">7</div>
+          <div>
+            <h2>Speaking Spinner: Routine & Hobbies</h2>
+            <p class="instruction">Spin the wheel, get a simple topic, and speak about everyday routine and hobbies. Use Present Simple affirmative and negative sentences.</p>
+          </div>
+        </div>
+        <div class="speakingGrid">
+          <div class="spinnerPanel">
+            <div class="wheelWrap" aria-label="Speaking spinner">
+              <div class="pointer"></div>
+              <div class="wheel" id="speakingWheel">
+                <div class="wheelLabels">
+                  <span>🎮</span><span>☕</span><span>📚</span><span>🎧</span><span>🛏️</span><span>🚲</span>
+                </div>
+              </div>
+            </div>
+            <button class="actionBtn" onclick="spinSpeakingWheel()">Spin the topic</button>
+            <button class="smallBtn" onclick="resetSpeakingSpinner()">Reset spins</button>
+            <div class="spinResult" id="spinResult">
+              <span class="label">Your topic</span>
+              <div class="spinPrompt">Click “Spin the topic”.</div>
+              <p class="spinHelp">Then make 1–2 easy sentences about this topic.</p>
+            </div>
+            <div class="spinHistory" id="spinHistory"></div>
+            <div class="controls">
+              <span class="timer">⏱️ <span id="timerText">45</span>s</span>
+              <button class="smallBtn" onclick="startTimer()">Start timer</button>
+              <button class="smallBtn" onclick="resetTimer()">Reset timer</button>
+            </div>
+          </div>
+          <div class="speakingCard">
+            <h3 style="margin-top:0;font-size:24px">Your mission</h3>
+            <p class="instruction">Spin <b>3 times</b>. Use your topics to say <b>5–6 sentences</b> about yourself and one friend/family member.</p>
+            <div class="sentenceStarters">
+              <div class="starter">1. Every day, I <b>...</b></div>
+              <div class="starter">2. After school, I <b>...</b></div>
+              <div class="starter">3. In my free time, I <b>...</b></div>
+              <div class="starter">4. I don’t <b>...</b></div>
+              <div class="starter">5. My friend / sister / brother <b>likes...</b></div>
+              <div class="starter">6. My friend / sister / brother doesn’t <b>...</b></div>
+            </div>
+            <div class="checklist">
+              <label class="check"><input type="checkbox" onchange="updateSpeakingDone()"> I spun the wheel 3 times.</label>
+              <label class="check"><input type="checkbox" onchange="updateSpeakingDone()"> I used 3 affirmative sentences.</label>
+              <label class="check"><input type="checkbox" onchange="updateSpeakingDone()"> I used 2 negative sentences.</label>
+              <label class="check"><input type="checkbox" onchange="updateSpeakingDone()"> I said at least 1 sentence about another person: <b>likes / doesn’t...</b></label>
+              <label class="check"><input type="checkbox" onchange="updateSpeakingDone()"> After <b>don’t / doesn’t</b>, I used the base verb.</label>
+            </div>
+            <div class="teacherNote"><b>Teacher idea:</b> после первого круга попросите ученицу выбрать самый «не её» вариант со спиннера и сказать 2 смешных предложения: <b>I don’t...</b> / <b>My friend doesn’t...</b></div>
+            <div class="feedback" id="fb7"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <div class="confetti" id="confetti"></div>
+
+<script>
+  const completed = new Set();
+
+  function markDone(n){
+    completed.add(n);
+    const p = document.getElementById('p'+n);
+    if(p) p.classList.add('done');
+    if(completed.size >= 7){ burstConfetti(); showToast('Amazing! All 7 tasks are complete. 🎉'); }
+  }
+  function unmarkDone(n){
+    completed.delete(n);
+    const p = document.getElementById('p'+n);
+    if(p) p.classList.remove('done');
+  }
+  function feedback(id, msg, good){
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.className = 'feedback ' + (good ? 'good' : 'bad');
+  }
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 2600);
+  }
+  function burstConfetti(){
+    const box = document.getElementById('confetti');
+    const colors = ['#ff4fa3','#7b61ff','#25c2ff','#3ee6a8','#ffd84d','#ff9b42'];
+    box.innerHTML = '';
+    for(let i=0;i<90;i++){
+      const piece = document.createElement('i');
+      piece.style.left = Math.random()*100 + 'vw';
+      piece.style.top = (-20 - Math.random()*80) + 'px';
+      piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+      piece.style.animationDelay = (Math.random()*0.4) + 's';
+      piece.style.transform = `rotate(${Math.random()*360}deg)`;
+      box.appendChild(piece);
+    }
+    setTimeout(()=>box.innerHTML='', 2100);
+  }
+  function normalize(str){
+    return (str || '')
+      .toLowerCase()
+      .replace(/[’]/g, "'")
+      .replace(/does not/g, "doesn't")
+      .replace(/do not/g, "don't")
+      .replace(/[.!?]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  // Task 1
+  const ruleData = [
+    {q:'Affirmative with I / you / we / they', options:['verb + -s/-es','base verb','doesn’t + base verb'], ans:'base verb'},
+    {q:'Affirmative with he / she / it', options:['base verb','verb + -s/-es','don’t + base verb'], ans:'verb + -s/-es'},
+    {q:'Negative with I / you / we / they', options:['don’t + base verb','doesn’t + base verb','verb + -s/-es'], ans:'don’t + base verb'},
+    {q:'Negative with he / she / it', options:['don’t + base verb','doesn’t + base verb','verb + -s/-es'], ans:'doesn’t + base verb'}
+  ];
+  function renderRuleQuiz(){
+    const box = document.getElementById('ruleQuiz');
+    box.innerHTML='';
+    ruleData.forEach((item,i)=>{
+      const card=document.createElement('div'); card.className='qCard';
+      card.innerHTML = `<div class="qTitle">${i+1}. ${item.q}</div><div class="choiceGroup"></div>`;
+      const group = card.querySelector('.choiceGroup');
+      item.options.forEach(opt=>{
+        const b=document.createElement('button'); b.className='choiceBtn'; b.textContent=opt;
+        b.onclick=()=>{ group.querySelectorAll('button').forEach(x=>x.classList.remove('selected','correct','wrong')); b.classList.add('selected'); };
+        group.appendChild(b);
+      });
+      box.appendChild(card);
+    });
+  }
+  function checkRuleQuiz(){
+    let score=0;
+    document.querySelectorAll('#ruleQuiz .qCard').forEach((card,i)=>{
+      const selected=card.querySelector('.selected');
+      card.querySelectorAll('button').forEach(b=>b.classList.remove('correct','wrong'));
+      if(selected && selected.textContent===ruleData[i].ans){ selected.classList.add('correct'); score++; }
+      else { if(selected) selected.classList.add('wrong'); Array.from(card.querySelectorAll('button')).find(b=>b.textContent===ruleData[i].ans).classList.add('correct'); }
+    });
+    if(score===ruleData.length){ feedback('fb1',`Perfect! ${score}/${ruleData.length}.`,true); markDone(1); burstConfetti(); }
+    else { feedback('fb1',`You have ${score}/${ruleData.length}. Look at the green answers and try again.`,false); unmarkDone(1); }
+  }
+  function resetRuleQuiz(){ renderRuleQuiz(); feedback('fb1','',true); unmarkDone(1); }
+
+  // Task 2
+  const tapData = [
+    {s:'🎧 Anna ___ TikTok videos after school.', options:['watch','watches'], ans:'watches'},
+    {s:'🍕 I ___ pizza on Fridays.', options:['eat','eats'], ans:'eat'},
+    {s:'🌳 My friends ___ in the park.', options:['walk','walks'], ans:'walk'},
+    {s:'🐱 A cat ___ on the sofa.', options:['sleep','sleeps'], ans:'sleeps'},
+    {s:'📚 We ___ English at 5 pm.', options:['study','studies'], ans:'study'},
+    {s:'🚲 Max ___ his bike every day.', options:['ride','rides'], ans:'rides'},
+    {s:'✨ You ___ cool stickers.', options:['collect','collects'], ans:'collect'},
+    {s:'🏪 The shop ___ at 9.', options:['open','opens'], ans:'opens'}
+  ];
+  function renderTapVerb(){
+    const box=document.getElementById('tapVerb'); box.innerHTML='';
+    tapData.forEach((item,i)=>{
+      const row=document.createElement('div'); row.className='lineItem';
+      row.innerHTML=`<div class="sentence">${i+1}. ${item.s}</div><div class="choiceGroup"></div>`;
+      const group=row.querySelector('.choiceGroup');
+      item.options.forEach(opt=>{
+        const b=document.createElement('button'); b.className='choiceBtn'; b.textContent=opt;
+        b.onclick=()=>{group.querySelectorAll('button').forEach(x=>x.classList.remove('selected','correct','wrong')); b.classList.add('selected')};
+        group.appendChild(b);
+      });
+      box.appendChild(row);
+    });
+  }
+  function checkTapVerb(){
+    let score=0;
+    document.querySelectorAll('#tapVerb .lineItem').forEach((row,i)=>{
+      row.querySelectorAll('button').forEach(b=>b.classList.remove('correct','wrong'));
+      const selected=row.querySelector('.selected');
+      if(selected && selected.textContent===tapData[i].ans){selected.classList.add('correct'); score++;}
+      else { if(selected) selected.classList.add('wrong'); Array.from(row.querySelectorAll('button')).find(b=>b.textContent===tapData[i].ans).classList.add('correct'); }
+    });
+    if(score===tapData.length){ feedback('fb2',`Great! ${score}/${tapData.length}.`,true); markDone(2); burstConfetti(); }
+    else { feedback('fb2',`Score: ${score}/${tapData.length}. Check where we need -s/-es.`,false); unmarkDone(2); }
+  }
+  function resetTapVerb(){ renderTapVerb(); feedback('fb2','',true); unmarkDone(2); }
+
+  // Task 3
+  const sortData = [
+    {t:'I', zone:'dont'}, {t:'you', zone:'dont'}, {t:'we', zone:'dont'}, {t:'they', zone:'dont'}, {t:'my friends', zone:'dont'},
+    {t:'he', zone:'doesnt'}, {t:'she', zone:'doesnt'}, {t:'it', zone:'doesnt'}, {t:'Emma', zone:'doesnt'}, {t:'my cat', zone:'doesnt'}
+  ];
+  let selectedDrag = null;
+  function shuffle(arr){ return [...arr].sort(()=>Math.random()-.5); }
+  function renderSorting(){
+    selectedDrag=null;
+    document.getElementById('zoneDont').innerHTML='<h3>DON’T + base verb</h3><p class="instruction">Example: <b>I don’t like tea.</b></p>';
+    document.getElementById('zoneDoesnt').innerHTML='<h3>DOESN’T + base verb</h3><p class="instruction">Example: <b>She doesn’t like tea.</b></p>';
+    const bank=document.getElementById('dragBank'); bank.innerHTML='';
+    shuffle(sortData).forEach(item=> bank.appendChild(makeDragChip(item.t,item.zone)) );
+  }
+  function makeDragChip(text, zone){
+    const chip=document.createElement('span');
+    chip.className='dragChip'; chip.textContent=text; chip.draggable=true; chip.dataset.answer=zone;
+    chip.addEventListener('dragstart', e=>{ e.dataTransfer.setData('text/plain', text); selectedDrag=chip; });
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.selectedDrag').forEach(x=>x.classList.remove('selectedDrag'));
+      selectedDrag=chip; chip.classList.add('selectedDrag');
+    });
+    return chip;
+  }
+  document.addEventListener('dragover', e=>{
+    const dz=e.target.closest('.dropZone, .dragBank');
+    if(dz){ e.preventDefault(); dz.classList.add('over'); }
+  });
+  document.addEventListener('dragleave', e=>{
+    const dz=e.target.closest('.dropZone, .dragBank');
+    if(dz){ dz.classList.remove('over'); }
+  });
+  document.addEventListener('drop', e=>{
+    const dz=e.target.closest('.dropZone, .dragBank');
+    if(dz && selectedDrag){ e.preventDefault(); dz.classList.remove('over'); dz.appendChild(selectedDrag); selectedDrag.classList.remove('selectedDrag'); selectedDrag=null; }
+  });
+  document.addEventListener('click', e=>{
+    const dz=e.target.closest('.dropZone, .dragBank');
+    if(dz && selectedDrag && !e.target.classList.contains('dragChip')){
+      dz.appendChild(selectedDrag); selectedDrag.classList.remove('selectedDrag'); selectedDrag=null;
+    }
+  });
+  function checkSorting(){
+    let total=0, score=0;
+    document.querySelectorAll('.dropZone .dragChip').forEach(chip=>{
+      total++;
+      const parentZone=chip.closest('.dropZone').dataset.zone;
+      chip.style.borderColor = parentZone===chip.dataset.answer ? '#18b875' : '#ee4c67';
+      chip.style.background = parentZone===chip.dataset.answer ? '#d9fff0' : '#ffe2e8';
+      if(parentZone===chip.dataset.answer) score++;
+    });
+    const missing = sortData.length-total;
+    if(score===sortData.length){ feedback('fb3',`Excellent sorting! ${score}/${sortData.length}.`,true); markDone(3); burstConfetti(); }
+    else { feedback('fb3',`Score: ${score}/${sortData.length}. ${missing ? missing + ' card(s) are still in the bank.' : 'Move the red cards.'}`,false); unmarkDone(3); }
+  }
+  function resetSorting(){ renderSorting(); feedback('fb3','',true); unmarkDone(3); }
+
+  // Task 4
+  const buildData = [
+    {label:'Build an affirmative sentence about comics.', answer:['She','reads','comics','after school'], chips:['reads','She','read','after school','comics','doesn’t']},
+    {label:'Build a negative sentence about food.', answer:['They','don’t','eat','fish'], chips:['fish','doesn’t','eat','They','eats','don’t']},
+    {label:'Build a negative sentence about sport.', answer:['My dad','doesn’t','play','tennis'], chips:['play','My dad','don’t','tennis','plays','doesn’t']},
+    {label:'Build an affirmative sentence about music.', answer:['I','listen','to music','every day'], chips:['every day','listens','I','listen','to music','don’t']},
+    {label:'Build an affirmative sentence about a robot.', answer:['The robot','works','at night'], chips:['work','at night','The robot','works','don’t','doesn’t']},
+    {label:'Build a negative sentence about hobbies.', answer:['My friend','doesn’t','collect','stickers'], chips:['collects','stickers','doesn’t','My friend','don’t','collect']}
+  ];
+  let buildIndex=0, currentBuild=[];
+  function renderBuilder(){
+    currentBuild=[];
+    const task=buildData[buildIndex];
+    document.getElementById('builderPrompt').textContent = `${buildIndex+1}/${buildData.length}. ${task.label}`;
+    document.getElementById('answerLine').innerHTML='';
+    const bank=document.getElementById('chipBank'); bank.innerHTML='';
+    shuffle(task.chips).forEach((word,idx)=>{
+      const chip=document.createElement('button'); chip.className='chip'; chip.textContent=word; chip.dataset.word=word; chip.dataset.idx=idx;
+      chip.onclick=()=>{
+        if(chip.classList.contains('used')) return;
+        chip.classList.add('used');
+        currentBuild.push({word, idx});
+        const inLine=document.createElement('button'); inLine.className='chip inLine'; inLine.textContent=word; inLine.dataset.idx=idx;
+        inLine.onclick=()=>removeBuilderChip(idx);
+        document.getElementById('answerLine').appendChild(inLine);
+      };
+      bank.appendChild(chip);
+    });
+    feedback('fb4','',true);
+  }
+  function removeBuilderChip(idx){
+    currentBuild = currentBuild.filter(x=>String(x.idx)!==String(idx));
+    Array.from(document.querySelectorAll('#chipBank .chip')).find(x=>String(x.dataset.idx)===String(idx))?.classList.remove('used');
+    Array.from(document.querySelectorAll('#answerLine .chip')).find(x=>String(x.dataset.idx)===String(idx))?.remove();
+  }
+  function undoBuilder(){
+    if(!currentBuild.length) return;
+    const last=currentBuild[currentBuild.length-1];
+    removeBuilderChip(last.idx);
+  }
+  function resetBuilderTask(){ renderBuilder(); }
+  function checkBuilder(){
+    const task=buildData[buildIndex];
+    const good = JSON.stringify(currentBuild.map(x=>x.word)) === JSON.stringify(task.answer);
+    if(good){
+      feedback('fb4',`Correct: ${task.answer.join(' ')}.`,true);
+      buildData[buildIndex].done=true;
+      if(buildData.every(x=>x.done)){ markDone(4); burstConfetti(); }
+      else showToast('Correct! Click Next for the next sentence.');
+    } else {
+      feedback('fb4','Not yet. Check subject + verb and don’t/doesn’t + base verb.',false);
+      unmarkDone(4);
+    }
+  }
+  function nextBuilder(){
+    buildIndex=(buildIndex+1)%buildData.length;
+    renderBuilder();
+  }
+
+  // Task 5
+  const transformData = [
+    {base:'Mia plays tennis.', subject:'Mia', aux:'doesn’t', verb:'play', ending:'tennis.'},
+    {base:'I watch horror films.', subject:'I', aux:'don’t', verb:'watch', ending:'horror films.'},
+    {base:'Leo likes broccoli.', subject:'Leo', aux:'doesn’t', verb:'like', ending:'broccoli.'},
+    {base:'They go to school by bus.', subject:'They', aux:'don’t', verb:'go', ending:'to school by bus.'},
+    {base:'My sister studies French.', subject:'My sister', aux:'doesn’t', verb:'study', ending:'French.'},
+    {base:'We have a dog.', subject:'We', aux:'don’t', verb:'have', ending:'a dog.'}
+  ];
+  function renderTransform(){
+    const box=document.getElementById('negativeTransform'); box.innerHTML='';
+    transformData.forEach((item,i)=>{
+      const row=document.createElement('div'); row.className='transformRow';
+      row.innerHTML=`
+        <div class="sentence"><b>${i+1}. ${item.base}</b><br><span style="color:#716c88">${item.subject} ... ${item.ending}</span></div>
+        <div><select data-i="${i}" class="auxSel"><option value="">choose</option><option>don’t</option><option>doesn’t</option></select></div>
+        <div><input type="text" class="verbInput" data-i="${i}" placeholder="base verb"></div>
+      `;
+      box.appendChild(row);
+    });
+  }
+  function checkTransform(){
+    let score=0;
+    document.querySelectorAll('#negativeTransform .transformRow').forEach((row,i)=>{
+      const sel=row.querySelector('.auxSel'); const inp=row.querySelector('.verbInput');
+      const ok = sel.value===transformData[i].aux && normalize(inp.value)===transformData[i].verb;
+      sel.style.borderColor = sel.value===transformData[i].aux ? '#18b875' : '#ee4c67';
+      inp.style.borderColor = normalize(inp.value)===transformData[i].verb ? '#18b875' : '#ee4c67';
+      let mark=row.querySelector('.statusMark'); if(!mark){mark=document.createElement('span'); mark.className='statusMark'; row.appendChild(mark)}
+      mark.textContent = ok ? '✓' : `✗ ${transformData[i].subject} ${transformData[i].aux} ${transformData[i].verb} ${transformData[i].ending}`;
+      mark.className='statusMark ' + (ok?'ok':'no');
+      if(ok) score++;
+    });
+    if(score===transformData.length){ feedback('fb5',`Perfect transformation! ${score}/${transformData.length}.`,true); markDone(5); burstConfetti(); }
+    else { feedback('fb5',`Score: ${score}/${transformData.length}. Remember: doesn’t + base verb, not -s.`,false); unmarkDone(5); }
+  }
+  function resetTransform(){ renderTransform(); feedback('fb5','',true); unmarkDone(5); }
+
+  // Task 6
+  const detectiveData = [
+    {wrong:'She don’t like coffee.', answers:["she doesn't like coffee"], hint:'she → doesn’t'},
+    {wrong:'My brothers watches TV at night.', answers:['my brothers watch tv at night'], hint:'plural subject → base verb'},
+    {wrong:'I doesn’t play football.', answers:["i don't play football"], hint:'I → don’t'},
+    {wrong:'Tom studies not on Sundays.', answers:["tom doesn't study on sundays"], hint:'negative: doesn’t + base verb'},
+    {wrong:'They plays computer games.', answers:['they play computer games'], hint:'they → base verb'}
+  ];
+  function renderDetective(){
+    const box=document.getElementById('detective'); box.innerHTML='';
+    detectiveData.forEach((item,i)=>{
+      const row=document.createElement('div'); row.className='detectiveRow';
+      row.innerHTML=`
+        <div class="wrongSentence">🔎 ${i+1}. ${item.wrong}</div>
+        <div><input type="text" class="detectiveInput" data-i="${i}" placeholder="Rewrite correctly..."><span class="statusMark"></span></div>
+        <div class="instruction hint" style="display:none; margin-top:8px">Hint: ${item.hint}</div>
+      `;
+      box.appendChild(row);
+    });
+  }
+  function checkDetective(){
+    let score=0;
+    document.querySelectorAll('#detective .detectiveRow').forEach((row,i)=>{
+      const input=row.querySelector('input');
+      const val=normalize(input.value);
+      const ok=detectiveData[i].answers.includes(val);
+      input.style.borderColor= ok ? '#18b875' : '#ee4c67';
+      const mark=row.querySelector('.statusMark');
+      mark.textContent= ok ? ' ✓' : ' ✗'; mark.className='statusMark '+(ok?'ok':'no');
+      if(ok) score++;
+    });
+    if(score===detectiveData.length){ feedback('fb6',`Detective work complete! ${score}/${detectiveData.length}.`,true); markDone(6); burstConfetti(); }
+    else { feedback('fb6',`Score: ${score}/${detectiveData.length}. Use hints or correct the red sentences.`,false); unmarkDone(6); }
+  }
+  function showDetectiveHints(){ document.querySelectorAll('.hint').forEach(h=>h.style.display='block'); }
+  function resetDetective(){ renderDetective(); feedback('fb6','',true); unmarkDone(6); }
+
+  // Task 7
+  const speakingTopics = [
+    {emoji:'🛏️', title:'Morning routine', help:'wake up, have breakfast, get dressed, go to school'},
+    {emoji:'📚', title:'School day', help:'study, read, write, do homework, learn English'},
+    {emoji:'🍝', title:'Food routine', help:'eat breakfast, drink tea, have lunch, don’t eat...'},
+    {emoji:'🎧', title:'Music hobby', help:'listen to music, sing, dance, like / don’t like...'},
+    {emoji:'🎮', title:'Games hobby', help:'play computer games, play board games, don’t play...'},
+    {emoji:'🎬', title:'Films & series', help:'watch films, watch videos, like comedies, don’t watch...'},
+    {emoji:'🚲', title:'Sport / active hobby', help:'ride a bike, run, swim, dance, don’t play...'},
+    {emoji:'🎨', title:'Creative hobby', help:'draw, paint, take photos, make videos'},
+    {emoji:'🐶', title:'Pets and free time', help:'walk a dog, feed a cat, play with a pet'},
+    {emoji:'📱', title:'Phone routine', help:'text friends, watch videos, don’t use the phone...'},
+    {emoji:'🧹', title:'Home routine', help:'clean my room, help my mum/dad, don’t cook...'},
+    {emoji:'🌙', title:'Evening routine', help:'have dinner, read, watch TV, go to bed'}
+  ];
+  let wheelRotation=0;
+  let spinCount=0;
+  let timerId=null, timeLeft=45;
+
+  function spinSpeakingWheel(){
+    const index=Math.floor(Math.random()*speakingTopics.length);
+    const topic=speakingTopics[index];
+    spinCount++;
+    wheelRotation += 720 + Math.floor(Math.random()*360);
+    document.getElementById('speakingWheel').style.transform = `rotate(${wheelRotation}deg)`;
+    document.getElementById('spinResult').innerHTML=`
+      <span class="label">Spin ${spinCount}: ${topic.emoji} ${topic.title}</span>
+      <div class="spinPrompt">Talk about: ${topic.title}</div>
+      <p class="spinHelp">Useful words: ${topic.help}</p>
+    `;
+    const tag=document.createElement('span');
+    tag.className='spinTag';
+    tag.textContent=`${topic.emoji} ${topic.title}`;
+    document.getElementById('spinHistory').appendChild(tag);
+    showToast(spinCount>=3 ? 'You have 3 topics. Start speaking!' : `Spin ${3-spinCount} more time(s).`);
+  }
+  function resetSpeakingSpinner(){
+    spinCount=0;
+    wheelRotation=0;
+    document.getElementById('speakingWheel').style.transform='rotate(0deg)';
+    document.getElementById('spinHistory').innerHTML='';
+    document.getElementById('spinResult').innerHTML=`
+      <span class="label">Your topic</span>
+      <div class="spinPrompt">Click “Spin the topic”.</div>
+      <p class="spinHelp">Then make 1–2 easy sentences about this topic.</p>
+    `;
+    document.querySelectorAll('.checklist input').forEach(x=>x.checked=false);
+    feedback('fb7','',true);
+    unmarkDone(7);
+  }
+  function startTimer(){
+    if(timerId) clearInterval(timerId);
+    timerId=setInterval(()=>{
+      timeLeft--;
+      document.getElementById('timerText').textContent=timeLeft;
+      if(timeLeft<=0){ clearInterval(timerId); timerId=null; showToast('Time! Great speaking practice.'); }
+    },1000);
+  }
+  function resetTimer(){ if(timerId) clearInterval(timerId); timerId=null; timeLeft=45; document.getElementById('timerText').textContent='45'; }
+  function updateSpeakingDone(){
+    const checks=Array.from(document.querySelectorAll('.checklist input'));
+    const count=checks.filter(x=>x.checked).length;
+    feedback('fb7', count===5 ? 'Speaking spinner complete! 🎤' : `${count}/5 speaking goals checked.`, count===5);
+    if(count===5) markDone(7); else unmarkDone(7);
+  }
+
+  renderRuleQuiz();
+  renderTapVerb();
+  renderSorting();
+  renderBuilder();
+  renderTransform();
+  renderDetective();
+</script>
+</body>
+</html>
