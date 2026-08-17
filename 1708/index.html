@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Titanic — Interactive Video Practice | Pre-Intermediate</title>
+<style>
+  :root{
+    --ink:#102538;
+    --navy:#17324a;
+    --blue:#2f6f9f;
+    --ice:#eaf6fb;
+    --paper:#fbfaf6;
+    --sand:#efe8da;
+    --accent:#c96d43;
+    --good:#19785b;
+    --bad:#a94442;
+    --muted:#6b7a88;
+    --white:#ffffff;
+    --shadow:0 14px 32px rgba(16,37,56,.10);
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at top left, rgba(47,111,159,.16), transparent 32%),
+      linear-gradient(180deg,#f6fbfd 0%,#f8f5ee 100%);
+    line-height:1.5;
+  }
+  button, input, select, textarea{font:inherit}
+  button{cursor:pointer}
+  .hero{
+    min-height:340px;
+    padding:42px 24px 34px;
+    background:
+      linear-gradient(135deg, rgba(17,47,71,.97), rgba(35,91,131,.91)),
+      linear-gradient(180deg, #17324a, #2f6f9f);
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero:after{
+    content:"";
+    position:absolute;
+    width:520px;height:220px;
+    border:2px solid rgba(255,255,255,.15);
+    border-radius:50%;
+    right:-150px;bottom:-130px;
+    transform:rotate(-7deg);
+  }
+  .hero-inner{max-width:1120px;margin:auto;position:relative;z-index:2}
+  .eyebrow{
+    display:inline-flex;gap:8px;align-items:center;
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.10);
+    padding:7px 12px;border-radius:999px;
+    font-size:.86rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  }
+  h1{
+    margin:16px 0 8px;
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:clamp(2.5rem,6vw,5.4rem);
+    line-height:.95;
+    letter-spacing:-.04em;
+  }
+  .subtitle{max-width:760px;font-size:1.08rem;color:#e8f3f8}
+  .route{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:24px
+  }
+  .route span{
+    padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.18);font-size:.9rem
+  }
+  .route b{opacity:.65}
+  .topbar{
+    position:sticky;top:0;z-index:10;
+    backdrop-filter:blur(12px);
+    background:rgba(248,250,249,.88);
+    border-bottom:1px solid rgba(16,37,56,.08);
+  }
+  .topbar-inner{
+    max-width:1120px;margin:auto;padding:10px 20px;
+    display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap
+  }
+  .nav{display:flex;gap:8px;flex-wrap:wrap}
+  .nav a{
+    text-decoration:none;color:var(--navy);font-weight:750;
+    background:#fff;border:1px solid #dbe4e8;padding:8px 12px;border-radius:12px
+  }
+  .progress-wrap{min-width:250px;flex:1;max-width:390px}
+  .progress-label{display:flex;justify-content:space-between;font-size:.82rem;font-weight:750;margin-bottom:5px}
+  .progress{height:9px;background:#dfe7ea;border-radius:999px;overflow:hidden}
+  #progressFill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--accent));transition:.3s}
+  main{max-width:1120px;margin:auto;padding:30px 20px 80px}
+  .intro{
+    background:#fff;border:1px solid #e3e7e8;border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:22px 24px;margin-bottom:26px
+  }
+  .intro-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}
+  .mini-card{background:var(--ice);border-radius:16px;padding:16px}
+  .mini-card h3{margin:0 0 6px}
+  .part{
+    margin-top:34px;
+    scroll-margin-top:100px;
+  }
+  .part-head{
+    display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin-bottom:14px
+  }
+  .part-number{
+    width:64px;height:64px;border-radius:18px;
+    background:var(--navy);color:#fff;display:grid;place-items:center;
+    font-weight:900;font-size:1.25rem;box-shadow:var(--shadow)
+  }
+  .part h2{
+    margin:0;font-family:Georgia, "Times New Roman", serif;
+    font-size:clamp(1.8rem,3vw,2.7rem);letter-spacing:-.02em
+  }
+  .part-note{color:var(--muted);margin:3px 0 0}
+  .task{
+    background:#fff;border:1px solid #e2e7e9;border-radius:var(--radius);
+    padding:22px;margin:16px 0;box-shadow:0 8px 22px rgba(16,37,56,.06);
+    position:relative
+  }
+  .task.done{outline:2px solid rgba(25,120,91,.18)}
+  .task-label{
+    display:inline-flex;gap:8px;align-items:center;
+    color:var(--blue);font-size:.78rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em
+  }
+  .task h3{margin:7px 0 5px;font-size:1.25rem}
+  .task p.help{margin:0 0 16px;color:var(--muted)}
+  .question{
+    padding:14px 0;border-top:1px dashed #dce3e6
+  }
+  .question:first-of-type{border-top:0}
+  .q-title{font-weight:800;margin-bottom:9px}
+  .options{display:flex;flex-wrap:wrap;gap:8px}
+  label.option{
+    display:flex;gap:8px;align-items:center;
+    padding:9px 11px;border:1px solid #d8e1e5;border-radius:12px;
+    background:#fbfcfc;transition:.15s
+  }
+  label.option:hover{border-color:#aabfc9;background:#f5fafc}
+  .inline-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  input[type="text"], select, textarea{
+    width:100%;border:1px solid #cfdbe0;border-radius:12px;padding:10px 12px;
+    background:#fff;color:var(--ink)
+  }
+  textarea{min-height:100px;resize:vertical}
+  .btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+  .btn{
+    border:0;border-radius:12px;padding:10px 14px;font-weight:850;
+    background:var(--navy);color:#fff
+  }
+  .btn.secondary{background:#eaf1f4;color:var(--navy)}
+  .btn.accent{background:var(--accent)}
+  .feedback{
+    margin-top:12px;padding:10px 12px;border-radius:12px;font-weight:700;display:none
+  }
+  .feedback.show{display:block}
+  .feedback.good{background:#eaf7f1;color:#155f49}
+  .feedback.bad{background:#fbeeed;color:#8a3b39}
+  .feedback.info{background:#eef6fb;color:#245d82}
+  .correct{border-color:#55a68a!important;background:#effaf5!important}
+  .wrong{border-color:#c67876!important;background:#fff1f0!important}
+  .prediction-board{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px
+  }
+  .pred-card{
+    padding:14px;border:1px solid #d8e2e6;border-radius:14px;background:#fbfcfc
+  }
+  .pred-card strong{display:block;margin-bottom:6px}
+  .order-list{display:grid;gap:9px;margin-top:12px}
+  .order-item{
+    display:flex;align-items:center;gap:10px;
+    border:1px solid #d6e0e4;background:#f9fbfc;padding:10px;border-radius:12px
+  }
+  .order-item .handle{font-size:1.15rem;color:#7f93a0}
+  .order-item .order-controls{margin-left:auto;display:flex;gap:5px}
+  .small-btn{
+    width:32px;height:32px;border:1px solid #cdd9de;border-radius:9px;background:#fff;color:var(--navy);font-weight:900
+  }
+  .match-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px
+  }
+  .match-row{
+    display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;
+    padding:10px 0;border-bottom:1px dashed #dde4e7
+  }
+  .term{
+    font-weight:900;background:var(--ice);padding:9px 11px;border-radius:11px
+  }
+  .builder{
+    padding:12px;border:1px solid #dce4e7;border-radius:14px;margin:12px 0;background:#fbfcfc
+  }
+  .bank,.sentence-zone{display:flex;gap:7px;flex-wrap:wrap;min-height:44px}
+  .chip{
+    border:1px solid #cbd8dd;background:#fff;padding:8px 10px;border-radius:11px;font-weight:750;
+    cursor:pointer;user-select:none
+  }
+  .sentence-zone{
+    padding:8px;border-radius:11px;background:#eef6f9;margin-bottom:9px
+  }
+  .sentence-zone .chip{background:#fff}
+  .tf-grid{display:grid;gap:9px}
+  .tf-row{
+    display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;
+    border:1px solid #dce4e7;border-radius:13px;padding:12px
+  }
+  .tf-buttons{display:flex;gap:6px}
+  .tf-btn{
+    min-width:54px;border:1px solid #cbd8dd;background:#fff;padding:7px 9px;border-radius:10px;font-weight:850
+  }
+  .tf-btn.selected{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .speaking{
+    background:
+      linear-gradient(135deg,rgba(23,50,74,.98),rgba(47,111,159,.92));
+    color:#fff;border:0
+  }
+  .speaking .task-label{color:#bfe7ff}
+  .speaking p.help{color:#dbeaf2}
+  .prompt-card{
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.17);
+    padding:14px;border-radius:14px;margin:12px 0
+  }
+  .cue-list{display:flex;gap:8px;flex-wrap:wrap}
+  .cue{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:7px 9px;border-radius:999px}
+  .timer{
+    font-size:2rem;font-weight:900;font-variant-numeric:tabular-nums;margin:8px 0
+  }
+  .speaking .btn.secondary{background:#fff;color:var(--navy)}
+  .open-grid{display:grid;gap:10px}
+  .open-row{
+    display:grid;grid-template-columns:1.2fr .8fr;gap:12px;align-items:center
+  }
+  .complete-btn{
+    background:#fff;color:var(--navy)
+  }
+  footer{
+    text-align:center;color:var(--muted);padding:20px;font-size:.9rem
+  }
+  .scorebox{
+    display:flex;gap:10px;flex-wrap:wrap;margin-top:15px
+  }
+  .score-pill{
+    background:#fff;border:1px solid rgba(255,255,255,.2);color:#fff;
+    padding:7px 10px;border-radius:999px
+  }
+  @media (max-width:760px){
+    .intro-grid,.inline-grid,.prediction-board,.match-grid{grid-template-columns:1fr}
+    .match-row,.open-row{grid-template-columns:1fr}
+    .term{width:max-content;max-width:100%}
+    .topbar-inner{display:block}
+    .progress-wrap{margin-top:8px;max-width:none}
+    .hero{padding-top:30px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">🎬 Headway-style video practice · Pre-Intermediate</div>
+    <h1>The Titanic</h1>
+    <div class="subtitle">
+      Watch the video in three parts. Predict first, listen for key facts, rebuild the story, and speak after every section.
+    </div>
+    <div class="route" aria-label="Titanic route">
+      <span>Southampton</span><b>→</b><span>Cherbourg</span><b>→</b><span>Queenstown / Cobh</span><b>→</b><span>New York</span>
+    </div>
+  </div>
+</header>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <nav class="nav">
+      <a href="#part1">Part 1</a>
+      <a href="#part2">Part 2</a>
+      <a href="#part3">Part 3</a>
+    </nav>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Lesson progress</span><span id="progressText">0 / 15 activities</span></div>
+      <div class="progress"><div id="progressFill"></div></div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="intro">
+    <div class="intro-grid">
+      <div>
+        <h2 style="margin-top:0">How to use this page</h2>
+        <p>Work with the video one part at a time. Do the <b>Prediction</b> before watching. Then watch once for the main idea, watch again for details, and finish with the <b>Speaking</b> task.</p>
+        <div class="scorebox">
+          <span class="score-pill" style="background:var(--navy)">Objective score: <b id="score">0</b> / <b id="scoreMax">0</b></span>
+        </div>
+      </div>
+      <div class="mini-card">
+        <h3>Useful listening tip</h3>
+        <p style="margin-bottom:0">Don’t stop at every unknown word. Listen for <b>dates, places, numbers, people, and sequence words</b>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 1 -->
+  <section class="part" id="part1">
+    <div class="part-head">
+      <div class="part-number">01</div>
+      <div>
+        <h2>The tragic story</h2>
+        <p class="part-note">Focus: route, dates, numbers, sequence of events</p>
+      </div>
+    </div>
+
+    <article class="task" data-activity="p1pred">
+      <div class="task-label">🔮 Lead-in · Prediction</div>
+      <h3>Before you watch: guess the facts</h3>
+      <p class="help">Choose one answer for each question. After watching, check how accurate your predictions were.</p>
+      <div class="prediction-board">
+        <div class="pred-card">
+          <strong>1. The Titanic started its voyage from…</strong>
+          <select id="p1pred1">
+            <option value="">Choose</option>
+            <option>Southampton</option>
+            <option>Belfast</option>
+            <option>New York</option>
+          </select>
+        </div>
+        <div class="pred-card">
+          <strong>2. It sank about… after hitting the iceberg.</strong>
+          <select id="p1pred2">
+            <option value="">Choose</option>
+            <option>40 minutes</option>
+            <option>2 hours 40 minutes</option>
+            <option>6 hours</option>
+          </select>
+        </div>
+        <div class="pred-card">
+          <strong>3. About how many people survived?</strong>
+          <select id="p1pred3">
+            <option value="">Choose</option>
+            <option>710</option>
+            <option>1,343</option>
+            <option>2,228</option>
+          </select>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="checkPrediction('p1pred',['Southampton','2 hours 40 minutes','710'])">Check after watching</button>
+      </div>
+      <div class="feedback" id="p1pred-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p1gap" data-points="6">
+      <div class="task-label">✍️ Detail listening · Fill in the gaps</div>
+      <h3>Titanic by numbers</h3>
+      <p class="help">Complete the facts. Use numbers or place names from the video.</p>
+      <div class="inline-grid">
+        <label>The ship was nearly <input id="g1" type="text" placeholder="___ metres long"></label>
+        <label>It had <input id="g2" type="text" placeholder="___ decks"></label>
+        <label>There were <input id="g3" type="text" placeholder="___ passengers"></label>
+        <label>There were <input id="g4" type="text" placeholder="___ crew members"></label>
+        <label>The wreck was found in <input id="g5" type="text" placeholder="year"></label>
+        <label>It was about <input id="g6" type="text" placeholder="___ miles down"></label>
+      </div>
+      <div class="btn-row"><button class="btn" onclick="checkGaps1()">Check</button><button class="btn secondary" onclick="resetGaps1()">Reset</button></div>
+      <div class="feedback" id="p1gap-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p1order" data-points="6">
+      <div class="task-label">🧭 Story logic · Put events in order</div>
+      <h3>Build the Titanic timeline</h3>
+      <p class="help">Use ↑ and ↓ to put the events in the correct chronological order.</p>
+      <div class="order-list" id="timeline1"></div>
+      <div class="btn-row"><button class="btn" onclick="checkOrder('timeline1', part1Order, 'p1order')">Check order</button><button class="btn secondary" onclick="shuffleOrder('timeline1')">Shuffle</button></div>
+      <div class="feedback" id="p1order-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p1tf" data-points="5">
+      <div class="task-label">⚓ Comprehension · True or false</div>
+      <h3>Fact check</h3>
+      <p class="help">Choose T or F for each statement.</p>
+      <div class="tf-grid" id="p1tf-box"></div>
+      <div class="btn-row"><button class="btn" onclick="checkTF('p1tf', p1TFAnswers)">Check</button></div>
+      <div class="feedback" id="p1tf-feedback"></div>
+    </article>
+
+    <article class="task speaking" data-activity="p1speak">
+      <div class="task-label">🎙 Speaking</div>
+      <h3>60-second news report</h3>
+      <p class="help">Imagine you are a radio reporter in 1912. Retell the main story in order.</p>
+      <div class="prompt-card">
+        Start with: <b>“The Titanic left Southampton on 10 April 1912…”</b>
+        <div class="cue-list" style="margin-top:10px">
+          <span class="cue">route</span><span class="cue">passengers + crew</span><span class="cue">iceberg</span><span class="cue">lifeboats</span><span class="cue">survivors</span>
+        </div>
+      </div>
+      <div class="timer" id="timer1">01:00</div>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="startTimer('timer1',60)">Start timer</button>
+        <button class="btn complete-btn" onclick="completeSpeaking('p1speak')">I finished speaking ✓</button>
+      </div>
+    </article>
+  </section>
+
+  <!-- PART 2 -->
+  <section class="part" id="part2">
+    <div class="part-head">
+      <div class="part-number">02</div>
+      <div>
+        <h2>Building the Titanic</h2>
+        <p class="part-note">Focus: Belfast, shipbuilding, Titanic Quarter, plans and exhibitions</p>
+      </div>
+    </div>
+
+    <article class="task" data-activity="p2pred">
+      <div class="task-label">🔮 Lead-in · Prediction</div>
+      <h3>What will this section show?</h3>
+      <p class="help">Tick the topics you expect to hear about. More than one answer is possible.</p>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="p2pred" value="shipyard"> an old shipyard</label>
+        <label class="option"><input type="checkbox" name="p2pred" value="plans"> original ship plans</label>
+        <label class="option"><input type="checkbox" name="p2pred" value="museum"> exhibitions and museum objects</label>
+        <label class="option"><input type="checkbox" name="p2pred" value="captain"> the captain’s childhood</label>
+        <label class="option"><input type="checkbox" name="p2pred" value="engines"> modern ship engines</label>
+      </div>
+      <div class="btn-row"><button class="btn" onclick="checkMultiPrediction()">Check after watching</button></div>
+      <div class="feedback" id="p2pred-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p2match" data-points="5">
+      <div class="task-label">🧩 Vocabulary + facts · Matching</div>
+      <h3>Match the place or name to its description</h3>
+      <div class="match-grid">
+        <div>
+          <div class="match-row"><div class="term">Belfast</div><select id="m1"></select></div>
+          <div class="match-row"><div class="term">Harland and Wolff</div><select id="m2"></select></div>
+          <div class="match-row"><div class="term">Titanic Quarter</div><select id="m3"></select></div>
+          <div class="match-row"><div class="term">Olympic</div><select id="m4"></select></div>
+          <div class="match-row"><div class="term">TITANICa</div><select id="m5"></select></div>
+        </div>
+        <div class="mini-card">
+          <b>Listen for:</b>
+          <ul style="margin-bottom:0">
+            <li>capital city</li>
+            <li>shipyard</li>
+            <li>sister ship</li>
+            <li>old industrial area</li>
+            <li>museum exhibition</li>
+          </ul>
+        </div>
+      </div>
+      <div class="btn-row"><button class="btn" onclick="checkMatch2()">Check</button></div>
+      <div class="feedback" id="p2match-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p2mc" data-points="5">
+      <div class="task-label">🎯 Listening detail · Multiple choice</div>
+      <h3>Choose the best answer</h3>
+      <div id="p2mc-box"></div>
+      <div class="btn-row"><button class="btn" onclick="checkMC2()">Check</button></div>
+      <div class="feedback" id="p2mc-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p2build" data-points="3">
+      <div class="task-label">🧱 Sentence building</div>
+      <h3>Rebuild three facts from the video</h3>
+      <p class="help">Click the chunks in the correct order. Click a chunk in the blue area to return it.</p>
+      <div id="builders"></div>
+      <div class="btn-row"><button class="btn" onclick="checkBuilders()">Check sentences</button><button class="btn secondary" onclick="resetBuilders()">Reset</button></div>
+      <div class="feedback" id="p2build-feedback"></div>
+    </article>
+
+    <article class="task speaking" data-activity="p2speak">
+      <div class="task-label">🎙 Speaking</div>
+      <h3>You are a guide in Belfast</h3>
+      <p class="help">Give a short tour introduction. Speak for 45–60 seconds.</p>
+      <div class="prompt-card">
+        Include at least four:
+        <div class="cue-list" style="margin-top:10px">
+          <span class="cue">Belfast</span><span class="cue">Harland and Wolff</span><span class="cue">Titanic Quarter</span><span class="cue">Olympic</span><span class="cue">original plans</span><span class="cue">exhibition</span>
+        </div>
+      </div>
+      <div class="timer" id="timer2">00:45</div>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="startTimer('timer2',45)">Start timer</button>
+        <button class="btn complete-btn" onclick="completeSpeaking('p2speak')">I finished speaking ✓</button>
+      </div>
+    </article>
+  </section>
+
+  <!-- PART 3 -->
+  <section class="part" id="part3">
+    <div class="part-head">
+      <div class="part-number">03</div>
+      <div>
+        <h2>My great-grandfather’s story</h2>
+        <p class="part-note">Focus: family history, Tommy Millar, personal objects, why stories survive</p>
+      </div>
+    </div>
+
+    <article class="task" data-activity="p3pred">
+      <div class="task-label">🔮 Lead-in · Prediction</div>
+      <h3>A family story: what do you think happened?</h3>
+      <p class="help">Choose your prediction before watching.</p>
+      <div class="question">
+        <div class="q-title">What small object did Tommy give his sons before leaving Belfast?</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="p3pred" value="two pennies"> two pennies</label>
+          <label class="option"><input type="radio" name="p3pred" value="a watch"> a watch</label>
+          <label class="option"><input type="radio" name="p3pred" value="a ticket"> a ship ticket</label>
+          <label class="option"><input type="radio" name="p3pred" value="a photograph"> a photograph</label>
+        </div>
+      </div>
+      <div class="btn-row"><button class="btn" onclick="checkPredictionRadio()">Check after watching</button></div>
+      <div class="feedback" id="p3pred-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p3tf" data-points="5">
+      <div class="task-label">🕯 Story listening · True or false</div>
+      <h3>Tommy Millar’s story</h3>
+      <div class="tf-grid" id="p3tf-box"></div>
+      <div class="btn-row"><button class="btn" onclick="checkTF('p3tf', p3TFAnswers)">Check</button></div>
+      <div class="feedback" id="p3tf-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p3who" data-points="4">
+      <div class="task-label">👥 People · Who is who?</div>
+      <h3>Match the people to the correct information</h3>
+      <div class="match-row"><div class="term">Susie Millar</div><select id="w1"></select></div>
+      <div class="match-row"><div class="term">Thomas “Tommy” Millar</div><select id="w2"></select></div>
+      <div class="match-row"><div class="term">Susie’s grandmother</div><select id="w3"></select></div>
+      <div class="match-row"><div class="term">Tommy’s two sons</div><select id="w4"></select></div>
+      <div class="btn-row"><button class="btn" onclick="checkWho()">Check</button></div>
+      <div class="feedback" id="p3who-feedback"></div>
+    </article>
+
+    <article class="task graded" data-activity="p3open" data-points="4">
+      <div class="task-label">💬 Open questions · Short answers</div>
+      <h3>Answer in 2–6 words</h3>
+      <p class="help">Spelling does not have to be perfect. The checker looks for key information.</p>
+      <div class="open-grid">
+        <div class="open-row"><b>1. Where did Tommy work before he became a crew member?</b><input id="o1" type="text"></div>
+        <div class="open-row"><b>2. What part of the Titanic did he help construct?</b><input id="o2" type="text"></div>
+        <div class="open-row"><b>3. Why was he leaving Ireland?</b><input id="o3" type="text"></div>
+        <div class="open-row"><b>4. What did the family keep for generations?</b><input id="o4" type="text"></div>
+      </div>
+      <div class="btn-row"><button class="btn" onclick="checkOpen3()">Check</button></div>
+      <div class="feedback" id="p3open-feedback"></div>
+    </article>
+
+    <article class="task speaking" data-activity="p3speak">
+      <div class="task-label">🎙 Speaking · Final task</div>
+      <h3>Tell the story from a different point of view</h3>
+      <p class="help">Choose a role and tell the story for about one minute. Try to use the past tense.</p>
+      <div class="prompt-card">
+        <b>Your role:</b> <span id="roleText">Tommy’s son</span>
+        <div class="btn-row" style="margin-top:10px"><button class="btn secondary" onclick="newRole()">Give me another role</button></div>
+        <div class="cue-list" style="margin-top:12px">
+          <span class="cue">Belfast</span><span class="cue">goodbye</span><span class="cue">two pennies</span><span class="cue">America</span><span class="cue">the disaster</span><span class="cue">family memory</span>
+        </div>
+      </div>
+      <div class="timer" id="timer3">01:00</div>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="startTimer('timer3',60)">Start timer</button>
+        <button class="btn complete-btn" onclick="completeSpeaking('p3speak')">I finished speaking ✓</button>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>Interactive lesson page · works offline · all checking is done in your browser</footer>
+
+<script>
+const completed = new Set();
+const earned = {};
+let score = 0;
+const totalActivities = 15;
+const maxScore = 43;
+document.getElementById('scoreMax').textContent = maxScore;
+
+function norm(s){
+  return String(s||'').toLowerCase().trim().replace(/[,.]/g,'').replace(/\s+/g,' ');
+}
+function setFeedback(id, type, html){
+  const el=document.getElementById(id+'-feedback');
+  el.className='feedback show '+type;
+  el.innerHTML=html;
+}
+function markActivity(id){
+  completed.add(id);
+  const card=document.querySelector(`[data-activity="${id}"]`);
+  if(card) card.classList.add('done');
+  updateProgress();
+}
+function setScoreFor(id, pts){
+  const old=earned[id]||0;
+  score += pts-old;
+  earned[id]=pts;
+  document.getElementById('score').textContent=score;
+  markActivity(id);
+}
+function updateProgress(){
+  const n=completed.size;
+  document.getElementById('progressText').textContent=`${n} / ${totalActivities} activities`;
+  document.getElementById('progressFill').style.width=`${(n/totalActivities)*100}%`;
+}
+
+/* Prediction 1 */
+function checkPrediction(id, answers){
+  const vals=[document.getElementById(id+'1').value,document.getElementById(id+'2').value,document.getElementById(id+'3').value];
+  if(vals.some(v=>!v)){setFeedback(id,'bad','Make all three predictions first.');return}
+  const hits=vals.filter((v,i)=>v===answers[i]).length;
+  setFeedback(id,'info',`You predicted <b>${hits}/3</b> facts correctly. Actual answers: <b>Southampton · 2 hours 40 minutes · 710 survivors</b>.`);
+  markActivity(id);
+}
+
+/* Gaps */
+function checkGaps1(){
+  const ans=[
+    ['270','nearly 270'],
+    ['9','nine'],
+    ['1343','1 343','1,343'],
+    ['885'],
+    ['1985'],
+    ['25','2.5','two and a half','two and half']
+  ];
+  let pts=0;
+  ans.forEach((alts,i)=>{
+    const el=document.getElementById('g'+(i+1));
+    const v=norm(el.value).replace(',','');
+    const ok=alts.map(norm).some(a=>v===a.replace(',',''));
+    el.classList.toggle('correct',ok);el.classList.toggle('wrong',!ok);
+    if(ok) pts++;
+  });
+  setScoreFor('p1gap',pts);
+  setFeedback('p1gap',pts===6?'good':'bad',`${pts}/6 correct. Key: <b>270 · 9 · 1,343 · 885 · 1985 · 2.5</b>.`);
+}
+function resetGaps1(){
+  for(let i=1;i<=6;i++){const e=document.getElementById('g'+i);e.value='';e.classList.remove('correct','wrong')}
+  const f=document.getElementById('p1gap-feedback');f.className='feedback';
+}
+
+/* Ordering */
+const part1Order=[
+  'The Titanic leaves Southampton.',
+  'The ship stops at Cherbourg.',
+  'The ship stops at Queenstown (now Cobh).',
+  'The Titanic hits an iceberg.',
+  'The ship sinks.',
+  'The wreck is found in 1985.'
+];
+function renderOrder(id, items){
+  const box=document.getElementById(id);box.innerHTML='';
+  items.forEach(text=>{
+    const row=document.createElement('div');row.className='order-item';row.dataset.text=text;
+    row.innerHTML=`<span class="handle">☰</span><span>${text}</span>
+      <span class="order-controls"><button class="small-btn" onclick="moveItem(this,-1)">↑</button><button class="small-btn" onclick="moveItem(this,1)">↓</button></span>`;
+    box.appendChild(row);
+  });
+}
+function moveItem(btn,dir){
+  const row=btn.closest('.order-item'), parent=row.parentElement;
+  if(dir<0 && row.previousElementSibling) parent.insertBefore(row,row.previousElementSibling);
+  if(dir>0 && row.nextElementSibling) parent.insertBefore(row.nextElementSibling,row);
+}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function shuffleOrder(id){renderOrder(id,shuffle(part1Order))}
+function checkOrder(id,answer,activity){
+  const rows=[...document.getElementById(id).children];
+  let pts=0;
+  rows.forEach((r,i)=>{
+    const ok=r.dataset.text===answer[i];
+    r.classList.toggle('correct',ok);r.classList.toggle('wrong',!ok);
+    if(ok)pts++;
+  });
+  setScoreFor(activity,pts);
+  setFeedback(activity,pts===answer.length?'good':'bad',`${pts}/${answer.length} positions correct. Look for route words first, then the disaster, then the discovery of the wreck.`);
+}
+renderOrder('timeline1',shuffle(part1Order));
+
+/* TF utility */
+const p1TF=[
+  ['The Titanic was the largest passenger ship in the world at the time.', true],
+  ['Most second- and third-class passengers were rich and famous.', false],
+  ['The voyage to New York was the ship’s maiden voyage.', true],
+  ['There were enough lifeboats for everyone on board.', false],
+  ['The wreck was discovered more than 70 years after the ship sank.', true]
+];
+const p1TFAnswers=p1TF.map(x=>x[1]);
+const p3TF=[
+  ['For many years, people in Belfast did not talk much about building the Titanic.', true],
+  ['Tommy only worked on the Titanic as a crew member.', false],
+  ['Tommy planned to start a new life in America.', true],
+  ['He told his sons to spend the pennies immediately.', false],
+  ['The family still has the pennies today.', true]
+];
+const p3TFAnswers=p3TF.map(x=>x[1]);
+
+function renderTF(prefix,data){
+  const box=document.getElementById(prefix+'-box');
+  box.innerHTML='';
+  data.forEach((item,i)=>{
+    const row=document.createElement('div');row.className='tf-row';row.dataset.index=i;
+    row.innerHTML=`<span>${i+1}. ${item[0]}</span><span class="tf-buttons">
+      <button class="tf-btn" onclick="pickTF('${prefix}',${i},true,this)">T</button>
+      <button class="tf-btn" onclick="pickTF('${prefix}',${i},false,this)">F</button>
+    </span>`;
+    box.appendChild(row);
+  });
+}
+function pickTF(prefix,i,val,btn){
+  const row=document.querySelector(`#${prefix}-box .tf-row[data-index="${i}"]`);
+  row.dataset.choice=val;
+  row.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function checkTF(prefix,answers){
+  const rows=[...document.querySelectorAll(`#${prefix}-box .tf-row`)];
+  let pts=0, unanswered=0;
+  rows.forEach((r,i)=>{
+    if(!('choice' in r.dataset)){unanswered++;r.classList.add('wrong');return}
+    const val=r.dataset.choice==='true', ok=val===answers[i];
+    r.classList.toggle('correct',ok);r.classList.toggle('wrong',!ok);
+    if(ok)pts++;
+  });
+  setScoreFor(prefix,pts);
+  setFeedback(prefix,pts===answers.length?'good':'bad',`${pts}/${answers.length} correct.${unanswered?` ${unanswered} unanswered.`:''}`);
+}
+renderTF('p1tf',p1TF);
+renderTF('p3tf',p3TF);
+
+/* Part 2 prediction */
+function checkMultiPrediction(){
+  const chosen=[...document.querySelectorAll('input[name="p2pred"]:checked')].map(x=>x.value);
+  if(!chosen.length){setFeedback('p2pred','bad','Choose at least one topic first.');return}
+  const actual=['shipyard','plans','museum'];
+  const hits=actual.filter(x=>chosen.includes(x)).length;
+  setFeedback('p2pred','info',`This part includes <b>an old shipyard, original plans, and museum/exhibition objects</b>. You predicted ${hits}/3 core topics.`);
+  markActivity('p2pred');
+}
+
+/* Part 2 matching */
+const descriptions=[
+  'Choose a description',
+  'the capital of Northern Ireland',
+  'the shipyard where Titanic was built',
+  'the old shipbuilding area of Belfast',
+  'Titanic’s sister ship',
+  'an exhibition with original plans and objects'
+];
+function fillSelect(id){
+  const s=document.getElementById(id);
+  s.innerHTML=descriptions.map((d,i)=>`<option value="${i}">${d}</option>`).join('');
+}
+['m1','m2','m3','m4','m5'].forEach(fillSelect);
+function checkMatch2(){
+  const correct=[1,2,3,4,5];let pts=0;
+  correct.forEach((a,i)=>{
+    const el=document.getElementById('m'+(i+1));
+    const ok=Number(el.value)===a;
+    el.classList.toggle('correct',ok);el.classList.toggle('wrong',!ok);
+    if(ok)pts++;
+  });
+  setScoreFor('p2match',pts);
+  setFeedback('p2match',pts===5?'good':'bad',`${pts}/5 correct.`);
+}
+
+/* Part 2 MC */
+const mc2=[
+  {
+    q:'What is special about the modern Titanic building in Belfast?',
+    opts:['It looks like the bow of the Titanic.','It is an exact copy of the whole ship.','It is still a working shipyard.'],
+    a:0
+  },
+  {
+    q:'About how many people worked in the shipyards around 1900?',
+    opts:['1,500','15,000','150,000'],
+    a:1
+  },
+  {
+    q:'How were the Titanic and Olympic plans different?',
+    opts:['They were completely different.','The designers marked Titanic’s differences in red.','The Olympic had no written plans.'],
+    a:1
+  },
+  {
+    q:'Why can objects from the Olympic help visitors understand the Titanic?',
+    opts:['The ships had many identical items.','The Olympic rescued the Titanic.','The Olympic was built in New York.'],
+    a:0
+  },
+  {
+    q:'What can visitors learn about at the exhibitions?',
+    opts:['Only the ship’s size.','The builders and the people who travelled on the ship.','Only modern Belfast.'],
+    a:1
+  }
+];
+function renderMC2(){
+  const box=document.getElementById('p2mc-box');box.innerHTML='';
+  mc2.forEach((x,i)=>{
+    const d=document.createElement('div');d.className='question';d.id='mcq'+i;
+    d.innerHTML=`<div class="q-title">${i+1}. ${x.q}</div><div class="options">${x.opts.map((o,j)=>`<label class="option"><input type="radio" name="mc${i}" value="${j}"> ${o}</label>`).join('')}</div>`;
+    box.appendChild(d);
+  });
+}
+function checkMC2(){
+  let pts=0;
+  mc2.forEach((x,i)=>{
+    const chosen=document.querySelector(`input[name="mc${i}"]:checked`);
+    const q=document.getElementById('mcq'+i);
+    const ok=chosen && Number(chosen.value)===x.a;
+    q.classList.toggle('correct',!!ok);q.classList.toggle('wrong',!ok);
+    if(ok)pts++;
+  });
+  setScoreFor('p2mc',pts);
+  setFeedback('p2mc',pts===5?'good':'bad',`${pts}/5 correct.`);
+}
+renderMC2();
+
+/* Sentence builders */
+const builderData=[
+  ['Belfast','was famous for','shipbuilding','in the 20th century.'],
+  ['The Titanic','was the second of three ships','Harland and Wolff were building','for the White Star Line.'],
+  ['The Titanic and Olympic','were almost identical','inside and out.']
+];
+const builderState=builderData.map(()=>[]);
+function renderBuilders(){
+  const box=document.getElementById('builders');box.innerHTML='';
+  builderData.forEach((chunks,i)=>{
+    const b=document.createElement('div');b.className='builder';
+    b.innerHTML=`<b>Sentence ${i+1}</b><div class="sentence-zone" id="zone${i}"></div><div class="bank" id="bank${i}"></div>`;
+    box.appendChild(b);
+    const shuffled=shuffle(chunks);
+    shuffled.forEach(chunk=>makeChunk(chunk,i,'bank'+i));
+  });
+}
+function makeChunk(text,i,targetId){
+  const c=document.createElement('button');c.className='chip';c.textContent=text;c.type='button';
+  c.onclick=()=>{
+    const zone=document.getElementById('zone'+i),bank=document.getElementById('bank'+i);
+    (c.parentElement===zone?bank:zone).appendChild(c);
+  };
+  document.getElementById(targetId).appendChild(c);
+}
+function currentSentence(i){
+  return [...document.getElementById('zone'+i).children].map(x=>x.textContent);
+}
+function checkBuilders(){
+  let pts=0;
+  builderData.forEach((ans,i)=>{
+    const zone=document.getElementById('zone'+i);
+    const cur=currentSentence(i);
+    const ok=JSON.stringify(cur)===JSON.stringify(ans);
+    zone.classList.toggle('correct',ok);zone.classList.toggle('wrong',!ok);
+    if(ok)pts++;
+  });
+  setScoreFor('p2build',pts);
+  setFeedback('p2build',pts===3?'good':'bad',`${pts}/3 sentences correct.`);
+}
+function resetBuilders(){renderBuilders()}
+renderBuilders();
+
+/* Part 3 prediction */
+function checkPredictionRadio(){
+  const c=document.querySelector('input[name="p3pred"]:checked');
+  if(!c){setFeedback('p3pred','bad','Make a prediction first.');return}
+  const ok=c.value==='two pennies';
+  setFeedback('p3pred','info',ok?'Yes — the family object was <b>two pennies dated 1912</b>.':'The answer is <b>two pennies dated 1912</b>. The family kept them for generations.');
+  markActivity('p3pred');
+}
+
+/* Who is who */
+const whoDesc=[
+  'Choose a description',
+  'the tour guide who tells the family story',
+  'the man who helped build the ship and later joined its crew',
+  'the person who showed Susie the Titanic memorial as a child',
+  'the children who each received a penny before their father left'
+];
+['w1','w2','w3','w4'].forEach(id=>{
+  const s=document.getElementById(id);
+  s.innerHTML=whoDesc.map((d,i)=>`<option value="${i}">${d}</option>`).join('');
+});
+function checkWho(){
+  const a=[1,2,3,4];let pts=0;
+  a.forEach((v,i)=>{
+    const el=document.getElementById('w'+(i+1));const ok=Number(el.value)===v;
+    el.classList.toggle('correct',ok);el.classList.toggle('wrong',!ok);
+    if(ok)pts++;
+  });
+  setScoreFor('p3who',pts);
+  setFeedback('p3who',pts===4?'good':'bad',`${pts}/4 correct.`);
+}
+
+/* Open answers */
+function containsAny(v,arr){v=norm(v);return arr.some(k=>v.includes(norm(k)))}
+function checkOpen3(){
+  const checks=[
+    v=>containsAny(v,['harland and wolff','harland & wolff','shipyard','h&w']),
+    v=>containsAny(v,['engine','engines']),
+    v=>containsAny(v,['new life','america','start a new life']),
+    v=>containsAny(v,['pennies','two pennies','coins'])
+  ];
+  let pts=0;
+  checks.forEach((fn,i)=>{
+    const el=document.getElementById('o'+(i+1));const ok=fn(el.value);
+    el.classList.toggle('correct',ok);el.classList.toggle('wrong',!ok);
+    if(ok)pts++;
+  });
+  setScoreFor('p3open',pts);
+  setFeedback('p3open',pts===4?'good':'bad',`${pts}/4 key ideas found. Suggested answers: <b>Harland and Wolff shipyard · the engines · to start a new life in America · the two pennies</b>.`);
+}
+
+/* Speaking */
+const timers={};
+function startTimer(id,seconds){
+  if(timers[id]) clearInterval(timers[id]);
+  let left=seconds;
+  const el=document.getElementById(id);
+  el.textContent=formatTime(left);
+  timers[id]=setInterval(()=>{
+    left--;
+    el.textContent=formatTime(Math.max(0,left));
+    if(left<=0){clearInterval(timers[id]);el.textContent='Time!'}
+  },1000);
+}
+function formatTime(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function completeSpeaking(id){markActivity(id);const card=document.querySelector(`[data-activity="${id}"]`);card.querySelector('.complete-btn').textContent='Completed ✓'}
+const roles=[
+  'Tommy’s son',
+  'Susie Millar',
+  'a visitor at the Belfast memorial',
+  'a Belfast shipyard worker in 1912'
+];
+function newRole(){
+  const current=document.getElementById('roleText').textContent;
+  const pool=roles.filter(x=>x!==current);
+  document.getElementById('roleText').textContent=pool[Math.floor(Math.random()*pool.length)];
+}
+</script>
+</body>
+</html>
