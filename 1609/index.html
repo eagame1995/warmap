@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Food Warm-up</title>
+<style>
+  :root{
+    --bg:#f7f3ea;
+    --card:#fffdf8;
+    --text:#24322c;
+    --muted:#6f7c75;
+    --green:#6aa56f;
+    --green2:#dfeee0;
+    --orange:#e99b54;
+    --orange2:#f8e6d4;
+    --red:#d86b61;
+    --yellow:#f0cf6a;
+    --line:#dcd7cb;
+    --shadow:0 10px 30px rgba(41,55,48,.10);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(106,165,111,.12), transparent 28%),
+      radial-gradient(circle at 90% 10%, rgba(233,155,84,.12), transparent 28%),
+      var(--bg);
+    color:var(--text);
+  }
+  .wrap{max-width:1100px;margin:auto;padding:34px 20px 60px}
+  header{
+    background:linear-gradient(135deg,#28483a,#3f6b57);
+    color:white;
+    border-radius:28px;
+    padding:34px 36px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  header:after{
+    content:"";
+    width:220px;height:220px;border-radius:50%;
+    background:rgba(255,255,255,.07);
+    position:absolute;right:-50px;top:-80px;
+  }
+  h1{margin:0 0 8px;font-size:clamp(34px,5vw,58px);letter-spacing:-1.5px}
+  header p{margin:0;font-size:18px;color:#e7f2eb}
+  .meta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+  .badge{
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.18);
+    padding:8px 12px;border-radius:999px;font-size:14px;
+  }
+  .section{
+    background:var(--card);
+    margin-top:22px;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(60,72,65,.06);
+  }
+  .num{
+    width:42px;height:42px;border-radius:14px;
+    display:inline-grid;place-items:center;
+    background:var(--green2);color:#315f3b;font-weight:800;
+    margin-right:10px;
+  }
+  h2{display:flex;align-items:center;margin:0 0 8px;font-size:27px}
+  .sub{color:var(--muted);margin:0 0 22px;font-size:16px}
+  .prompt{
+    background:#f2efe7;border-left:5px solid var(--orange);
+    padding:16px 18px;border-radius:14px;
+    font-size:19px;font-weight:700;margin:14px 0;
+  }
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .task{
+    border:1px solid var(--line);
+    border-radius:16px;padding:16px 18px;background:#fff;
+  }
+  .task strong{display:block;margin-bottom:7px}
+  .timerbox{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+  button{
+    appearance:none;border:0;border-radius:13px;padding:11px 16px;
+    background:#2f5b47;color:#fff;font-weight:750;font-size:15px;
+    cursor:pointer;transition:.18s ease;
+  }
+  button:hover{transform:translateY(-1px);filter:brightness(1.05)}
+  button.secondary{background:#e9e4d8;color:#2b3a32}
+  .timer{
+    min-width:90px;text-align:center;
+    font-size:26px;font-weight:850;letter-spacing:1px;
+    padding:8px 14px;border-radius:13px;background:#eef5ef;color:#315f3b;
+  }
+
+  .food-pool{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px}
+  .chip{
+    padding:10px 13px;border-radius:999px;
+    border:1px solid var(--line);background:white;
+    font-weight:700;cursor:grab;user-select:none;
+  }
+  .scale{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;
+  }
+  .scale-zone{
+    min-height:140px;border-radius:16px;padding:11px;
+    border:1.5px dashed #cfc7b8;background:#faf8f2;
+  }
+  .scale-zone h3{margin:0 0 8px;font-size:13px;text-align:center}
+  .scale-zone[data-level="1"]{background:#e7f2e7}
+  .scale-zone[data-level="2"]{background:#f1f6e8}
+  .scale-zone[data-level="3"]{background:#fff9df}
+  .scale-zone[data-level="4"]{background:#fbe9dc}
+  .scale-zone[data-level="5"]{background:#f8dedd}
+
+  .language{
+    display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;
+  }
+  .language span{
+    background:#f4f1e9;border-radius:999px;padding:8px 11px;font-size:14px;
+  }
+
+  .dilemma-card{
+    margin-top:14px;
+    background:linear-gradient(135deg,#f4eee3,#fffaf2);
+    border:1px solid #e7dece;
+    border-radius:22px;padding:28px;
+    min-height:175px;display:grid;place-items:center;text-align:center;
+  }
+  .versus{font-size:clamp(24px,4vw,40px);font-weight:900;line-height:1.2}
+  .versus em{font-style:normal;color:var(--orange);padding:0 7px}
+  .questions{
+    display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px;
+  }
+  .questions span{background:#fff;border:1px solid var(--line);padding:8px 11px;border-radius:999px}
+  .controls{display:flex;gap:10px;justify-content:center;margin-top:14px}
+
+  textarea{
+    width:100%;min-height:120px;resize:vertical;
+    border:1px solid var(--line);border-radius:16px;padding:14px 16px;
+    font:inherit;font-size:16px;background:#fff;
+  }
+  .final-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .final-chips button{
+    background:#eef4ee;color:#2e5c3f;border:1px solid #d8e5d9;
+  }
+  .final-chips button.active{background:#2f5b47;color:white}
+  footer{text-align:center;color:#7d877f;font-size:13px;margin-top:24px}
+  @media (max-width:800px){
+    .grid{grid-template-columns:1fr}
+    .scale{grid-template-columns:1fr}
+    .scale-zone{min-height:70px}
+    header,.section{border-radius:20px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Food Warm-up</h1>
+    <p>Healthy, unhealthy… or somewhere in between?</p>
+    <div class="meta">
+      <span class="badge">Speaking</span>
+      <span class="badge">Vocabulary activation</span>
+      <span class="badge">7–10 minutes</span>
+      <span class="badge">Adult learner</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2><span class="num">1</span>Quick brainstorm</h2>
+    <p class="sub">Speak fast. Don’t overthink — just activate the vocabulary you already know.</p>
+
+    <div class="prompt">Name as many foods as you can in 40 seconds.</div>
+
+    <div class="timerbox">
+      <div class="timer" id="timer">00:40</div>
+      <button onclick="startTimer()">Start timer</button>
+      <button class="secondary" onclick="resetTimer()">Reset</button>
+    </div>
+
+    <div class="grid" style="margin-top:18px">
+      <div class="task"><strong>3 healthy foods</strong><span>What comes to mind first?</span></div>
+      <div class="task"><strong>3 unhealthy foods</strong><span>Why are they unhealthy?</span></div>
+      <div class="task"><strong>3 foods you love</strong><span>How often do you eat them?</span></div>
+      <div class="task"><strong>3 foods you never buy</strong><span>Why not?</span></div>
+      <div class="task"><strong>3 foods you eat every week</strong><span>Are they part of your routine?</span></div>
+      <div class="task"><strong>1 food you changed your opinion about</strong><span>What happened?</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="num">2</span>Healthy or unhealthy?</h2>
+    <p class="sub">Drag the foods onto the scale. You must explain every choice.</p>
+
+    <div class="food-pool" id="foodPool">
+      <div class="chip" draggable="true">pizza</div>
+      <div class="chip" draggable="true">nuts</div>
+      <div class="chip" draggable="true">chocolate</div>
+      <div class="chip" draggable="true">avocado</div>
+      <div class="chip" draggable="true">bread</div>
+      <div class="chip" draggable="true">cheese</div>
+      <div class="chip" draggable="true">coffee</div>
+      <div class="chip" draggable="true">fruit juice</div>
+      <div class="chip" draggable="true">pasta</div>
+      <div class="chip" draggable="true">burgers</div>
+      <div class="chip" draggable="true">eggs</div>
+      <div class="chip" draggable="true">cereal</div>
+    </div>
+
+    <div class="scale">
+      <div class="scale-zone" data-level="1"><h3>VERY HEALTHY</h3></div>
+      <div class="scale-zone" data-level="2"><h3>QUITE HEALTHY</h3></div>
+      <div class="scale-zone" data-level="3"><h3>NEUTRAL</h3></div>
+      <div class="scale-zone" data-level="4"><h3>QUITE UNHEALTHY</h3></div>
+      <div class="scale-zone" data-level="5"><h3>VERY UNHEALTHY</h3></div>
+    </div>
+
+    <div class="language">
+      <span>I think ___ is healthy because…</span>
+      <span>It contains a lot of…</span>
+      <span>It has too much…</span>
+      <span>It’s good / bad for…</span>
+      <span>It depends on…</span>
+      <span>If you eat too much of it…</span>
+      <span>I wouldn’t call it unhealthy because…</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="num">3</span>Food dilemmas</h2>
+    <p class="sub">You have to choose one. No “both” and no “it depends” before you make your first choice.</p>
+
+    <div class="dilemma-card">
+      <div>
+        <div class="versus" id="dilemma">homemade pizza <em>OR</em> supermarket salad?</div>
+        <div class="questions">
+          <span>Why?</span>
+          <span>How often?</span>
+          <span>Is it always unhealthy?</span>
+          <span>What makes it healthy?</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button onclick="prevDilemma()">← Previous</button>
+      <button onclick="nextDilemma()">Next →</button>
+      <button class="secondary" onclick="randomDilemma()">Random</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="num">4</span>Final question</h2>
+    <p class="sub">Bring your ideas together before moving on to the main lesson.</p>
+
+    <div class="prompt">So, what actually makes food healthy or unhealthy?</div>
+
+    <textarea placeholder="Write 3–5 ideas here, or discuss them aloud..."></textarea>
+
+    <div class="final-chips">
+      <button onclick="this.classList.toggle('active')">sugar</button>
+      <button onclick="this.classList.toggle('active')">fat</button>
+      <button onclick="this.classList.toggle('active')">salt</button>
+      <button onclick="this.classList.toggle('active')">protein</button>
+      <button onclick="this.classList.toggle('active')">vitamins</button>
+      <button onclick="this.classList.toggle('active')">calories</button>
+      <button onclick="this.classList.toggle('active')">ingredients</button>
+      <button onclick="this.classList.toggle('active')">portion size</button>
+    </div>
+  </section>
+
+  <footer>Warm-up • Food & Health • Speaking-first</footer>
+</div>
+
+<script>
+  let timerId = null;
+  let timeLeft = 40;
+
+  function renderTimer(){
+    document.getElementById('timer').textContent = '00:' + String(timeLeft).padStart(2,'0');
+  }
+  function startTimer(){
+    if(timerId) return;
+    timerId = setInterval(()=>{
+      timeLeft--;
+      renderTimer();
+      if(timeLeft <= 0){
+        clearInterval(timerId);
+        timerId = null;
+        document.getElementById('timer').textContent = "TIME!";
+      }
+    },1000);
+  }
+  function resetTimer(){
+    clearInterval(timerId);
+    timerId = null;
+    timeLeft = 40;
+    renderTimer();
+  }
+
+  const dilemmas = [
+    "homemade pizza <em>OR</em> supermarket salad?",
+    "coffee <em>OR</em> energy drink?",
+    "fruit <em>OR</em> fruit juice?",
+    "bread <em>OR</em> no bread at all?",
+    "chocolate every day <em>OR</em> fast food once a week?",
+    "eating late at night <em>OR</em> skipping dinner?",
+    "a big breakfast <em>OR</em> no breakfast?",
+    "healthy food you hate <em>OR</em> unhealthy food you love?"
+  ];
+  let current = 0;
+
+  function showDilemma(){
+    document.getElementById('dilemma').innerHTML = dilemmas[current];
+  }
+  function nextDilemma(){
+    current = (current + 1) % dilemmas.length;
+    showDilemma();
+  }
+  function prevDilemma(){
+    current = (current - 1 + dilemmas.length) % dilemmas.length;
+    showDilemma();
+  }
+  function randomDilemma(){
+    let next = current;
+    while(next === current && dilemmas.length > 1){
+      next = Math.floor(Math.random()*dilemmas.length);
+    }
+    current = next;
+    showDilemma();
+  }
+
+  let dragged = null;
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('dragstart', ()=> dragged = chip);
+  });
+  document.querySelectorAll('.scale-zone, #foodPool').forEach(zone=>{
+    zone.addEventListener('dragover', e=>e.preventDefault());
+    zone.addEventListener('drop', ()=>{
+      if(dragged) zone.appendChild(dragged);
+    });
+  });
+</script>
+</body>
+</html>
