@@ -1,0 +1,75 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A Home Away from Home</title>
+<style>
+:root{--navy:#172033;--blue:#5667e8;--line:#dfe4ec;--bg:#f4f6f9;--green:#168b69;--red:#c84646}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px Arial,sans-serif;color:var(--navy)}header{background:var(--navy);color:#fff;padding:34px 5vw}h1{font-size:clamp(32px,5vw,56px);margin:5px 0}.wrap{max-width:1050px;margin:auto;padding:24px 16px 70px}.home{background:#fff;border:1px solid var(--line);border-radius:22px;margin:24px 0;overflow:hidden}.hero{padding:25px;background:#eef0ff}.hero h2{font-size:31px;margin:5px 0}.phase{padding:24px;border-top:1px solid var(--line)}.tag{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.choice,.pick{border:1.5px solid var(--line);padding:13px;border-radius:13px;cursor:pointer;background:#fff}.choice.ok{background:#e9f8f2;border-color:var(--green)}.choice.bad{background:#fff0f0;border-color:var(--red)}.pick.sel{background:#eef0ff;border-color:var(--blue)}.q{margin:18px 0;padding-top:15px;border-top:1px dashed var(--line)}select,input{padding:8px;border:1px solid #bac3d0;border-radius:8px}button{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}.fb{font-weight:700;margin-left:8px}.speak{background:#fff8e7;border-radius:14px;padding:16px}small{color:#657085}
+</style></head><body><header><small style="color:#ccd2df">HEADWAY ELEMENTARY • UNIT 4 VIDEO</small><h1>A home away from home</h1><p>Three mini-lessons: one complete viewing cycle for each part.</p></header><main class="wrap">
+
+
+<section class="home">
+  <div class="hero"><b>BEFORE THE VIDEO</b><h2>🏡 Holiday homes</h2></div>
+  <div class="phase">
+    <span class="tag">General lead-in</span>
+    <h3>1. Where would you stay?</h3>
+    <p>Choose <b>TWO</b> places for a holiday. Then explain your choices.</p>
+    <div class="grid picks">
+      <div class="pick">🏨 Hotel</div><div class="pick">🏕️ Tent</div>
+      <div class="pick">🏰 Castle</div><div class="pick">🏠 Tiny house</div>
+      <div class="pick">🗼 Tower</div><div class="pick">🌿 Underground house</div>
+    </div>
+    <p><b>Talk:</b> Which is the most comfortable? The strangest? Which one would you never choose?</p>
+
+    <h3>2. What makes a good holiday home?</h3>
+    <p>Choose your <b>TOP 4</b>.</p>
+    <div class="grid picks">
+      <div class="pick">🛏️ comfortable bed</div><div class="pick">🍳 kitchen</div>
+      <div class="pick">🚿 bathroom</div><div class="pick">🪟 windows</div>
+      <div class="pick">📺 TV</div><div class="pick">🌅 great view</div>
+      <div class="pick">🤫 quiet location</div><div class="pick">📶 Wi-Fi</div>
+    </div>
+
+    <h3>3. Match: home ↔ description</h3>
+    <p>What do you think these unusual homes are like?</p>
+    <div class="q">Roundhouse → <select data-a="a round building"><option>Choose…</option><option>a round building</option><option>a tall building</option><option>a house under the ground</option></select></div>
+    <div class="q">Water tower → <select data-a="a tall building"><option>Choose…</option><option>a round building</option><option>a tall building</option><option>a house under the ground</option></select></div>
+    <div class="q">Bunker → <select data-a="a house under the ground"><option>Choose…</option><option>a round building</option><option>a tall building</option><option>a house under the ground</option></select></div>
+    <button class="checkselect">Check</button><span class="fb"></span>
+  </div>
+</section>
+
+<section class="home"><div class="hero"><b>PART 1</b><h2>🛖 The Roundhouse</h2></div>
+<div class="phase"><span class="tag">Lead-in</span><h3>1. Round or square?</h3><p>Imagine your house is completely round. Choose <b>3 things</b> that might be different.</p><div class="grid picks"><div class="pick">🛏️ furniture</div><div class="pick">🪟 windows</div><div class="pick">🚪 doors</div><div class="pick">🍳 kitchen</div><div class="pick">🔥 heating</div><div class="pick">🪑 places to sit</div></div><p><b>Talk:</b> Would you like to spend a weekend there? Why / why not?</p></div>
+<div class="phase"><span class="tag">Prediction</span><h3>2. Guess before watching</h3><div class="tf" data-items='[["The house is very old.","False"],["There are no windows.","True"],["There are several rooms.","False"],["There is a fire inside.","True"]]'></div></div>
+<div class="phase"><span class="tag">While watching</span><h3>3. Watch and catch the details</h3><div class="mc" data-q="When was the Roundhouse built?" data-a="1999" data-o="2,000 years ago|1970|1999"></div><div class="mc" data-q="How wide is it?" data-a="13 metres" data-o="13 metres|13.1 metres|49 metres"></div><div class="q">Complete: There is only <input data-answer="one"> room and there aren’t any <input data-answer="windows">. <button class="checkinput">Check</button><span class="fb"></span></div><div class="mc" data-q="Where are the kitchen and bathroom?" data-a="In the Lantern" data-o="Inside the Roundhouse|In the Lantern|In the old village"></div></div>
+<div class="q"><h3>Match: place ↔ facility</h3>
+<div class="q">Roundhouse → <select data-a="wooden bed and fire"><option>Choose…</option><option>wooden bed and fire</option><option>kitchen and shower</option><option>49 steps</option></select></div>
+<div class="q">The Lantern → <select data-a="kitchen and shower"><option>Choose…</option><option>wooden bed and fire</option><option>kitchen and shower</option><option>49 steps</option></select></div>
+<button class="checkselect">Check</button><span class="fb"></span></div><div class="phase"><span class="tag">Post-watching</span><h3>4. Sell it or reject it</h3><div class="speak"><b>You have a free weekend at the Roundhouse.</b><p>Give it ⭐ 1–5. Say <b>2 good things</b>, <b>2 problems</b> and whether you would stay there.</p><small>There is… / There isn’t… / It’s… / I like… / I don’t like… / I’d stay there because…</small></div></div></section>
+
+<section class="home"><div class="hero"><b>PART 2</b><h2>🗼 The Water Tower</h2></div>
+<div class="phase"><span class="tag">Lead-in</span><h3>1. Living vertically</h3><p>A house has only <b>one room on each floor</b>. Put these rooms where you want them.</p><div class="q">TOP → <select><option>kitchen</option><option>living room</option><option>bedroom</option></select> &nbsp; MIDDLE → <select><option>living room</option><option>kitchen</option><option>bedroom</option></select> &nbsp; BOTTOM → <select><option>bedroom</option><option>living room</option><option>kitchen</option></select></div><p>Explain your plan to a partner.</p></div>
+<div class="phase"><span class="tag">Prediction</span><h3>2. What do you expect?</h3><p>Choose what you think you will see.</p><div class="grid picks"><div class="pick">narrow stairs</div><div class="pick">lift</div><div class="pick">round cupboards</div><div class="pick">big living room</div><div class="pick">TV</div><div class="pick">bathroom outside</div></div></div>
+<div class="phase"><span class="tag">While watching</span><h3>3. Build the tower</h3><p>Match the floor to the room.</p><div class="q">Top floor <select data-a="Kitchen"><option>Choose…</option><option>Kitchen</option><option>Living room</option><option>Bedroom</option></select></div><div class="q">Second floor <select data-a="Living room"><option>Choose…</option><option>Kitchen</option><option>Living room</option><option>Bedroom</option></select></div><div class="q">First floor <select data-a="Bedroom"><option>Choose…</option><option>Kitchen</option><option>Living room</option><option>Bedroom</option></select></div><button class="checkselect">Check</button><span class="fb"></span><h3>4. Number hunt</h3><div class="q">The tower is over <input data-answer="150"> years old. The staircase has <input data-answer="49"> steps. <button class="checkinput">Check</button><span class="fb"></span></div></div>
+<div class="q"><h3>Match: room ↔ detail</h3>
+<div class="q">Kitchen → <select data-a="round cupboards"><option>Choose…</option><option>round cupboards</option><option>comfortable sofa and TV</option><option>two bedside tables and mirror</option></select></div>
+<div class="q">Living room → <select data-a="comfortable sofa and TV"><option>Choose…</option><option>round cupboards</option><option>comfortable sofa and TV</option><option>two bedside tables and mirror</option></select></div>
+<div class="q">Bedroom → <select data-a="two bedside tables and mirror"><option>Choose…</option><option>round cupboards</option><option>comfortable sofa and TV</option><option>two bedside tables and mirror</option></select></div>
+<button class="checkselect">Check</button><span class="fb"></span></div><div class="phase"><span class="tag">Post-watching</span><h3>5. The biggest problem</h3><div class="speak"><p>Choose the <b>biggest disadvantage</b>: 49 steps / tiny living room / bathroom through another door.</p><p>Then choose the <b>best feature</b>. Compare your answers.</p></div></div></section>
+
+<section class="home"><div class="hero"><b>PART 3</b><h2>🌿 The Bunker</h2></div>
+<div class="phase"><span class="tag">Lead-in</span><h3>1. What is under the grass?</h3><p>You see only a small green hill. What could be inside?</p><div class="grid picks"><div class="pick">a tiny room</div><div class="pick">a family house</div><div class="pick">a secret office</div><div class="pick">a hotel</div><div class="pick">nothing</div></div><p>Describe your imaginary underground home.</p></div>
+<div class="phase"><span class="tag">Prediction</span><h3>2. Bunker bingo</h3><p>Select the <b>5 things</b> you think are inside.</p><div class="grid picks"><div class="pick">sofas</div><div class="pick">TV</div><div class="pick">piano</div><div class="pick">microwave</div><div class="pick">four bedrooms</div><div class="pick">windows</div><div class="pick">skylights</div><div class="pick">six chairs</div></div></div>
+<div class="phase"><span class="tag">While watching</span><h3>3. True or False?</h3><div class="tf" data-items='[["The Bunker is three kilometres from Sennen Cove.","True"],["It was built in the 1970s.","False"],["There are four bedrooms.","True"],["All bedrooms have their own bathrooms.","False"],["There are normal windows.","False"],["Skylights bring in natural light.","True"]]'></div><h3>4. Where is it?</h3><div class="q">Brown sofas + TV + books → <select data-a="living room"><option>Choose…</option><option>living room</option><option>kitchen</option><option>bedroom</option></select></div><div class="q">Kettle + cooker + microwave → <select data-a="kitchen"><option>Choose…</option><option>living room</option><option>kitchen</option><option>bedroom</option></select></div><button class="checkselect">Check</button><span class="fb"></span></div>
+<div class="q"><h3>Match: number ↔ fact</h3>
+<div class="q">3 → <select data-a="kilometres from the beach"><option>Choose…</option><option>kilometres from the beach</option><option>bedrooms</option><option>chairs at the table</option></select></div>
+<div class="q">4 → <select data-a="bedrooms"><option>Choose…</option><option>kilometres from the beach</option><option>bedrooms</option><option>chairs at the table</option></select></div>
+<div class="q">6 → <select data-a="chairs at the table"><option>Choose…</option><option>kilometres from the beach</option><option>bedrooms</option><option>chairs at the table</option></select></div>
+<button class="checkselect">Check</button><span class="fb"></span></div><div class="phase"><span class="tag">Post-watching</span><h3>5. Would you book it?</h3><div class="speak"><p>You are travelling with <b>5 friends</b>. Decide if the Bunker is a good choice.</p><p>Discuss: sleeping • cooking • light • location • entertainment • comfort.</p><p><b>Final:</b> Create a 20-second advert for the Bunker.</p></div></div></section>
+</main>
+<script>
+document.querySelectorAll('.pick').forEach(x=>x.onclick=()=>x.classList.toggle('sel'));
+function makeMC(el,q,a,opts){el.innerHTML=`<div class="q"><b>${q}</b><div class="grid">${opts.map(o=>`<div class="choice">${o}</div>`).join('')}<div class="fb"></div></div></div>`;el.querySelectorAll('.choice').forEach(c=>c.onclick=()=>{el.querySelectorAll('.choice').forEach(z=>z.classList.remove('ok','bad'));c.classList.add(c.textContent===a?'ok':'bad');el.querySelector('.fb').textContent=c.textContent===a?'✓ Correct':'Try again'})}
+document.querySelectorAll('.mc').forEach(e=>makeMC(e,e.dataset.q,e.dataset.a,e.dataset.o.split('|')));
+document.querySelectorAll('.tf').forEach(e=>{JSON.parse(e.dataset.items).forEach(([q,a])=>{let d=document.createElement('div');e.appendChild(d);makeMC(d,q,a,['True','False'])})});
+document.querySelectorAll('.checkselect').forEach(b=>b.onclick=()=>{let parent=b.parentElement,xs=parent.querySelectorAll('select[data-a]'),n=0;xs.forEach(s=>{let ok=s.value===s.dataset.a;s.style.borderColor=ok?'#168b69':'#c84646';n+=ok});b.nextElementSibling.textContent=`${n}/${xs.length} correct`});
+document.querySelectorAll('.checkinput').forEach(b=>b.onclick=()=>{let p=b.parentElement,xs=p.querySelectorAll('input[data-answer]'),n=0;xs.forEach(i=>{let ok=i.value.trim().toLowerCase()===i.dataset.answer;i.style.borderColor=ok?'#168b69':'#c84646';n+=ok});p.querySelector('.fb').textContent=`${n}/${xs.length} correct`});
+</script></body></html>
