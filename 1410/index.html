@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's Good for You? — Video Lesson</title>
+<style>
+:root{
+  --bg:#f7f8fb;
+  --card:#ffffff;
+  --text:#20242b;
+  --muted:#68707c;
+  --accent:#2f6fed;
+  --accent2:#f29f3f;
+  --good:#2f9e63;
+  --bad:#d94b4b;
+  --line:#e5e8ef;
+  --soft:#eef3ff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
+header{
+  background:linear-gradient(135deg,#1f2a44,#2f6fed);
+  color:white;
+  padding:52px 24px 42px;
+}
+.header-wrap{max-width:1100px;margin:auto}
+h1{font-size:clamp(34px,5vw,58px);margin:0 0 10px;line-height:1.05}
+.subtitle{font-size:18px;opacity:.92;max-width:760px}
+.badge{
+  display:inline-block;background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.25);
+  padding:6px 10px;border-radius:999px;font-size:14px;margin-bottom:16px;
+}
+main{max-width:1100px;margin:0 auto;padding:28px 18px 70px}
+.section{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:28px;margin:24px 0;box-shadow:0 8px 24px rgba(18,28,45,.05)
+}
+h2{font-size:30px;margin:0 0 8px}
+h3{font-size:23px;margin:26px 0 12px}
+.stage{
+  display:inline-block;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--accent);background:var(--soft);
+  padding:6px 10px;border-radius:8px;margin-bottom:8px
+}
+.instructions{color:var(--muted);margin-top:0}
+.task{
+  border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;background:#fff
+}
+.task-title{font-size:19px;font-weight:700;margin-bottom:5px}
+.item{margin:13px 0}
+.options label{
+  display:block;padding:9px 12px;border:1px solid var(--line);
+  border-radius:10px;margin:7px 0;cursor:pointer
+}
+.options label:hover{background:#fafbfe}
+select,input[type=text],textarea{
+  width:100%;padding:11px 12px;border:1px solid #cfd5df;border-radius:10px;
+  font:inherit;background:white
+}
+textarea{min-height:88px;resize:vertical}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid-2{grid-template-columns:1fr}}
+button{
+  border:0;border-radius:10px;padding:10px 15px;font-weight:700;
+  cursor:pointer;margin:8px 8px 0 0;font-size:15px
+}
+.check{background:var(--accent);color:#fff}
+.reset{background:#eef0f4;color:#28313d}
+.feedback{margin-top:10px;font-weight:700}
+.correct{color:var(--good)}
+.wrong{color:var(--bad)}
+.speaking{
+  background:linear-gradient(135deg,#fff8ed,#fff);
+  border:1px solid #f6d6ad;
+}
+.card-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+}
+@media(max-width:760px){.card-grid{grid-template-columns:1fr}}
+.speak-card{
+  border:1px solid #f1d4ae;background:#fffaf3;border-radius:14px;padding:16px;
+  min-height:105px
+}
+.match-row{
+  display:grid;grid-template-columns:55px 1fr 220px;gap:10px;align-items:center;margin:9px 0
+}
+@media(max-width:720px){.match-row{grid-template-columns:40px 1fr}.match-row select{grid-column:2}}
+.note{
+  background:#f1f7f4;border-left:4px solid var(--good);padding:14px 16px;border-radius:10px;
+  margin:14px 0;color:#375146
+}
+.progress-wrap{
+  position:sticky;top:0;z-index:10;background:rgba(247,248,251,.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)
+}
+.progress-inner{max-width:1100px;margin:auto;padding:10px 18px;display:flex;gap:8px;flex-wrap:wrap}
+.progress-inner a{
+  color:var(--text);text-decoration:none;background:white;border:1px solid var(--line);
+  border-radius:999px;padding:7px 11px;font-size:14px
+}
+.small{font-size:14px;color:var(--muted)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <div class="badge">Pre-Intermediate • Video lesson</div>
+    <h1>What’s Good for You?</h1>
+    <div class="subtitle">Healthy eating, the story of chocolate, and cheesemaking. Prediction, while-watching, post-watching, and speaking practice.</div>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <a href="#leadin">Lead-in</a>
+    <a href="#part1">Part 1: You are what you eat</a>
+    <a href="#part2">Part 2: The chocolate story</a>
+    <a href="#part3">Part 3: Cheesemaking</a>
+  </div>
+</div>
+
+<main>
+
+<section class="section" id="leadin">
+  <div class="stage">Lead-in</div>
+  <h2>Food, health & habits</h2>
+  <p class="instructions">Discuss the questions. Give reasons and examples. Try to speak for 30–45 seconds for each question.</p>
+
+  <div class="card-grid">
+    <div class="speak-card"><b>1.</b> What does a “healthy diet” mean to you?</div>
+    <div class="speak-card"><b>2.</b> Can food be healthy if it contains fat or sugar? Why / why not?</div>
+    <div class="speak-card"><b>3.</b> Why do people often choose fast food even when they know it is not very healthy?</div>
+    <div class="speak-card"><b>4.</b> Do you think people worry too much about “healthy” and “unhealthy” food?</div>
+    <div class="speak-card"><b>5.</b> Which is more important: what you eat or how much you eat?</div>
+    <div class="speak-card"><b>6.</b> What food do you think people will eat more of in 20 years?</div>
+    <div class="speak-card"><b>7.</b> Can chocolate be part of a healthy diet? Explain your opinion.</div>
+    <div class="speak-card"><b>8.</b> Why do traditional foods stay popular even when new food trends appear?</div>
+  </div>
+</section>
+
+<section class="section" id="part1">
+  <div class="stage">Part 1</div>
+  <h2>You are what you eat</h2>
+
+  <h3>Pre-watching — Prediction</h3>
+  <div class="task">
+    <div class="task-title">Task 1. Predict the ideas</div>
+    <p class="instructions">Choose the option you think the video will mention.</p>
+    <div id="p1pred"></div>
+    <button class="check" onclick="checkMC('p1pred', p1predAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p1pred')">Reset</button>
+    <div class="feedback" id="p1pred_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 2. Before you watch: agree or disagree</div>
+    <p class="instructions">Choose your opinion first. After watching, check whether the video supports or challenges it.</p>
+    <div class="grid-2">
+      <div class="item">1. Fat is always bad for you.<select><option></option><option>Agree</option><option>Disagree</option><option>Not sure</option></select></div>
+      <div class="item">2. Cheese can have health benefits.<select><option></option><option>Agree</option><option>Disagree</option><option>Not sure</option></select></div>
+      <div class="item">3. Dark chocolate may be healthier than milk chocolate.<select><option></option><option>Agree</option><option>Disagree</option><option>Not sure</option></select></div>
+      <div class="item">4. Experts never change their advice about food.<select><option></option><option>Agree</option><option>Disagree</option><option>Not sure</option></select></div>
+      <div class="item">5. Busy people usually have more time to cook healthy food.<select><option></option><option>Agree</option><option>Disagree</option><option>Not sure</option></select></div>
+      <div class="item">6. Sugar is the only unhealthy thing in our diet.<select><option></option><option>Agree</option><option>Disagree</option><option>Not sure</option></select></div>
+      <div class="item">7. Fish is usually presented as a healthy choice.<select><option></option><option>Agree</option><option>Disagree</option><option>Not sure</option></select></div>
+      <div class="item">8. Healthy eating is simple because scientists always agree.<select><option></option><option>Agree</option><option>Disagree</option><option>Not sure</option></select></div>
+    </div>
+  </div>
+
+  <h3>While watching</h3>
+
+  <div class="task">
+    <div class="task-title">Task 3. True or False</div>
+    <p class="instructions">Watch and decide if the statements are true or false.</p>
+    <div id="p1tf"></div>
+    <button class="check" onclick="checkTF('p1tf', p1tfAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p1tf')">Reset</button>
+    <div class="feedback" id="p1tf_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 4. Complete the sentences</div>
+    <p class="instructions">Use one word or short phrase from the video.</p>
+    <div id="p1gap"></div>
+    <button class="check" onclick="checkText('p1gap', p1gapAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p1gap')">Reset</button>
+    <div class="feedback" id="p1gap_fb"></div>
+  </div>
+
+  <h3>Post-watching</h3>
+
+  <div class="task">
+    <div class="task-title">Task 5. Match the idea to the explanation</div>
+    <p class="instructions">Match each idea with the best explanation.</p>
+    <div id="p1match"></div>
+    <button class="check" onclick="checkMatch('p1match', p1matchAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p1match')">Reset</button>
+    <div class="feedback" id="p1match_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 6. Think deeper</div>
+    <p class="instructions">Answer in 1–3 sentences.</p>
+    <div class="item">1. Why is it difficult for people to eat healthily today?<textarea></textarea></div>
+    <div class="item">2. Why can advice about food change over time?<textarea></textarea></div>
+    <div class="item">3. Which idea from the video surprised you most?<textarea></textarea></div>
+    <div class="item">4. Why might people continue eating unhealthy food even when they know the risks?<textarea></textarea></div>
+    <div class="item">5. Do you trust food trends such as keto? Why / why not?<textarea></textarea></div>
+    <div class="item">6. What is more useful: strict food rules or balance?<textarea></textarea></div>
+    <div class="item">7. Can “healthy food” also be unhealthy in some situations?<textarea></textarea></div>
+  </div>
+
+  <div class="task speaking">
+    <div class="task-title">Speaking challenge — “Healthy or overhyped?”</div>
+    <p class="instructions">Choose one food below. Speak for about 45 seconds: Is it healthy, unhealthy, or somewhere in between? Give at least two reasons.</p>
+    <div class="card-grid">
+      <div class="speak-card">Cheese</div><div class="speak-card">Dark chocolate</div>
+      <div class="speak-card">Bread</div><div class="speak-card">Fast food</div>
+      <div class="speak-card">Rice</div><div class="speak-card">Fish</div>
+      <div class="speak-card">Butter</div><div class="speak-card">Fruit juice</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="part2">
+  <div class="stage">Part 2</div>
+  <h2>The chocolate story</h2>
+
+  <h3>Pre-watching — Prediction</h3>
+  <div class="task">
+    <div class="task-title">Task 1. What do you think?</div>
+    <p class="instructions">Choose your prediction before watching.</p>
+    <div id="p2pred"></div>
+    <button class="check" onclick="checkMC('p2pred', p2predAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p2pred')">Reset</button>
+    <div class="feedback" id="p2pred_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 2. Put the chocolate-making steps in a possible order</div>
+    <p class="instructions">Write numbers 1–8. This is a prediction task, so do not worry about being wrong.</p>
+    <div class="grid-2">
+      <div class="item">Roast the beans <input type="text" placeholder="number"></div>
+      <div class="item">Pour chocolate into moulds <input type="text" placeholder="number"></div>
+      <div class="item">Choose the best cocoa beans <input type="text" placeholder="number"></div>
+      <div class="item">Remove the shells <input type="text" placeholder="number"></div>
+      <div class="item">Add ingredients <input type="text" placeholder="number"></div>
+      <div class="item">Mix until smooth <input type="text" placeholder="number"></div>
+      <div class="item">Grind the nib into a paste <input type="text" placeholder="number"></div>
+      <div class="item">Let the bars become ready <input type="text" placeholder="number"></div>
+    </div>
+  </div>
+
+  <h3>While watching</h3>
+
+  <div class="task">
+    <div class="task-title">Task 3. Multiple choice</div>
+    <div id="p2mc"></div>
+    <button class="check" onclick="checkMC('p2mc', p2mcAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p2mc')">Reset</button>
+    <div class="feedback" id="p2mc_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 4. Complete the process</div>
+    <p class="instructions">Complete each sentence with the missing word or phrase.</p>
+    <div id="p2gap"></div>
+    <button class="check" onclick="checkText('p2gap', p2gapAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p2gap')">Reset</button>
+    <div class="feedback" id="p2gap_fb"></div>
+  </div>
+
+  <h3>Post-watching</h3>
+
+  <div class="task">
+    <div class="task-title">Task 5. Match the word to its meaning</div>
+    <div id="p2match"></div>
+    <button class="check" onclick="checkMatch('p2match', p2matchAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p2match')">Reset</button>
+    <div class="feedback" id="p2match_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 6. Explain the story</div>
+    <p class="instructions">Answer in complete sentences.</p>
+    <div class="item">1. How was the ancient Mayan and Aztec chocolate drink different from modern chocolate?<textarea></textarea></div>
+    <div class="item">2. Why did chocolate change after it arrived in Europe?<textarea></textarea></div>
+    <div class="item">3. Which stage of chocolate production seems most important to you? Why?<textarea></textarea></div>
+    <div class="item">4. Which stage seems the most difficult?<textarea></textarea></div>
+    <div class="item">5. Why do manufacturers add ingredients such as vanilla or nuts?<textarea></textarea></div>
+    <div class="item">6. Would you prefer handmade chocolate or factory-made chocolate? Why?<textarea></textarea></div>
+    <div class="item">7. Why do you think chocolate became popular around the world?<textarea></textarea></div>
+  </div>
+
+  <div class="task speaking">
+    <div class="task-title">Speaking challenge — Create your own chocolate bar</div>
+    <p class="instructions">Invent a new chocolate bar. Speak for 45–60 seconds. Include: type of chocolate, 2–3 extra ingredients, shape, target customer, and one reason people would buy it.</p>
+    <div class="note">Useful language: <b>It would contain… / I’d add… / It would be shaped like… / It would be for… / People would buy it because…</b></div>
+  </div>
+</section>
+
+<section class="section" id="part3">
+  <div class="stage">Part 3</div>
+  <h2>Cheesemaking</h2>
+
+  <h3>Pre-watching — Prediction</h3>
+  <div class="task">
+    <div class="task-title">Task 1. Predict the facts</div>
+    <p class="instructions">Choose the answer you expect before you watch.</p>
+    <div id="p3pred"></div>
+    <button class="check" onclick="checkMC('p3pred', p3predAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p3pred')">Reset</button>
+    <div class="feedback" id="p3pred_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 2. What happens when cheese is made?</div>
+    <p class="instructions">Predict whether these actions happen in the video.</p>
+    <div id="p3yn"></div>
+    <button class="check" onclick="checkTF('p3yn', p3ynAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p3yn')">Reset</button>
+    <div class="feedback" id="p3yn_fb"></div>
+  </div>
+
+  <h3>While watching</h3>
+
+  <div class="task">
+    <div class="task-title">Task 3. True or False</div>
+    <div id="p3tf"></div>
+    <button class="check" onclick="checkTF('p3tf', p3tfAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p3tf')">Reset</button>
+    <div class="feedback" id="p3tf_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 4. Complete the cheesemaking process</div>
+    <div id="p3gap"></div>
+    <button class="check" onclick="checkText('p3gap', p3gapAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p3gap')">Reset</button>
+    <div class="feedback" id="p3gap_fb"></div>
+  </div>
+
+  <h3>Post-watching</h3>
+
+  <div class="task">
+    <div class="task-title">Task 5. Match the process word to the description</div>
+    <div id="p3match"></div>
+    <button class="check" onclick="checkMatch('p3match', p3matchAnswers)">Check</button>
+    <button class="reset" onclick="resetBlock('p3match')">Reset</button>
+    <div class="feedback" id="p3match_fb"></div>
+  </div>
+
+  <div class="task">
+    <div class="task-title">Task 6. Post-watching discussion</div>
+    <p class="instructions">Give full answers and support your ideas.</p>
+    <div class="item">1. Why might handmade cheese be considered better than factory-made cheese?<textarea></textarea></div>
+    <div class="item">2. Why is time important in cheesemaking?<textarea></textarea></div>
+    <div class="item">3. Which step in the process seems the most unusual to you?<textarea></textarea></div>
+    <div class="item">4. Why do customers wait for cheese for such a long time?<textarea></textarea></div>
+    <div class="item">5. Would you like to visit a cheese farm? Why / why not?<textarea></textarea></div>
+    <div class="item">6. What traditional food from your country is made by hand?<textarea></textarea></div>
+    <div class="item">7. Do you think traditional food production should be protected? Why?<textarea></textarea></div>
+  </div>
+
+  <div class="task speaking">
+    <div class="task-title">Speaking challenge — “Farm product pitch”</div>
+    <p class="instructions">Imagine you work at Lyburn Farm. Convince a visitor to buy your cheese. Speak for 45–60 seconds and include at least four points.</p>
+    <div class="card-grid">
+      <div class="speak-card">How it is made</div>
+      <div class="speak-card">Why it is special</div>
+      <div class="speak-card">How long it matures</div>
+      <div class="speak-card">What it tastes like</div>
+      <div class="speak-card">Who would enjoy it</div>
+      <div class="speak-card">Why it is worth waiting for</div>
+      <div class="speak-card">What makes the farm special</div>
+      <div class="speak-card">One memorable slogan</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+function makeMC(containerId, items){
+  const c=document.getElementById(containerId);
+  items.forEach((it,i)=>{
+    const d=document.createElement('div'); d.className='item';
+    d.innerHTML=`<b>${i+1}. ${it.q}</b><div class="options">${
+      it.opts.map((o,j)=>`<label><input type="radio" name="${containerId}_${i}" value="${j}"> ${o}</label>`).join('')
+    }</div>`;
+    c.appendChild(d);
+  });
+}
+function makeTF(containerId, items){
+  const c=document.getElementById(containerId);
+  items.forEach((q,i)=>{
+    const d=document.createElement('div'); d.className='item';
+    d.innerHTML=`<b>${i+1}. ${q}</b>
+      <div class="options">
+      <label><input type="radio" name="${containerId}_${i}" value="T"> True</label>
+      <label><input type="radio" name="${containerId}_${i}" value="F"> False</label>
+      </div>`;
+    c.appendChild(d);
+  });
+}
+function makeText(containerId, items){
+  const c=document.getElementById(containerId);
+  items.forEach((q,i)=>{
+    const d=document.createElement('div'); d.className='item';
+    d.innerHTML=`<b>${i+1}. ${q}</b><input type="text" data-index="${i}" autocomplete="off">`;
+    c.appendChild(d);
+  });
+}
+function makeMatch(containerId, left, right){
+  const c=document.getElementById(containerId);
+  left.forEach((x,i)=>{
+    const d=document.createElement('div'); d.className='match-row';
+    d.innerHTML=`<b>${i+1}</b><span>${x}</span>
+      <select data-index="${i}">
+      <option value="">Choose...</option>
+      ${right.map((r,j)=>`<option value="${j}">${String.fromCharCode(65+j)}. ${r}</option>`).join('')}
+      </select>`;
+    c.appendChild(d);
+  });
+}
+function checkMC(id,ans){
+  let score=0;
+  ans.forEach((a,i)=>{
+    const el=document.querySelector(`input[name="${id}_${i}"]:checked`);
+    if(el && Number(el.value)===a) score++;
+  });
+  setFb(id,score,ans.length);
+}
+function checkTF(id,ans){
+  let score=0;
+  ans.forEach((a,i)=>{
+    const el=document.querySelector(`input[name="${id}_${i}"]:checked`);
+    if(el && el.value===a) score++;
+  });
+  setFb(id,score,ans.length);
+}
+function norm(s){return s.trim().toLowerCase().replace(/[.,!?]/g,'').replace(/\s+/g,' ')}
+function checkText(id,ans){
+  let score=0;
+  document.querySelectorAll(`#${id} input[type=text]`).forEach((el,i)=>{
+    const v=norm(el.value);
+    const ok=ans[i].some(a=>v===norm(a));
+    el.style.borderColor=ok?'#2f9e63':'#d94b4b';
+    if(ok) score++;
+  });
+  setFb(id,score,ans.length);
+}
+function checkMatch(id,ans){
+  let score=0;
+  document.querySelectorAll(`#${id} select`).forEach((el,i)=>{
+    const ok=Number(el.value)===ans[i];
+    el.style.borderColor=ok?'#2f9e63':'#d94b4b';
+    if(ok) score++;
+  });
+  setFb(id,score,ans.length);
+}
+function setFb(id,score,total){
+  const fb=document.getElementById(id+'_fb');
+  fb.className='feedback '+(score===total?'correct':'wrong');
+  fb.textContent=`Score: ${score}/${total}` + (score===total?' — Great job!':' — Check the video and try again.');
+}
+function resetBlock(id){
+  const c=document.getElementById(id);
+  c.querySelectorAll('input').forEach(x=>{if(x.type==='radio'||x.type==='checkbox')x.checked=false;else x.value='';x.style.borderColor=''});
+  c.querySelectorAll('select').forEach(x=>{x.value='';x.style.borderColor=''});
+  const fb=document.getElementById(id+'_fb'); if(fb) fb.textContent='';
+}
+
+/* PART 1 */
+const p1predItems=[
+ {q:"Why do many people buy fast food?",opts:["Because it is fashionable","Because it is quick and cheap","Because experts recommend it"]},
+ {q:"What do experts usually recommend eating more of?",opts:["Fresh vegetables","Sweets","Processed food"]},
+ {q:"Which drink is probably presented as the best everyday choice?",opts:["Fizzy drinks","Water","Milkshake"]},
+ {q:"What may the video say about cheese?",opts:["It can have some benefits","It should never be eaten","It contains no fat"]},
+ {q:"Which diet trend may be mentioned?",opts:["Keto diet","Only-fruit diet","No-breakfast diet"]},
+ {q:"What may dark chocolate help with?",opts:["Blood pressure","Eyesight only","Hair growth"]},
+ {q:"What do experts say about too much sugar?",opts:["It is a good idea","It is not a good idea","It has no effect"]},
+ {q:"What general message is likely?",opts:["Food advice can change","Scientists always agree","One food is perfect for everyone"]}
+];
+const p1predAnswers=[1,0,1,0,0,0,1,0];
+makeMC('p1pred',p1predItems);
+
+const p1tfItems=[
+"People today often have little time to prepare healthy meals.",
+"Angus says he has a very healthy diet.",
+"Dan says he eats healthy food about 80% of the time.",
+"Experts recommend fizzy drinks instead of water.",
+"Scientists have always said cheese is healthy.",
+"Some studies suggest cheese can help people lose weight.",
+"Followers of the keto diet believe eating fat can be good for you.",
+"Dark chocolate may help lower blood pressure."
+];
+const p1tfAnswers=['T','F','T','F','F','T','T','T'];
+makeTF('p1tf',p1tfItems);
+
+const p1gapItems=[
+"Fast food is popular because it is quick and ______.",
+"Anne-Marie says she eats a lot of ______.",
+"Dan prefers whole foods and ______-cooked food.",
+"Experts say we should drink water, not ______ drinks.",
+"For a long time, foods high in ______ were considered unhealthy.",
+"Some modern diets say carbohydrates such as rice or ______ may not be very healthy.",
+"Dark chocolate contains healthy ______ and minerals.",
+"Dark chocolate may make you smarter and ______."
+];
+const p1gapAnswers=[
+["cheap"],["sugar"],["home","home-cooked","home cooked"],["fizzy"],
+["fat"],["bread"],["fats"],["happier","happy"]
+];
+makeText('p1gap',p1gapItems);
+
+const p1matchLeft=["Fast food","Fresh vegetables","Cheese","Keto diet","Dark chocolate","Processed food","Water"];
+const p1matchRight=[
+"may contain useful minerals and healthy fats",
+"is presented as better than fizzy drinks",
+"is often chosen because it is quick and cheap",
+"is something Dan says he does not eat much",
+"is recommended by experts as an important part of a healthy diet",
+"is an example of a modern eating trend that accepts more fat",
+"may have benefits such as helping blood pressure"
+];
+const p1matchAnswers=[2,4,0,5,6,3,1];
+makeMatch('p1match',p1matchLeft,p1matchRight);
+
+/* PART 2 */
+const p2predItems=[
+ {q:"Where did the story of chocolate probably begin?",opts:["Central America","Switzerland","West Africa"]},
+ {q:"How was the original cocoa drink?",opts:["Very sweet","Not sweet","Frozen"]},
+ {q:"Who first brought cocoa beans to Europe?",opts:["British farmers","Spanish explorers","French chocolatiers"]},
+ {q:"Where do most cocoa beans grow today?",opts:["Western Africa","Northern Europe","Central Asia"]},
+ {q:"What happens first in chocolate production?",opts:["The beans are roasted","The chocolate is put in moulds","Vanilla is added"]},
+ {q:"What is the inside of a cocoa bean called after the shell is removed?",opts:["Nib","Curd","Whey"]},
+ {q:"What machine mixes chocolate until it is very smooth?",opts:["Conche","Press","Roaster only"]},
+ {q:"What can be added before the chocolate is put in moulds?",opts:["Nuts or orange","Cheese","Rice"]}
+];
+const p2predAnswers=[0,1,1,0,0,0,0,0];
+makeMC('p2pred',p2predItems);
+
+const p2mcItems=[
+ {q:"About how long ago did the chocolate story begin?",opts:["250 years ago","2,500 years ago","25,000 years ago"]},
+ {q:"What did the Mayans and Aztecs mix cocoa beans with?",opts:["Water and spices","Milk and sugar","Coffee and honey"]},
+ {q:"About how long ago were cocoa beans brought to Europe?",opts:["50 years ago","170 years ago","500 years ago"]},
+ {q:"When did a British company start making solid chocolate bars?",opts:["Around 170 years ago","Around 700 years ago","Around 20 years ago"]},
+ {q:"Where is Lindt mentioned in the video?",opts:["Zurich","London","Madrid"]},
+ {q:"What gives the beans their flavour?",opts:["Roasting","Cooling","Freezing"]},
+ {q:"What is chocolate liquor?",opts:["A drink with alcohol","A paste made from the nib","A type of cocoa shell"]},
+ {q:"What happens after the chocolate is mixed until smooth?",opts:["It is poured into moulds","It is planted","It is washed in water"]}
+];
+const p2mcAnswers=[1,0,2,0,0,0,1,0];
+makeMC('p2mc',p2mcItems);
+
+const p2gapItems=[
+"The Mayans and Aztecs used cocoa beans to make a special ______.",
+"The drink did not contain sugar, so it was not ______.",
+"Spanish explorers brought cocoa beans to ______.",
+"Most cocoa beans grow in Western ______.",
+"After roasting, chocolatiers remove the ______.",
+"The inner bean is called the ______.",
+"The nib is ground into a paste called chocolate ______.",
+"A machine called a ______ mixes the paste until it is smooth."
+];
+const p2gapAnswers=[
+["drink"],["sweet"],["europe"],["africa"],["shells"],["nib"],["liquor"],["conche"]
+];
+makeText('p2gap',p2gapItems);
+
+const p2matchLeft=["cocoa bean","roast","nib","chocolate liquor","cocoa butter","conche","mould"];
+const p2matchRight=[
+"a machine used to mix chocolate until smooth",
+"the inner part of the cocoa bean",
+"a container that gives chocolate its final shape",
+"to heat something strongly to develop flavour",
+"the seed used to make chocolate",
+"a fat made from cocoa beans",
+"a thick paste made from ground nibs"
+];
+const p2matchAnswers=[4,3,1,6,5,0,2];
+makeMatch('p2match',p2matchLeft,p2matchRight);
+
+/* PART 3 */
+const p3predItems=[
+ {q:"Which country is mentioned as eating the most cheese per person?",opts:["Denmark","Britain","Italy"]},
+ {q:"How many types of British cheese are mentioned?",opts:["About 70","More than 700","More than 7,000"]},
+ {q:"Which British cheese is the most popular?",opts:["Cheddar","Brie","Parmesan"]},
+ {q:"What time are the cows milked at the farm?",opts:["6 a.m.","10 a.m.","6 p.m."]},
+ {q:"What is added to make the milk solid?",opts:["Rennet","Sugar","Vanilla"]},
+ {q:"What are the solid pieces called?",opts:["Curds","Shells","Nib"]},
+ {q:"What liquid is separated from the curds?",opts:["Whey","Cocoa butter","Oil"]},
+ {q:"How old can some cheeses on the farm be?",opts:["Nearly two years","About two weeks","About ten years"]}
+];
+const p3predAnswers=[0,1,0,0,0,0,0,0];
+makeMC('p3pred',p3predItems);
+
+const p3ynItems=[
+"The milk is heated and then cooled.",
+"Rennet is added to the milk.",
+"The milk becomes solid.",
+"The curds and whey are separated.",
+"The curds are put into moulds.",
+"The moulds are left overnight.",
+"A machine removes extra liquid.",
+"The cheese is eaten immediately the next morning."
+];
+const p3ynAnswers=['T','T','T','T','T','T','T','F'];
+makeTF('p3yn',p3ynItems);
+
+const p3tfItems=[
+"Cheese is younger than recorded history.",
+"Britain makes more different types of cheese per person than Denmark.",
+"Cheddar is the most popular cheese in Britain.",
+"Lyburn Farm is in the north of England.",
+"The farm is family-run.",
+"The milk is cooled to 28 degrees.",
+"There are 54 moulds used in the process.",
+"Some cheeses on the farm are nearly two years old."
+];
+const p3tfAnswers=['F','T','T','F','T','T','T','T'];
+makeTF('p3tf',p3tfItems);
+
+const p3gapItems=[
+"At 6 a.m., the farmers ______ their own cows.",
+"They heat and then cool the milk to ______ degrees.",
+"The cheesemaker adds a substance called ______.",
+"The milk separates into solid curds and watery ______.",
+"When the curds are ready, they ______ the whey.",
+"The curds are put into special ______.",
+"A machine squeezes the ______ out of the mould.",
+"The cheese stays on the farm until it is ______."
+];
+const p3gapAnswers=[
+["milk"],["28","twenty-eight","twenty eight"],["rennet"],["whey"],
+["drain","drain off"],["moulds","molds"],["liquid"],["ready"]
+];
+makeText('p3gap',p3gapItems);
+
+const p3matchLeft=["rennet","curds","whey","drain","mould","mature","family-run"];
+const p3matchRight=[
+"to remove liquid from something",
+"the solid part of milk after it changes",
+"operated by members of one family",
+"a substance that makes milk become solid",
+"the watery liquid separated from curds",
+"to become older and develop flavour",
+"a container that gives food a particular shape"
+];
+const p3matchAnswers=[3,1,4,0,6,5,2];
+makeMatch('p3match',p3matchLeft,p3matchRight);
+</script>
+</body>
+</html>
